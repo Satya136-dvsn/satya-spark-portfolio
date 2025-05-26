@@ -1,7 +1,5 @@
-
 const About = () => {
-  return (
-    <section id="about" className="py-20 px-6 relative z-10">
+  return <section id="about" className="py-20 px-6 relative z-10">
       <div className="container mx-auto max-w-6xl">
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
           About Me
@@ -28,7 +26,7 @@ const About = () => {
           </div>
 
           <div className="space-y-6">
-            <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
+            <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 backdrop-blur-lg rounded-2xl p-8 border border-white/20 px-[32px]">
               <h3 className="text-2xl font-bold mb-6 text-white">Summary</h3>
               <p className="text-gray-300 leading-relaxed">
                 Enthusiastic engineering student with expertise in electronics, programming, and web development. 
@@ -56,8 +54,6 @@ const About = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default About;
