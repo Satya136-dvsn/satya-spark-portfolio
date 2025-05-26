@@ -1,4 +1,3 @@
-
 const Projects = () => {
   const projects = [
     {
@@ -6,7 +5,7 @@ const Projects = () => {
       period: "August 2024 - April 2025",
       description: "Creating an efficient 32-bit hybrid multiplier using Vedic and Karatsuba algorithms for improved multiplication efficiency.",
       tech: ["FPGA", "Verilog", "Digital Design", "Algorithms"],
-      status: "In Progress"
+      status: "Completed"
     },
     {
       title: "Stock Market Portfolio Optimization",
