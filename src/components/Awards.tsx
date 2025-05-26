@@ -57,7 +57,7 @@ const Awards = () => {
   ];
 
   return (
-    <section id="awards" className="py-20 px-6 relative z-10">
+    <section id="awards" className="py-20 px-6 relative z-10 min-h-screen">
       <div className="container mx-auto max-w-7xl">
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
           Awards & Recognition
@@ -96,7 +96,7 @@ const Awards = () => {
         </div>
 
         {/* Leadership Section */}
-        <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
+        <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 backdrop-blur-lg rounded-2xl p-8 border border-white/20 mb-16">
           <h3 className="text-3xl font-bold text-center mb-8 text-white">Leadership Roles</h3>
           
           <div className="grid md:grid-cols-3 gap-8">
@@ -125,7 +125,7 @@ const Awards = () => {
         </div>
 
         {/* Workshops & Hackathons */}
-        <div className="mt-16">
+        <div>
           <h3 className="text-3xl font-bold text-center mb-8 text-white">Workshops & Hackathons</h3>
           
           <div className="grid md:grid-cols-2 gap-6">

@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import { ArrowDown } from 'lucide-react';
 
@@ -19,7 +20,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative z-10 px-6">
+    <section id="home" className="min-h-screen flex items-center justify-center relative z-10 px-6 pt-20">
       <div className="text-center max-w-4xl mx-auto">
         <div className="mb-8 relative">
           <div className="w-32 h-32 mx-auto mb-8 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 p-1 animate-pulse">
@@ -48,12 +49,22 @@ const Hero = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-          <button className="px-8 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-white font-semibold hover:scale-105 transition-transform duration-300 hover:shadow-lg hover:shadow-purple-500/25">
+          <a 
+            href="https://github.com/Satya136-dvsn" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="px-8 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-white font-semibold hover:scale-105 transition-transform duration-300 hover:shadow-lg hover:shadow-purple-500/25"
+          >
             View My Work
-          </button>
-          <button className="px-8 py-3 border-2 border-purple-400 rounded-full text-purple-400 font-semibold hover:bg-purple-400 hover:text-white transition-all duration-300">
+          </a>
+          <a 
+            href="https://drive.google.com/file/d/18bDgKhjtqWTClQY3BM2y247JA_ww6Zah/view?usp=drive_link" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="px-8 py-3 border-2 border-purple-400 rounded-full text-purple-400 font-semibold hover:bg-purple-400 hover:text-white transition-all duration-300"
+          >
             Download Resume
-          </button>
+          </a>
         </div>
 
         <div className="animate-bounce">
