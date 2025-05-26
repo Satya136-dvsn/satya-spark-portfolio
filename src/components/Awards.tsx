@@ -6,35 +6,40 @@ const Awards = () => {
       event: "ELEKTRA 2K25 Tech Fest",
       description: "Elected as Student President for the prestigious tech fest, leading organizational activities and student engagement.",
       icon: "🏆",
-      type: "Leadership"
+      type: "Leadership",
+      certificateUrl: "https://drive.google.com/file/d/1OYYNP3QhhOsF_gSCIXepN8Fgq8vzBnQX/view?usp=drive_link"
     },
     {
       title: "Charm With Grace",
       event: "ELEKTRA 2K24",
       description: "Volunteered and received recognition for outstanding contributions during the tech fest.",
       icon: "⭐",
-      type: "Volunteer"
+      type: "Volunteer",
+      certificateUrl: "https://drive.google.com/file/d/1nohAb1innzvhOvPK8Q1OYx-PLuKDSW5m/view?usp=drive_link"
     },
     {
       title: "Poster Designing Award",
       event: "ELEKTRA 2K24",
       description: "Awarded for designing creative posters and banners, showcasing artistic and design skills.",
       icon: "🎨",
-      type: "Creative"
+      type: "Creative",
+      certificateUrl: "https://drive.google.com/file/d/1UFFhBmDhHzTdsxfgpGk1VS8lxzsy8XTP/view?usp=drive_link"
     },
     {
       title: "Photography Recognition",
       event: "ELEKTRA 2K24",
       description: "Recognized for exceptional photography contributions, highlighting skills in event photography.",
       icon: "📸",
-      type: "Creative"
+      type: "Creative",
+      certificateUrl: "https://drive.google.com/file/d/1O0No4-5C_krRi5dkL-ZYkz5wF44j0PlV/view?usp=drive_link"
     },
     {
       title: "Student Body Recognition",
       event: "ELEKTRA 2K24",
       description: "Certificate of Recognition for contributions as a Student ACES Member during the national tech fest.",
       icon: "🎖️",
-      type: "Recognition"
+      type: "Recognition",
+      certificateUrl: "https://drive.google.com/file/d/1uWwN5x2RCfOk6HW3EnZYn3MkWI_KQGJl/view?usp=drive_link"
     }
   ];
 
@@ -53,6 +58,39 @@ const Awards = () => {
       role: "Active Member",
       organizations: ["IEEE Communication Society", "ISTE", "IETE"],
       description: "Actively participated in professional organizations, contributing to technical discussions and events."
+    }
+  ];
+
+  const workshops = [
+    { 
+      name: "Power BI Workshop", 
+      event: "TechTip24", 
+      desc: "Enhanced skills in data visualization and interactive dashboard creation",
+      certificateUrl: "https://drive.google.com/file/d/1KF7FrgVFHA5nb3-NcWjxR-6htqPCc-ir/view?usp=drive_link"
+    },
+    { 
+      name: "Cybersecurity & Digital Forensics", 
+      event: "IEEE", 
+      desc: "Comprehensive course in cyber threat analysis and digital investigation",
+      certificateUrl: "https://drive.google.com/file/d/11qGvTvnFHfUwKC0quNOD-9i663bNfRb-/view?usp=drive_link"
+    },
+    { 
+      name: "Machine Learning & Google AI", 
+      event: "IEEE", 
+      desc: "Latest ML techniques and practical applications using Google AI tools",
+      certificateUrl: "https://drive.google.com/file/d/1HltVaUOv1AmWOtp5xz6n10lkmrtT_OcK/view?usp=drive_link"
+    },
+    { 
+      name: "AWS Workshop", 
+      event: "Brainovision Solutions", 
+      desc: "4-day AWS workshop and 24-hour hackathon on cloud solutions",
+      certificateUrl: "https://drive.google.com/file/d/1byvrsF7QupG8uy5hULFR6C7bOnynd743/view?usp=drive_link"
+    },
+    { 
+      name: "Arduino Workshop", 
+      event: "IEEE EDS SB Chapter ANITS", 
+      desc: "Hands-on workshop enhancing microcontroller and embedded systems knowledge",
+      certificateUrl: "https://drive.google.com/file/d/1MAWuDpx-S3sDLvbOyxm9ebh1AEcu7wNg/view?usp=drive_link"
     }
   ];
 
@@ -91,6 +129,17 @@ const Awards = () => {
               
               <p className="text-purple-300 font-semibold mb-3">{award.event}</p>
               <p className="text-gray-300 text-sm leading-relaxed">{award.description}</p>
+
+              <div className="mt-4 pt-4 border-t border-white/10">
+                <a
+                  href={award.certificateUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-purple-400 hover:text-purple-300 transition-colors duration-300 text-sm font-semibold"
+                >
+                  View Certificate →
+                </a>
+              </div>
             </div>
           ))}
         </div>
@@ -129,20 +178,23 @@ const Awards = () => {
           <h3 className="text-3xl font-bold text-center mb-8 text-white">Workshops & Hackathons</h3>
           
           <div className="grid md:grid-cols-2 gap-6">
-            {[
-              { name: "Power BI Workshop", event: "TechTip24", desc: "Enhanced skills in data visualization and interactive dashboard creation" },
-              { name: "Cybersecurity & Digital Forensics", event: "IEEE", desc: "Comprehensive course in cyber threat analysis and digital investigation" },
-              { name: "Machine Learning & Google AI", event: "IEEE", desc: "Latest ML techniques and practical applications using Google AI tools" },
-              { name: "AWS Workshop", event: "Brainovision Solutions", desc: "4-day AWS workshop and 24-hour hackathon on cloud solutions" },
-              { name: "Arduino Workshop", event: "IEEE EDS SB Chapter ANITS", desc: "Hands-on workshop enhancing microcontroller and embedded systems knowledge" }
-            ].map((workshop, index) => (
+            {workshops.map((workshop, index) => (
               <div 
                 key={index}
                 className="bg-white/5 backdrop-blur-lg rounded-xl p-4 border border-white/10 hover:scale-105 transition-transform duration-300"
               >
                 <h4 className="text-lg font-semibold text-white mb-1">{workshop.name}</h4>
                 <p className="text-purple-300 text-sm font-medium mb-2">{workshop.event}</p>
-                <p className="text-gray-300 text-sm">{workshop.desc}</p>
+                <p className="text-gray-300 text-sm mb-3">{workshop.desc}</p>
+                
+                <a
+                  href={workshop.certificateUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-purple-400 hover:text-purple-300 transition-colors duration-300 text-sm font-semibold"
+                >
+                  View Certificate →
+                </a>
               </div>
             ))}
           </div>

@@ -6,42 +6,56 @@ const Certifications = () => {
       provider: "NPTEL",
       description: "8-week course covering service models, deployment models, virtualization, storage, and security",
       score: "55/100",
-      type: "Course"
+      type: "Course",
+      certificateUrl: "https://drive.google.com/file/d/1GavwG7waIwsRqK-URB1AAIhlZz4TIdj8/view?usp=drive_link"
     },
     {
       title: "Professional Certificate in Data Analytics",
       provider: "edX",
       description: "Comprehensive certification validating skills in data analysis, visualization, and statistical tools",
       score: "Certified",
-      type: "Professional Certificate"
+      type: "Professional Certificate",
+      certificateUrl: "https://drive.google.com/file/d/16_NwCmsl1E3HZWwp06nlsOotIjGU6ut_/view?usp=drive_link"
     },
     {
       title: "Cloud Computing",
       provider: "NPTEL",
       description: "12-week course covering service models, deployment models, virtualization, storage, and security",
       score: "57/100",
-      type: "Course"
+      type: "Course",
+      certificateUrl: "https://drive.google.com/file/d/1DvMXn_UIVQw7B_z7Q6iipEFlYdqN7biF/view?usp=drive_link"
     },
     {
       title: "JavaScript Specialist",
       provider: "Dollar Design School",
       description: "Certified specialist with proficiency in web development and dynamic web applications",
       score: "Certified",
-      type: "Specialist Certification"
+      type: "Specialist Certification",
+      certificateUrl: "https://drive.google.com/file/d/1tV7BQowL3Fane-HueQW3hA9YukcvTAh8/view?usp=drive_link"
     },
     {
       title: "CSS3 Specialist",
       provider: "Framework Tech",
       description: "Expertise in creating visually appealing and responsive web experiences",
       score: "Certified",
-      type: "Specialist Certification"
+      type: "Specialist Certification",
+      certificateUrl: "https://drive.google.com/file/d/1nDr6tn35giKGBz5Z-1lAjIUeWXU8LL-8/view?usp=drive_link"
     },
     {
       title: "HTML5 Specialist",
       provider: "Framework Tech",
       description: "Demonstrating expertise in creating innovative and user-friendly web applications",
       score: "Certified",
-      type: "Specialist Certification"
+      type: "Specialist Certification",
+      certificateUrl: "https://drive.google.com/file/d/1khgGgsNyst1K0mMI-df9kubyei_tMklH/view?usp=drive_link"
+    },
+    {
+      title: "Generative AI Foundations Certificate",
+      provider: "upGrad",
+      description: "Certified in Generative AI Foundations, covering advanced prompt engineering, AI-powered research, automation, and problem-solving—endorsed by Microsoft and upGrad.",
+      score: "Certified",
+      type: "Professional Certificate",
+      certificateUrl: ""
     }
   ];
 
@@ -80,11 +94,18 @@ const Certifications = () => {
               <p className="text-purple-300 font-semibold mb-3">{cert.provider}</p>
               <p className="text-gray-300 text-sm leading-relaxed">{cert.description}</p>
 
-              <div className="mt-4 pt-4 border-t border-white/10">
-                <button className="text-purple-400 hover:text-purple-300 transition-colors duration-300 text-sm font-semibold">
-                  View Certificate →
-                </button>
-              </div>
+              {cert.certificateUrl && (
+                <div className="mt-4 pt-4 border-t border-white/10">
+                  <a
+                    href={cert.certificateUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-purple-400 hover:text-purple-300 transition-colors duration-300 text-sm font-semibold"
+                  >
+                    View Certificate →
+                  </a>
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -92,7 +113,7 @@ const Certifications = () => {
         {/* Stats */}
         <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
           <div className="text-center p-6 bg-gradient-to-br from-purple-500/20 to-pink-500/20 backdrop-blur-lg rounded-xl border border-white/20">
-            <div className="text-3xl font-bold text-purple-400 mb-2">6+</div>
+            <div className="text-3xl font-bold text-purple-400 mb-2">7+</div>
             <div className="text-gray-300 text-sm">Certifications</div>
           </div>
           <div className="text-center p-6 bg-gradient-to-br from-blue-500/20 to-purple-500/20 backdrop-blur-lg rounded-xl border border-white/20">
@@ -104,8 +125,8 @@ const Certifications = () => {
             <div className="text-gray-300 text-sm">NPTEL Courses</div>
           </div>
           <div className="text-center p-6 bg-gradient-to-br from-pink-500/20 to-purple-500/20 backdrop-blur-lg rounded-xl border border-white/20">
-            <div className="text-3xl font-bold text-pink-400 mb-2">1</div>
-            <div className="text-gray-300 text-sm">Professional Cert</div>
+            <div className="text-3xl font-bold text-pink-400 mb-2">2</div>
+            <div className="text-gray-300 text-sm">Professional Certs</div>
           </div>
         </div>
       </div>
