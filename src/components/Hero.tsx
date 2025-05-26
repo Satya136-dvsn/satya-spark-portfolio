@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { ArrowDown } from 'lucide-react';
 
@@ -24,8 +23,12 @@ const Hero = () => {
       <div className="text-center max-w-4xl mx-auto">
         <div className="mb-8 relative">
           <div className="w-32 h-32 mx-auto mb-8 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 p-1 animate-pulse">
-            <div className="w-full h-full rounded-full bg-slate-900 flex items-center justify-center text-4xl font-bold">
-              DVS
+            <div className="w-full h-full rounded-full bg-slate-900 overflow-hidden">
+              <img 
+                src="/lovable-uploads/95f43a83-175b-4961-9937-4e95596ecffd.png" 
+                alt="Duba Venkata Satyanarayana"
+                className="w-full h-full object-cover rounded-full"
+              />
             </div>
           </div>
         </div>
