@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { ArrowDown } from 'lucide-react';
 
@@ -22,6 +21,8 @@ const Hero = () => {
 
   const handleProfileClick = () => {
     setIsProfileClicked(true);
+    // Open the image in a new tab for preview
+    window.open('/lovable-uploads/95f43a83-175b-4961-9937-4e95596ecffd.png', '_blank');
   };
 
   return (
@@ -29,9 +30,7 @@ const Hero = () => {
       <div className="text-center max-w-4xl mx-auto">
         <div className="mb-8 relative">
           <div 
-            className={`w-32 h-32 mx-auto mb-8 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 p-1 cursor-pointer transition-all duration-300 hover:scale-105 ${
-              !isProfileClicked ? 'animate-pulse' : ''
-            }`}
+            className="w-32 h-32 mx-auto mb-8 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 p-1 cursor-pointer transition-all duration-300 hover:scale-105"
             onClick={handleProfileClick}
           >
             <div className="w-full h-full rounded-full bg-slate-900 overflow-hidden">
