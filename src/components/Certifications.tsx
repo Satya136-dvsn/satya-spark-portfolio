@@ -50,17 +50,25 @@ const Certifications = () => {
       certificateUrl: "https://drive.google.com/file/d/1khgGgsNyst1K0mMI-df9kubyei_tMklH/view?usp=drive_link"
     },
     {
+      title: "Robotics with Arduino Internship",
+      provider: "Verzeo",
+      description: "Hands-on internship experience in robotics and Arduino programming, developing practical skills in embedded systems",
+      score: "Certified",
+      type: "Internship",
+      certificateUrl: "https://drive.google.com/file/d/1nmAOSsYlAjonngk7IFURlgYX2xatRgJg/view?usp=drive_link"
+    },
+    {
       title: "Generative AI Foundations Certificate",
       provider: "upGrad",
       description: "Certified in Generative AI Foundations, covering advanced prompt engineering, AI-powered research, automation, and problem-solving—endorsed by Microsoft and upGrad.",
       score: "Certified",
       type: "Professional Certificate",
-      certificateUrl: ""
+      certificateUrl: "https://drive.google.com/file/d/1HteJMu-N7oG1k_HTXvjITMG5hO2FFAPh/view?usp=drive_link"
     }
   ];
 
   return (
-    <section id="certifications" className="py-20 px-6 relative z-10">
+    <section id="certifications" className="py-16 px-6 relative z-10">
       <div className="container mx-auto max-w-7xl">
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
           Certifications
@@ -77,7 +85,9 @@ const Certifications = () => {
                   cert.type === 'Professional Certificate' 
                     ? 'bg-green-500/20 text-green-400 border border-green-500/30'
                     : cert.type === 'Specialist Certification'
-                    ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' 
+                    ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+                    : cert.type === 'Internship'
+                    ? 'bg-orange-500/20 text-orange-400 border border-orange-500/30'
                     : 'bg-purple-500/20 text-purple-400 border border-purple-500/30'
                 }`}>
                   {cert.type}
@@ -113,7 +123,7 @@ const Certifications = () => {
         {/* Stats */}
         <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
           <div className="text-center p-6 bg-gradient-to-br from-purple-500/20 to-pink-500/20 backdrop-blur-lg rounded-xl border border-white/20">
-            <div className="text-3xl font-bold text-purple-400 mb-2">7+</div>
+            <div className="text-3xl font-bold text-purple-400 mb-2">8+</div>
             <div className="text-gray-300 text-sm">Certifications</div>
           </div>
           <div className="text-center p-6 bg-gradient-to-br from-blue-500/20 to-purple-500/20 backdrop-blur-lg rounded-xl border border-white/20">

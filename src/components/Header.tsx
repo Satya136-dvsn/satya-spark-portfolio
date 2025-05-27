@@ -5,6 +5,7 @@ import { Menu, X } from 'lucide-react';
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,14 +25,26 @@ const Header = () => {
     { name: 'Contact', href: '#contact' }
   ];
 
+  const handleNavClick = (sectionName: string) => {
+    setActiveSection(sectionName);
+    setTimeout(() => setActiveSection(''), 2000); // Reset after 2 seconds
+  };
+
   return (
     <header className={`fixed top-0 w-full z-40 transition-all duration-300 ${
       isScrolled ? 'bg-black/20 backdrop-blur-md border-b border-white/10' : 'bg-transparent'
     }`}>
       <nav className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-            DVS
+          <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent relative">
+            <span className={`transition-opacity duration-500 ${activeSection ? 'opacity-0' : 'opacity-100'}`}>
+              DVS
+            </span>
+            {activeSection && (
+              <span className="absolute inset-0 transition-opacity duration-500 opacity-100 animate-pulse">
+                DVS
+              </span>
+            )}
           </div>
 
           {/* Desktop Navigation */}
@@ -40,7 +53,8 @@ const Header = () => {
               <a
                 key={item.name}
                 href={item.href}
-                className="text-white/80 hover:text-white transition-colors duration-300 relative group"
+                onClick={() => handleNavClick(item.name)}
+                className="text-white/80 hover:text-white transition-all duration-300 relative group transform hover:scale-110"
               >
                 {item.name}
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 transition-all duration-300 group-hover:w-full"></span>
@@ -50,7 +64,7 @@ const Header = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 text-white"
+            className="md:hidden p-2 text-white transition-transform duration-300 hover:scale-110"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -59,13 +73,16 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 p-4 bg-black/30 backdrop-blur-md rounded-lg border border-white/10">
+          <div className="md:hidden mt-4 p-4 bg-black/30 backdrop-blur-md rounded-lg border border-white/10 animate-fade-in">
             {navItems.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
-                className="block py-2 text-white/80 hover:text-white transition-colors duration-300"
-                onClick={() => setIsMobileMenuOpen(false)}
+                className="block py-2 text-white/80 hover:text-white transition-all duration-300 hover:translate-x-2"
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  handleNavClick(item.name);
+                }}
               >
                 {item.name}
               </a>

@@ -4,6 +4,7 @@ import { ArrowDown } from 'lucide-react';
 
 const Hero = () => {
   const [text, setText] = useState('');
+  const [isProfileClicked, setIsProfileClicked] = useState(false);
   const fullText = "Electronics & Web Development Enthusiast";
   
   useEffect(() => {
@@ -19,11 +20,20 @@ const Hero = () => {
     return () => clearInterval(timer);
   }, []);
 
+  const handleProfileClick = () => {
+    setIsProfileClicked(true);
+  };
+
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative z-10 px-6 pt-20">
       <div className="text-center max-w-4xl mx-auto">
         <div className="mb-8 relative">
-          <div className="w-32 h-32 mx-auto mb-8 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 p-1 animate-pulse">
+          <div 
+            className={`w-32 h-32 mx-auto mb-8 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 p-1 cursor-pointer transition-all duration-300 hover:scale-105 ${
+              !isProfileClicked ? 'animate-pulse' : ''
+            }`}
+            onClick={handleProfileClick}
+          >
             <div className="w-full h-full rounded-full bg-slate-900 overflow-hidden">
               <img 
                 src="/lovable-uploads/95f43a83-175b-4961-9937-4e95596ecffd.png" 
