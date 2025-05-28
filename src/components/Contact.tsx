@@ -1,3 +1,4 @@
+
 import { Mail, Phone, MapPin, Linkedin, Github } from 'lucide-react';
 import { useState } from 'react';
 import { useToast } from "@/hooks/use-toast";
@@ -35,17 +36,16 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      // Replace these with your actual EmailJS configuration
       await emailjs.send(
-        'YOUR_SERVICE_ID', // You'll get this from EmailJS dashboard
-        'YOUR_TEMPLATE_ID', // You'll get this from EmailJS dashboard
+        'service_nkkohmr',
+        'template_1rzo75j',
         {
           from_name: formData.name,
           from_email: formData.email,
           message: formData.message,
           to_email: 'd.v.satyanarayana260@gmail.com'
         },
-        'YOUR_PUBLIC_KEY' // You'll get this from EmailJS dashboard
+        'W2pas8rVP9po8uB0l'
       );
 
       toast({
@@ -75,7 +75,7 @@ const Contact = () => {
 
         <div className="grid md:grid-cols-2 gap-12">
           <div className="space-y-8">
-            <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 hover:scale-105 transition-transform duration-300">
+            <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
               <h3 className="text-2xl font-bold mb-6 text-white">Get In Touch</h3>
               
               <div className="space-y-4">
@@ -115,7 +115,7 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 hover:scale-105 transition-transform duration-300">
+            <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
               <h3 className="text-2xl font-bold mb-6 text-white">Follow Me</h3>
               
               <div className="flex space-x-4">
@@ -194,7 +194,7 @@ const Contact = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg text-white font-semibold hover:scale-105 transition-transform duration-300 hover:shadow-lg hover:shadow-purple-500/25 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                className="w-full px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg text-white font-semibold hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? 'Sending...' : 'Send Message'}
               </button>
