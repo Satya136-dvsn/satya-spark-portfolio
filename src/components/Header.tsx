@@ -5,7 +5,6 @@ import { Menu, X } from 'lucide-react';
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,26 +24,14 @@ const Header = () => {
     { name: 'Contact', href: '#contact' }
   ];
 
-  const handleNavClick = (sectionName: string) => {
-    setActiveSection(sectionName);
-    setTimeout(() => setActiveSection(''), 2000); // Reset after 2 seconds
-  };
-
   return (
     <header className={`fixed top-0 w-full z-40 transition-all duration-300 ${
       isScrolled ? 'bg-black/20 backdrop-blur-md border-b border-white/10' : 'bg-transparent'
     }`}>
       <nav className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent relative">
-            <span className={`transition-opacity duration-500 ${activeSection ? 'opacity-0' : 'opacity-100'}`}>
-              DVS
-            </span>
-            {activeSection && (
-              <span className="absolute inset-0 transition-opacity duration-500 opacity-100 animate-pulse">
-                DVS
-              </span>
-            )}
+          <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            DVS
           </div>
 
           {/* Desktop Navigation */}
@@ -53,7 +40,6 @@ const Header = () => {
               <a
                 key={item.name}
                 href={item.href}
-                onClick={() => handleNavClick(item.name)}
                 className="text-white/80 hover:text-white transition-all duration-300 relative group transform hover:scale-110"
               >
                 {item.name}
@@ -79,10 +65,7 @@ const Header = () => {
                 key={item.name}
                 href={item.href}
                 className="block py-2 text-white/80 hover:text-white transition-all duration-300 hover:translate-x-2"
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  handleNavClick(item.name);
-                }}
+                onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item.name}
               </a>
