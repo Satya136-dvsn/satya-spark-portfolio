@@ -83,7 +83,7 @@ const SkillBadges = () => {
   return (
     <section id="skill-badges" className="py-16 px-6 relative z-10">
       <div className="container mx-auto max-w-7xl">
-        <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+        <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
           Skill Badges
         </h2>
 
@@ -91,19 +91,19 @@ const SkillBadges = () => {
           {skillBadges.map((badge, index) => (
             <div 
               key={index}
-              className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25 group"
+              className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 group"
             >
               <div className="flex justify-between items-start mb-4">
-                <span className="px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/20 text-blue-400 border border-blue-500/30">
+                <span className="px-3 py-1 rounded-full text-xs font-semibold bg-purple-500/20 text-purple-400 border border-purple-500/30">
                   {badge.type}
                 </span>
               </div>
 
-              <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors duration-300 mb-2">
+              <h3 className="text-xl font-bold text-white group-hover:text-purple-400 transition-colors duration-300 mb-2">
                 {badge.title}
               </h3>
               
-              <p className="text-blue-300 font-semibold mb-3">{badge.provider}</p>
+              <p className="text-purple-300 font-semibold mb-3">{badge.provider}</p>
               <p className="text-gray-300 text-sm leading-relaxed">{badge.description}</p>
 
               {badge.badgeUrl && (
@@ -112,7 +112,7 @@ const SkillBadges = () => {
                     href={badge.badgeUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-400 hover:text-blue-300 transition-colors duration-300 text-sm font-semibold"
+                    className="text-purple-400 hover:text-purple-300 transition-colors duration-300 text-sm font-semibold"
                   >
                     View Badge →
                   </a>
@@ -124,12 +124,12 @@ const SkillBadges = () => {
 
         {/* Stats */}
         <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
-          <div className="text-center p-6 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 backdrop-blur-lg rounded-xl border border-white/20">
-            <div className="text-3xl font-bold text-blue-400 mb-2">11</div>
+          <div className="text-center p-6 bg-gradient-to-br from-purple-500/20 to-pink-500/20 backdrop-blur-lg rounded-xl border border-white/20">
+            <div className="text-3xl font-bold text-purple-400 mb-2">11</div>
             <div className="text-gray-300 text-sm">Skill Badges</div>
           </div>
-          <div className="text-center p-6 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 backdrop-blur-lg rounded-xl border border-white/20">
-            <div className="text-3xl font-bold text-cyan-400 mb-2">2</div>
+          <div className="text-center p-6 bg-gradient-to-br from-blue-500/20 to-purple-500/20 backdrop-blur-lg rounded-xl border border-white/20">
+            <div className="text-3xl font-bold text-blue-400 mb-2">2</div>
             <div className="text-gray-300 text-sm">Google Cloud</div>
           </div>
           <div className="text-center p-6 bg-gradient-to-br from-green-500/20 to-blue-500/20 backdrop-blur-lg rounded-xl border border-white/20">
