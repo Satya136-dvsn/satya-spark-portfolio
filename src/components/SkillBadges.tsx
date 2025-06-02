@@ -16,6 +16,20 @@ const SkillBadges = () => {
       badgeUrl: "https://www.credly.com/badges/ab5eff35-f358-4bb7-910c-0d1b2adb224d/public_url"
     },
     {
+      title: "Inspect Rich Documents with Gemini Multimodality and Multimodal RAG",
+      provider: "Google Cloud",
+      description: "Skill badge demonstrating expertise in analyzing rich documents using Gemini's multimodality features and RAG techniques",
+      type: "Skill Badge",
+      badgeUrl: "https://www.credly.com/badges/94cc5a7d-3761-4f23-9913-b6ddb4ae26bd/public_url"
+    },
+    {
+      title: "Explore Generative AI with the Gemini API in Vertex AI",
+      provider: "Google Cloud",
+      description: "Skill badge showcasing proficiency in leveraging the Gemini API within Vertex AI for generative AI applications",
+      type: "Skill Badge",
+      badgeUrl: "https://www.credly.com/badges/18304b8e-f5b3-4d14-8316-ddefaffcb049/public_url"
+    },
+    {
       title: "Analyzing Data with Excel",
       provider: "IBM",
       description: "Demonstrated competency in data analysis techniques and methodologies using Microsoft Excel",
@@ -125,11 +139,11 @@ const SkillBadges = () => {
         {/* Stats */}
         <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
           <div className="text-center p-6 bg-gradient-to-br from-purple-500/20 to-pink-500/20 backdrop-blur-lg rounded-xl border border-white/20">
-            <div className="text-3xl font-bold text-purple-400 mb-2">11</div>
+            <div className="text-3xl font-bold text-purple-400 mb-2">13</div>
             <div className="text-gray-300 text-sm">Skill Badges</div>
           </div>
           <div className="text-center p-6 bg-gradient-to-br from-blue-500/20 to-purple-500/20 backdrop-blur-lg rounded-xl border border-white/20">
-            <div className="text-3xl font-bold text-blue-400 mb-2">2</div>
+            <div className="text-3xl font-bold text-blue-400 mb-2">4</div>
             <div className="text-gray-300 text-sm">Google Cloud</div>
           </div>
           <div className="text-center p-6 bg-gradient-to-br from-green-500/20 to-blue-500/20 backdrop-blur-lg rounded-xl border border-white/20">
