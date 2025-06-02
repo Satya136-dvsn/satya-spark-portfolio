@@ -1,9 +1,8 @@
-
 const Certifications = () => {
   const certifications = [
     {
       title: "AWS APAC Solutions Architecture",
-      provider: "Forage",
+      provider: "SkillSprints",
       description: "Completed a virtual experience designing a scalable cloud hosting architecture using AWS Elastic Beanstalk, and communicated technical solutions in clear business terms",
       score: "Certified",
       type: "Virtual Experience",
@@ -11,7 +10,7 @@ const Certifications = () => {
     },
     {
       title: "Deloitte Australia Data Analytics",
-      provider: "Forage",
+      provider: "SkillSprints",
       description: "Completed a data analytics simulation involving forensic analysis, data classification in Excel, and interactive dashboard creation using Tableau",
       score: "Certified",
       type: "Virtual Experience",
