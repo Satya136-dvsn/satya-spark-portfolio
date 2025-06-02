@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 
 const Skills = () => {
@@ -40,9 +39,9 @@ const Skills = () => {
         { name: "Data Analysis & Visualization", level: 85 },
         { name: "Arduino Programming", level: 90 },
         { name: "Power BI", level: 78 },
+        { name: "Tableau", level: 85 },
         { name: "AWS Cloud", level: 75 },
-        { name: "FPGA Design", level: 82 },
-        { name: "Robotics", level: 88 }
+        { name: "FPGA Design", level: 82 }
       ]
     },
     {
