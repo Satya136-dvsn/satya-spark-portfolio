@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import { ArrowDown } from 'lucide-react';
 
@@ -67,7 +68,7 @@ const Hero = () => {
             View My Work
           </a>
           <a 
-            href="https://drive.google.com/file/d/18bDgKhjtqWTClQY3BM2y247JA_ww6Zah/view?usp=drive_link" 
+            href="https://drive.google.com/file/d/18bDgKhjtqWTClQY3BM2y247JA_ww6Zah/view?usp=sharing" 
             target="_blank" 
             rel="noopener noreferrer"
             className="px-8 py-3 border-2 border-purple-400 rounded-full text-purple-400 font-semibold hover:bg-purple-400 hover:text-white transition-all duration-300"
