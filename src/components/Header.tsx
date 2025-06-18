@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import {
@@ -70,21 +71,24 @@ const Header = () => {
 
             {/* Dropdown Menu */}
             <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center text-white/80 hover:text-white transition-all duration-300 transform hover:scale-110 focus:outline-none">
+              <DropdownMenuTrigger className="flex items-center text-white/80 hover:text-white transition-all duration-300 transform hover:scale-110 focus:outline-none relative group">
                 More
                 <ChevronDown className="ml-1 h-4 w-4" />
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 transition-all duration-300 group-hover:w-full"></span>
               </DropdownMenuTrigger>
               <DropdownMenuContent 
                 align="end" 
-                className="bg-black/90 backdrop-blur-md border border-white/20 rounded-lg shadow-lg z-50"
+                className="bg-black/95 backdrop-blur-xl border border-white/20 rounded-xl shadow-2xl shadow-purple-500/10 z-50 min-w-[200px] p-2"
               >
                 {navItems.slice(3).map((item) => (
                   <DropdownMenuItem key={item.name} asChild>
                     <a
                       href={item.href}
-                      className="text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300 cursor-pointer flex items-center px-3 py-2 rounded-md"
+                      className="text-white/80 hover:text-white hover:bg-gradient-to-r hover:from-purple-500/20 hover:to-pink-500/20 transition-all duration-300 cursor-pointer flex items-center px-4 py-3 rounded-lg group"
                     >
-                      {item.name}
+                      <span className="group-hover:translate-x-1 transition-transform duration-300">
+                        {item.name}
+                      </span>
                     </a>
                   </DropdownMenuItem>
                 ))}

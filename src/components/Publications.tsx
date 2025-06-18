@@ -64,6 +64,14 @@ const Publications = () => {
                   >
                     View Paper
                   </a>
+                  <a
+                    href={publication.citeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg text-white text-sm font-semibold hover:scale-105 transition-transform duration-300"
+                  >
+                    Cite
+                  </a>
                 </div>
               </div>
             </div>
