@@ -1,4 +1,5 @@
 
+
 import { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import {
@@ -78,7 +79,7 @@ const Header = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent 
                 align="end" 
-                className="bg-black/95 backdrop-blur-xl border border-white/20 rounded-xl shadow-2xl shadow-purple-500/10 z-50 min-w-[200px] p-2"
+                className="bg-gradient-to-br from-slate-900/95 via-purple-900/95 to-slate-900/95 backdrop-blur-xl border border-purple-500/30 rounded-xl shadow-2xl shadow-purple-500/20 z-50 min-w-[200px] p-2"
               >
                 {navItems.slice(3).map((item) => (
                   <DropdownMenuItem key={item.name} asChild>
@@ -126,3 +127,4 @@ const Header = () => {
 };
 
 export default Header;
+
