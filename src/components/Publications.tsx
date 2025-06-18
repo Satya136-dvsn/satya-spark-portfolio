@@ -7,7 +7,9 @@ const Publications = () => {
       date: "May 2025",
       description: "Developed a high-performance 32-bit multiplier by integrating Vedic and Karatsuba algorithms, achieving significant improvements in speed and area efficiency—vital for high-speed digital signal processing and computational applications.",
       doi: "10.1109/ICCCNT.2025.11012447",
-      status: "Published"
+      status: "Published",
+      paperUrl: "https://drive.google.com/file/d/1WpY7VJv_Sc4pZF9RLFJFCi39UILDwWlR/view?usp=sharing",
+      citeUrl: "https://ieeexplore.ieee.org/document/11012447"
     }
   ];
 
@@ -44,15 +46,24 @@ const Publications = () => {
               <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center pt-4 border-t border-white/10 gap-4">
                 <div className="text-sm">
                   <span className="text-gray-400">DOI: </span>
-                  <span className="text-purple-400 font-mono">{publication.doi}</span>
+                  <a 
+                    href={publication.citeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-purple-400 font-mono hover:text-purple-300 transition-colors duration-300"
+                  >
+                    {publication.doi}
+                  </a>
                 </div>
                 <div className="flex gap-3">
-                  <button className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg text-white text-sm font-semibold hover:scale-105 transition-transform duration-300">
+                  <a
+                    href={publication.paperUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg text-white text-sm font-semibold hover:scale-105 transition-transform duration-300"
+                  >
                     View Paper
-                  </button>
-                  <button className="px-4 py-2 border border-purple-400 rounded-lg text-purple-400 text-sm font-semibold hover:bg-purple-400 hover:text-white transition-all duration-300">
-                    Cite
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>

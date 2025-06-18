@@ -1,6 +1,11 @@
-
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -21,8 +26,10 @@ const Header = () => {
     { name: 'Experience', href: '#experience' },
     { name: 'Projects', href: '#projects' },
     { name: 'Skills', href: '#skills' },
+    { name: 'Publications', href: '#publications' },
     { name: 'Certifications', href: '#certifications' },
     { name: 'Badges', href: '#skill-badges' },
+    { name: 'Awards', href: '#awards' },
     { name: 'Contact', href: '#contact' }
   ];
 
@@ -36,18 +43,53 @@ const Header = () => {
             DVS
           </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
-            {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="text-white/80 hover:text-white transition-all duration-300 relative group transform hover:scale-110"
+          {/* Desktop Navigation with Dropdown */}
+          <div className="hidden md:flex items-center space-x-8">
+            {/* Regular nav items (keep first few visible) */}
+            <a
+              href="#home"
+              className="text-white/80 hover:text-white transition-all duration-300 relative group transform hover:scale-110"
+            >
+              Home
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a
+              href="#about"
+              className="text-white/80 hover:text-white transition-all duration-300 relative group transform hover:scale-110"
+            >
+              About
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a
+              href="#projects"
+              className="text-white/80 hover:text-white transition-all duration-300 relative group transform hover:scale-110"
+            >
+              Projects
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+
+            {/* Dropdown Menu */}
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center text-white/80 hover:text-white transition-all duration-300 transform hover:scale-110 focus:outline-none">
+                More
+                <ChevronDown className="ml-1 h-4 w-4" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent 
+                align="end" 
+                className="bg-black/90 backdrop-blur-md border border-white/20 rounded-lg shadow-lg z-50"
               >
-                {item.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 transition-all duration-300 group-hover:w-full"></span>
-              </a>
-            ))}
+                {navItems.slice(3).map((item) => (
+                  <DropdownMenuItem key={item.name} asChild>
+                    <a
+                      href={item.href}
+                      className="text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300 cursor-pointer flex items-center px-3 py-2 rounded-md"
+                    >
+                      {item.name}
+                    </a>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
 
           {/* Mobile Menu Button */}
