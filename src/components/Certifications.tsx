@@ -6,7 +6,8 @@ const Certifications = () => {
       description: "All India Online Aptitude Test participation with score of 49/60 marks and All India Rank of 1886",
       score: "49/60 (AIR: 1886)",
       type: "Competition",
-      certificateUrl: "https://www.naukri.com/campus/certificates/naukri_campus_ai_ncat_participation_may_2025/v0/683a1f17892c1f3133ab2ac2?utm_source=certificate&utm_medium=copy&utm_campaign=683a1f17892c1f3133ab2ac2"
+      certificateUrl: "https://www.naukri.com/campus/certificates/naukri_campus_ai_ncat_participation_may_2025/v0/683a1f17892c1f3133ab2ac2?utm_source=certificate&utm_medium=copy&utm_campaign=683a1f17892c1f3133ab2ac2",
+      scoreUrl: "https://www.naukri.com/campus/contests/all-india-online-aptitude-test/assessment/2025-NjgyMjBjYTc4N2M5NzY3NzJiZmEyOWEx?utm_source=score_card_share"
     },
     {
       title: "AWS APAC Solutions Architecture",
@@ -110,7 +111,18 @@ const Certifications = () => {
                   {cert.type}
                 </span>
                 <div className="text-right">
-                  <span className="text-yellow-400 font-bold text-sm">{cert.score}</span>
+                  {cert.scoreUrl ? (
+                    <a
+                      href={cert.scoreUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-yellow-400 hover:text-yellow-300 font-bold text-sm transition-colors duration-300"
+                    >
+                      {cert.score}
+                    </a>
+                  ) : (
+                    <span className="text-yellow-400 font-bold text-sm">{cert.score}</span>
+                  )}
                 </div>
               </div>
 
