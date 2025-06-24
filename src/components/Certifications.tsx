@@ -1,6 +1,13 @@
-
 const Certifications = () => {
   const certifications = [
+    {
+      title: "NCAT Participation Certificate",
+      provider: "Naukri Campus",
+      description: "All India Online Aptitude Test participation with score of 49/60 marks and All India Rank of 1886",
+      score: "49/60 (AIR: 1886)",
+      type: "Competition",
+      certificateUrl: "https://www.naukri.com/campus/certificates/naukri_campus_ai_ncat_participation_may_2025/v0/683a1f17892c1f3133ab2ac2?utm_source=certificate&utm_medium=copy&utm_campaign=683a1f17892c1f3133ab2ac2"
+    },
     {
       title: "AWS APAC Solutions Architecture",
       provider: "Forage",
@@ -96,6 +103,8 @@ const Certifications = () => {
                     ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
                     : cert.type === 'Virtual Experience'
                     ? 'bg-orange-500/20 text-orange-400 border border-orange-500/30'
+                    : cert.type === 'Competition'
+                    ? 'bg-red-500/20 text-red-400 border border-red-500/30'
                     : 'bg-purple-500/20 text-purple-400 border border-purple-500/30'
                 }`}>
                   {cert.type}
@@ -131,7 +140,7 @@ const Certifications = () => {
         {/* Stats */}
         <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
           <div className="text-center p-6 bg-gradient-to-br from-purple-500/20 to-pink-500/20 backdrop-blur-lg rounded-xl border border-white/20">
-            <div className="text-3xl font-bold text-purple-400 mb-2">9+</div>
+            <div className="text-3xl font-bold text-purple-400 mb-2">10+</div>
             <div className="text-gray-300 text-sm">Certifications</div>
           </div>
           <div className="text-center p-6 bg-gradient-to-br from-blue-500/20 to-purple-500/20 backdrop-blur-lg rounded-xl border border-white/20">
