@@ -1,13 +1,13 @@
+
 const Certifications = () => {
   const certifications = [
     {
-      title: "NCAT Participation Certificate",
-      provider: "Naukri Campus",
-      description: "All India Online Aptitude Test participation with score of 49/60 marks and All India Rank of 1886",
-      score: "49/60 (AIR: 1886)",
-      type: "Competition",
-      certificateUrl: "https://www.naukri.com/campus/certificates/naukri_campus_ai_ncat_participation_may_2025/v0/683a1f17892c1f3133ab2ac2?utm_source=certificate&utm_medium=copy&utm_campaign=683a1f17892c1f3133ab2ac2",
-      scoreUrl: "https://www.naukri.com/campus/contests/all-india-online-aptitude-test/assessment/2025-NjgyMjBjYTc4N2M5NzY3NzJiZmEyOWEx?utm_source=score_card_share"
+      title: "Data Analytics & Visualization Certificate",
+      provider: "Accenture & Forage",
+      description: "Certified in data analytics and storytelling through Accenture's virtual program, covering data cleaning, modeling, visualization, and client-ready presentations",
+      score: "Certified",
+      type: "Virtual Experience",
+      certificateUrl: "https://drive.google.com/file/d/1CXfG9XX0pFSkfjUVu0HHaBhddGVXdwO6/view?usp=sharing"
     },
     {
       title: "AWS APAC Solutions Architecture",
@@ -24,6 +24,15 @@ const Certifications = () => {
       score: "Certified",
       type: "Virtual Experience",
       certificateUrl: "https://drive.google.com/file/d/1UupXoeoRMCBsrZlfkRpjLPSsn5KK7p4i/view?usp=drive_link"
+    },
+    {
+      title: "NCAT Participation Certificate",
+      provider: "Naukri Campus",
+      description: "Secured 49/60 with an All India Rank of 1886 in the Naukri Campus All-India Online Aptitude Test, demonstrating strong problem-solving and analytical skills",
+      score: "49/60 (AIR: 1886)",
+      type: "Competition",
+      certificateUrl: "https://www.naukri.com/campus/certificates/naukri_campus_ai_ncat_participation_may_2025/v0/683a1f17892c1f3133ab2ac2?utm_source=certificate&utm_medium=copy&utm_campaign=683a1f17892c1f3133ab2ac2",
+      scoreUrl: "https://www.naukri.com/campus/contests/all-india-online-aptitude-test/assessment/2025-NjgyMjBjYTc4N2M5NzY3NzJiZmEyOWEx?utm_source=score_card_share"
     },
     {
       title: "Generative AI Foundations Certificate",
@@ -152,7 +161,7 @@ const Certifications = () => {
         {/* Stats */}
         <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
           <div className="text-center p-6 bg-gradient-to-br from-purple-500/20 to-pink-500/20 backdrop-blur-lg rounded-xl border border-white/20">
-            <div className="text-3xl font-bold text-purple-400 mb-2">10+</div>
+            <div className="text-3xl font-bold text-purple-400 mb-2">11</div>
             <div className="text-gray-300 text-sm">Certifications</div>
           </div>
           <div className="text-center p-6 bg-gradient-to-br from-blue-500/20 to-purple-500/20 backdrop-blur-lg rounded-xl border border-white/20">
@@ -164,7 +173,7 @@ const Certifications = () => {
             <div className="text-gray-300 text-sm">NPTEL Courses</div>
           </div>
           <div className="text-center p-6 bg-gradient-to-br from-pink-500/20 to-purple-500/20 backdrop-blur-lg rounded-xl border border-white/20">
-            <div className="text-3xl font-bold text-pink-400 mb-2">2</div>
+            <div className="text-3xl font-bold text-pink-400 mb-2">3</div>
             <div className="text-gray-300 text-sm">Virtual Experiences</div>
           </div>
         </div>
