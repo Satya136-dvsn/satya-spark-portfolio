@@ -5,6 +5,8 @@ interface IntroAnimationProps {
 }
 
 const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
+  const [showLogo, setShowLogo] = useState(false);
+  const [showMonogram, setShowMonogram] = useState(false);
   const [showName, setShowName] = useState(false);
   const [showWriteOn, setShowWriteOn] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
@@ -13,19 +15,27 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
   const letters = name.split('');
 
   useEffect(() => {
-    // Start name animation after brief delay
-    const nameTimer = setTimeout(() => setShowName(true), 300);
+    // Start logo hexagon animation
+    const logoTimer = setTimeout(() => setShowLogo(true), 300);
+    
+    // Show DVS monogram after hexagon draws
+    const monogramTimer = setTimeout(() => setShowMonogram(true), 1000);
+    
+    // Start name animation after logo completes
+    const nameTimer = setTimeout(() => setShowName(true), 1500);
     
     // Start write-on effect after name letters complete
-    const writeOnTimer = setTimeout(() => setShowWriteOn(true), 2200);
+    const writeOnTimer = setTimeout(() => setShowWriteOn(true), 3200);
     
     // Start fade out
-    const fadeTimer = setTimeout(() => setFadeOut(true), 3200);
+    const fadeTimer = setTimeout(() => setFadeOut(true), 3800);
     
     // Complete animation
-    const completeTimer = setTimeout(() => onComplete(), 3700);
+    const completeTimer = setTimeout(() => onComplete(), 4300);
 
     return () => {
+      clearTimeout(logoTimer);
+      clearTimeout(monogramTimer);
       clearTimeout(nameTimer);
       clearTimeout(writeOnTimer);
       clearTimeout(fadeTimer);
@@ -44,7 +54,90 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
         <div className="absolute bottom-1/3 left-2/3 w-28 h-28 bg-pink-300/4 rounded-full animate-pulse delay-300"></div>
       </div>
 
-      <div className="text-center relative">
+      <div className="text-center relative flex flex-col items-center">
+        {/* DVS Logo with Hexagonal Outline */}
+        <div className="mb-8 relative">
+          <svg 
+            width="120" 
+            height="120" 
+            viewBox="0 0 120 120" 
+            className="relative"
+          >
+            {/* Hexagonal Outline */}
+            <polygon
+              points="60,10 95,30 95,70 60,90 25,70 25,30"
+              fill="none"
+              stroke="url(#gradient)"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className={`transition-all duration-1000 ease-out ${
+                showLogo 
+                  ? 'opacity-100 animate-draw-hexagon' 
+                  : 'opacity-0'
+              }`}
+              style={{
+                filter: showLogo ? 'drop-shadow(0 0 15px rgba(168, 85, 247, 0.4))' : 'none'
+              }}
+            />
+            
+            {/* DVS Monogram */}
+            <text
+              x="60"
+              y="67"
+              textAnchor="middle"
+              className={`text-2xl font-bold transition-all duration-800 ease-out ${
+                showMonogram 
+                  ? 'opacity-100 fill-current' 
+                  : 'opacity-0'
+              }`}
+              style={{
+                fill: 'url(#textGradient)',
+                filter: showMonogram ? 'drop-shadow(0 0 10px rgba(236, 72, 153, 0.3))' : 'none'
+              }}
+            >
+              DVS
+            </text>
+            
+            {/* Shimmer effect for logo */}
+            {showMonogram && (
+              <rect
+                x="0"
+                y="0"
+                width="120"
+                height="120"
+                fill="url(#shimmerGradient)"
+                className="animate-logo-shimmer"
+                style={{
+                  animationDelay: '200ms',
+                  animationFillMode: 'both'
+                }}
+              />
+            )}
+            
+            {/* Gradient Definitions */}
+            <defs>
+              <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#a855f7" />
+                <stop offset="50%" stopColor="#ec4899" />
+                <stop offset="100%" stopColor="#f472b6" />
+              </linearGradient>
+              
+              <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#a855f7" />
+                <stop offset="50%" stopColor="#ec4899" />
+                <stop offset="100%" stopColor="#f472b6" />
+              </linearGradient>
+              
+              <linearGradient id="shimmerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="rgba(255,255,255,0)" />
+                <stop offset="50%" stopColor="rgba(255,255,255,0.3)" />
+                <stop offset="100%" stopColor="rgba(255,255,255,0)" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+
         {/* Main name with letter-by-letter animation and write-on effect */}
         <div className="relative">
           <h1 className="text-6xl md:text-8xl lg:text-9xl font-['Alex_Brush',cursive] tracking-wide relative">
@@ -135,6 +228,40 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
         
         .animate-draw-path {
           animation: draw-path 1s ease-in-out forwards;
+        }
+        
+        @keyframes draw-hexagon {
+          0% {
+            stroke-dasharray: 0 400;
+            stroke-dashoffset: 0;
+          }
+          100% {
+            stroke-dasharray: 400 0;
+            stroke-dashoffset: 0;
+          }
+        }
+        
+        .animate-draw-hexagon {
+          stroke-dasharray: 0 400;
+          animation: draw-hexagon 1s ease-out forwards;
+        }
+        
+        @keyframes logo-shimmer {
+          0% { 
+            transform: translateX(-120px);
+            opacity: 0;
+          }
+          50% { 
+            opacity: 1;
+          }
+          100% { 
+            transform: translateX(120px);
+            opacity: 0;
+          }
+        }
+        
+        .animate-logo-shimmer {
+          animation: logo-shimmer 1s ease-out forwards;
         }
         
         @import url('https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap');
