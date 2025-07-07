@@ -6,7 +6,7 @@ interface IntroAnimationProps {
 
 const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
   const [showName, setShowName] = useState(false);
-  const [showSubtext, setShowSubtext] = useState(false);
+  const [showWriteOn, setShowWriteOn] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
   
   const name = "Duba Venkata Satyanarayana";
@@ -14,20 +14,20 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
 
   useEffect(() => {
     // Start name animation after brief delay
-    const nameTimer = setTimeout(() => setShowName(true), 500);
+    const nameTimer = setTimeout(() => setShowName(true), 300);
     
-    // Show subtext after name animation
-    const subtextTimer = setTimeout(() => setShowSubtext(true), 2000);
+    // Start write-on effect after name letters complete
+    const writeOnTimer = setTimeout(() => setShowWriteOn(true), 2200);
     
     // Start fade out
     const fadeTimer = setTimeout(() => setFadeOut(true), 3200);
     
     // Complete animation
-    const completeTimer = setTimeout(() => onComplete(), 4000);
+    const completeTimer = setTimeout(() => onComplete(), 3700);
 
     return () => {
       clearTimeout(nameTimer);
-      clearTimeout(subtextTimer);
+      clearTimeout(writeOnTimer);
       clearTimeout(fadeTimer);
       clearTimeout(completeTimer);
     };
@@ -40,87 +40,104 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
         <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-purple-400/5 rounded-full animate-pulse"></div>
         <div className="absolute bottom-1/4 right-1/4 w-24 h-24 bg-pink-400/5 rounded-full animate-pulse delay-1000"></div>
         <div className="absolute top-3/4 left-3/4 w-20 h-20 bg-blue-400/5 rounded-full animate-pulse delay-500"></div>
+        <div className="absolute top-1/2 left-1/6 w-16 h-16 bg-purple-300/3 rounded-full animate-pulse delay-700"></div>
+        <div className="absolute bottom-1/3 left-2/3 w-28 h-28 bg-pink-300/4 rounded-full animate-pulse delay-300"></div>
       </div>
 
       <div className="text-center relative">
-        {/* Main name with letter-by-letter animation */}
-        <div className="mb-6 font-['Montserrat',sans-serif]">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-wider">
+        {/* Main name with letter-by-letter animation and write-on effect */}
+        <div className="relative">
+          <h1 className="text-6xl md:text-8xl lg:text-9xl font-['Alex_Brush',cursive] tracking-wide relative">
             {letters.map((letter, index) => (
               <span
                 key={index}
-                className={`inline-block transition-all duration-700 ease-out ${
+                className={`inline-block transition-all duration-700 ease-out relative ${
                   showName 
                     ? 'opacity-100 translate-y-0 filter blur-0' 
                     : 'opacity-0 translate-y-8 filter blur-sm'
                 }`}
                 style={{
-                  transitionDelay: showName ? `${index * 50}ms` : '0ms',
-                  background: letter === ' ' ? 'transparent' : 'linear-gradient(135deg, #a855f7, #ec4899, #3b82f6)',
+                  transitionDelay: showName ? `${index * 40}ms` : '0ms',
+                  background: letter === ' ' ? 'transparent' : 'linear-gradient(135deg, #a855f7, #ec4899, #f472b6)',
                   backgroundClip: letter === ' ' ? 'unset' : 'text',
                   WebkitBackgroundClip: letter === ' ' ? 'unset' : 'text',
                   color: letter === ' ' ? 'transparent' : 'transparent',
-                  textShadow: showName ? '0 0 30px rgba(168, 85, 247, 0.3)' : 'none',
-                  marginRight: letter === ' ' ? '0.5rem' : '0'
+                  textShadow: showName ? '0 0 40px rgba(168, 85, 247, 0.4), 0 0 20px rgba(236, 72, 153, 0.3)' : 'none',
+                  marginRight: letter === ' ' ? '1rem' : '0',
+                  filter: showName ? 'drop-shadow(0 4px 20px rgba(168, 85, 247, 0.3))' : 'none'
                 }}
               >
                 {letter === ' ' ? '\u00A0' : letter}
+                
+                {/* Shimmer effect for each letter */}
+                {showName && (
+                  <span 
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-12"
+                    style={{
+                      animation: `shimmer 1.5s ease-out ${index * 40 + 500}ms`,
+                      animationFillMode: 'both'
+                    }}
+                  />
+                )}
               </span>
             ))}
           </h1>
-        </div>
-
-        {/* Subtitle with shimmer effect */}
-        <div 
-          className={`transition-all duration-1000 ease-out ${
-            showSubtext 
-              ? 'opacity-100 translate-y-0 filter blur-0' 
-              : 'opacity-0 translate-y-4 filter blur-sm'
-          }`}
-        >
-          <p className="text-lg md:text-xl font-['Poppins',sans-serif] font-light text-gray-300 tracking-wide relative overflow-hidden">
-            <span className="relative z-10">Electronics & Web Development Enthusiast</span>
-            {showSubtext && (
-              <span 
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 animate-shimmer"
+          
+          {/* Write-on effect overlay */}
+          {showWriteOn && (
+            <div className="absolute inset-0 pointer-events-none">
+              <svg 
+                className="w-full h-full" 
+                viewBox="0 0 800 200" 
                 style={{
-                  animation: 'shimmer 2s ease-in-out infinite',
-                  transform: 'translateX(-100%)'
+                  filter: 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.8))'
                 }}
-              />
-            )}
-          </p>
-        </div>
-
-        {/* Elegant loading indicator */}
-        <div 
-          className={`mt-12 transition-all duration-1000 ${
-            showSubtext ? 'opacity-100' : 'opacity-0'
-          }`}
-        >
-          <div className="w-32 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto relative overflow-hidden">
-            <div 
-              className="absolute inset-0 bg-gradient-to-r from-white/50 to-white/50 animate-pulse"
-              style={{
-                animation: 'loadingSlide 2s ease-in-out infinite',
-              }}
-            />
-          </div>
+              >
+                <path
+                  d="M 50 100 Q 150 80 250 100 T 450 100 Q 550 90 650 100 Q 700 95 750 100"
+                  stroke="rgba(255, 255, 255, 0.9)"
+                  strokeWidth="2"
+                  fill="none"
+                  strokeLinecap="round"
+                  className="animate-draw-path"
+                />
+              </svg>
+            </div>
+          )}
         </div>
       </div>
 
       <style>{`
         @keyframes shimmer {
-          0% { transform: translateX(-100%) skewX(-12deg); }
-          100% { transform: translateX(200%) skewX(-12deg); }
+          0% { 
+            transform: translateX(-100%) skewX(-12deg);
+            opacity: 0;
+          }
+          50% { 
+            opacity: 1;
+          }
+          100% { 
+            transform: translateX(200%) skewX(-12deg);
+            opacity: 0;
+          }
         }
         
-        @keyframes loadingSlide {
-          0%, 100% { transform: translateX(-100%); }
-          50% { transform: translateX(100%); }
+        @keyframes draw-path {
+          0% {
+            stroke-dasharray: 0 1000;
+            stroke-dashoffset: 0;
+          }
+          100% {
+            stroke-dasharray: 1000 0;
+            stroke-dashoffset: 0;
+          }
         }
-
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
+        
+        .animate-draw-path {
+          animation: draw-path 1s ease-in-out forwards;
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap');
       `}</style>
     </div>
   );
