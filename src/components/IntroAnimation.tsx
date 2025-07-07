@@ -9,7 +9,7 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
   const [showSubtext, setShowSubtext] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
   
-  const name = "Venkata Satyanarayana";
+  const name = "Duba Venkata Satyanarayana";
   const letters = name.split('');
 
   useEffect(() => {
@@ -17,13 +17,13 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
     const nameTimer = setTimeout(() => setShowName(true), 500);
     
     // Show subtext after name animation
-    const subtextTimer = setTimeout(() => setShowSubtext(true), 2500);
+    const subtextTimer = setTimeout(() => setShowSubtext(true), 2000);
     
     // Start fade out
-    const fadeTimer = setTimeout(() => setFadeOut(true), 4000);
+    const fadeTimer = setTimeout(() => setFadeOut(true), 3200);
     
     // Complete animation
-    const completeTimer = setTimeout(() => onComplete(), 5000);
+    const completeTimer = setTimeout(() => onComplete(), 4000);
 
     return () => {
       clearTimeout(nameTimer);
