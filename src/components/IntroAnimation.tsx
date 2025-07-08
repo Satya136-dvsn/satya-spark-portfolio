@@ -8,11 +8,10 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
   const [showLogo, setShowLogo] = useState(false);
   const [showMonogram, setShowMonogram] = useState(false);
   const [showName, setShowName] = useState(false);
-  const [showWriteOn, setShowWriteOn] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
   
   const name = "Duba Venkata Satyanarayana";
-  const letters = name.split('');
+  const words = name.split(' ');
 
   useEffect(() => {
     // Start logo hexagon animation
@@ -24,20 +23,16 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
     // Start name animation after logo completes
     const nameTimer = setTimeout(() => setShowName(true), 1500);
     
-    // Start write-on effect after name letters complete
-    const writeOnTimer = setTimeout(() => setShowWriteOn(true), 3200);
-    
-    // Start fade out
-    const fadeTimer = setTimeout(() => setFadeOut(true), 3800);
+    // Start fade out after 3.5-4 seconds total
+    const fadeTimer = setTimeout(() => setFadeOut(true), 3500);
     
     // Complete animation
-    const completeTimer = setTimeout(() => onComplete(), 4300);
+    const completeTimer = setTimeout(() => onComplete(), 4000);
 
     return () => {
       clearTimeout(logoTimer);
       clearTimeout(monogramTimer);
       clearTimeout(nameTimer);
-      clearTimeout(writeOnTimer);
       clearTimeout(fadeTimer);
       clearTimeout(completeTimer);
     };
@@ -138,36 +133,36 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
           </svg>
         </div>
 
-        {/* Main name with letter-by-letter animation and write-on effect */}
+        {/* Main name with word-by-word animation */}
         <div className="relative">
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-['Alex_Brush',cursive] tracking-wide relative">
-            {letters.map((letter, index) => (
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-['Alex_Brush',cursive] tracking-wide relative whitespace-nowrap">
+            {words.map((word, wordIndex) => (
               <span
-                key={index}
-                className={`inline-block transition-all duration-700 ease-out relative ${
+                key={wordIndex}
+                className={`inline-block transition-all duration-700 ease-in-out relative ${
                   showName 
                     ? 'opacity-100 translate-y-0 filter blur-0' 
-                    : 'opacity-0 translate-y-8 filter blur-sm'
+                    : 'opacity-0 translate-y-12 filter blur-sm'
                 }`}
                 style={{
-                  transitionDelay: showName ? `${index * 40}ms` : '0ms',
-                  background: letter === ' ' ? 'transparent' : 'linear-gradient(135deg, #a855f7, #ec4899, #f472b6)',
-                  backgroundClip: letter === ' ' ? 'unset' : 'text',
-                  WebkitBackgroundClip: letter === ' ' ? 'unset' : 'text',
-                  color: letter === ' ' ? 'transparent' : 'transparent',
+                  transitionDelay: showName ? `${wordIndex * 400}ms` : '0ms',
+                  background: 'linear-gradient(135deg, #a855f7, #ec4899, #f472b6)',
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  color: 'transparent',
                   textShadow: showName ? '0 0 40px rgba(168, 85, 247, 0.4), 0 0 20px rgba(236, 72, 153, 0.3)' : 'none',
-                  marginRight: letter === ' ' ? '1rem' : '0',
+                  marginRight: wordIndex < words.length - 1 ? '0.5rem' : '0',
                   filter: showName ? 'drop-shadow(0 4px 20px rgba(168, 85, 247, 0.3))' : 'none'
                 }}
               >
-                {letter === ' ' ? '\u00A0' : letter}
+                {word}
                 
-                {/* Shimmer effect for each letter */}
+                {/* Shimmer effect for each word */}
                 {showName && (
                   <span 
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-12"
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -skew-x-12"
                     style={{
-                      animation: `shimmer 1.5s ease-out ${index * 40 + 500}ms`,
+                      animation: `word-shimmer 1.2s ease-out ${wordIndex * 400 + 600}ms`,
                       animationFillMode: 'both'
                     }}
                   />
@@ -175,28 +170,6 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
               </span>
             ))}
           </h1>
-          
-          {/* Write-on effect overlay */}
-          {showWriteOn && (
-            <div className="absolute inset-0 pointer-events-none">
-              <svg 
-                className="w-full h-full" 
-                viewBox="0 0 800 200" 
-                style={{
-                  filter: 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.8))'
-                }}
-              >
-                <path
-                  d="M 50 100 Q 150 80 250 100 T 450 100 Q 550 90 650 100 Q 700 95 750 100"
-                  stroke="rgba(255, 255, 255, 0.9)"
-                  strokeWidth="2"
-                  fill="none"
-                  strokeLinecap="round"
-                  className="animate-draw-path"
-                />
-              </svg>
-            </div>
-          )}
         </div>
       </div>
 
@@ -262,6 +235,20 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
         
         .animate-logo-shimmer {
           animation: logo-shimmer 1s ease-out forwards;
+        }
+        
+        @keyframes word-shimmer {
+          0% { 
+            transform: translateX(-100%) skewX(-12deg);
+            opacity: 0;
+          }
+          50% { 
+            opacity: 1;
+          }
+          100% { 
+            transform: translateX(200%) skewX(-12deg);
+            opacity: 0;
+          }
         }
         
         @import url('https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap');
