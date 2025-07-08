@@ -78,10 +78,10 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
             
             {/* DVS Monogram - Centered and Creative */}
             <g className={`transition-all duration-800 ease-out ${showMonogram ? 'opacity-100' : 'opacity-0'}`}>
-              {/* Individual letters with staggered animation */}
+              {/* Individual letters with staggered animation - centered in hexagon */}
               <text
-                x="45"
-                y="67"
+                x="50"
+                y="55"
                 textAnchor="middle"
                 className={`text-xl font-bold transition-all duration-600 ${showMonogram ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}
                 style={{
@@ -94,7 +94,7 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
               </text>
               <text
                 x="60"
-                y="67"
+                y="55"
                 textAnchor="middle"
                 className={`text-xl font-bold transition-all duration-600 ${showMonogram ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}
                 style={{
@@ -106,8 +106,8 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
                 V
               </text>
               <text
-                x="75"
-                y="67"
+                x="70"
+                y="55"
                 textAnchor="middle"
                 className={`text-xl font-bold transition-all duration-600 ${showMonogram ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}
                 style={{
