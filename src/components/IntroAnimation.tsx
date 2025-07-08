@@ -133,43 +133,72 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
           </svg>
         </div>
 
-        {/* Main name with word-by-word animation */}
+        {/* Handwriting animation for the name */}
         <div className="relative">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-['Alex_Brush',cursive] tracking-wide relative whitespace-nowrap">
-            {words.map((word, wordIndex) => (
-              <span
-                key={wordIndex}
-                className={`inline-block transition-all duration-700 ease-in-out relative ${
-                  showName 
-                    ? 'opacity-100 translate-y-0 filter blur-0' 
-                    : 'opacity-0 translate-y-12 filter blur-sm'
-                }`}
-                style={{
-                  transitionDelay: showName ? `${wordIndex * 400}ms` : '0ms',
-                  background: 'linear-gradient(135deg, #a855f7, #ec4899, #f472b6)',
-                  backgroundClip: 'text',
-                  WebkitBackgroundClip: 'text',
-                  color: 'transparent',
-                  textShadow: showName ? '0 0 40px rgba(168, 85, 247, 0.4), 0 0 20px rgba(236, 72, 153, 0.3)' : 'none',
-                  marginRight: wordIndex < words.length - 1 ? '0.5rem' : '0',
-                  filter: showName ? 'drop-shadow(0 4px 20px rgba(168, 85, 247, 0.3))' : 'none'
-                }}
-              >
-                {word}
-                
-                {/* Shimmer effect for each word */}
-                {showName && (
-                  <span 
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -skew-x-12"
-                    style={{
-                      animation: `word-shimmer 1.2s ease-out ${wordIndex * 400 + 600}ms`,
-                      animationFillMode: 'both'
-                    }}
-                  />
-                )}
-              </span>
-            ))}
-          </h1>
+          <svg 
+            width="800" 
+            height="120" 
+            viewBox="0 0 800 120" 
+            className="mx-auto"
+            style={{ overflow: 'visible' }}
+          >
+            <defs>
+              {/* Writing mask animation */}
+              <mask id="writingMask">
+                <rect 
+                  width="0" 
+                  height="120" 
+                  fill="white"
+                  className={showName ? 'animate-writing-reveal' : ''}
+                />
+              </mask>
+              
+              {/* Glow filter */}
+              <filter id="textGlow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                <feMerge> 
+                  <feMergeNode in="coloredBlur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+              
+              {/* Shimmer gradient */}
+              <linearGradient id="shimmerTrail" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="rgba(255,255,255,0)" />
+                <stop offset="30%" stopColor="rgba(255,255,255,0.8)" />
+                <stop offset="70%" stopColor="rgba(255,255,255,0.8)" />
+                <stop offset="100%" stopColor="rgba(255,255,255,0)" />
+              </linearGradient>
+            </defs>
+            
+            {/* Main text with handwriting reveal */}
+            <text
+              x="400"
+              y="70"
+              textAnchor="middle"
+              className="text-5xl md:text-6xl lg:text-7xl font-['Alex_Brush',cursive]"
+              fill="url(#textGradient)"
+              filter="url(#textGlow)"
+              mask="url(#writingMask)"
+              style={{
+                fontSize: '4rem'
+              }}
+            >
+              Duba Venkata Satyanarayana
+            </text>
+            
+            {/* Shimmer trail effect */}
+            {showName && (
+              <rect
+                x="0"
+                y="0"
+                width="60"
+                height="120"
+                fill="url(#shimmerTrail)"
+                className="animate-shimmer-trail"
+              />
+            )}
+          </svg>
         </div>
       </div>
 
@@ -237,18 +266,38 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
           animation: logo-shimmer 1s ease-out forwards;
         }
         
-        @keyframes word-shimmer {
+        @keyframes writing-reveal {
           0% { 
-            transform: translateX(-100%) skewX(-12deg);
+            width: 0;
+          }
+          100% { 
+            width: 800px;
+          }
+        }
+        
+        .animate-writing-reveal {
+          animation: writing-reveal 2.5s ease-out forwards;
+        }
+        
+        @keyframes shimmer-trail {
+          0% { 
+            transform: translateX(-60px);
             opacity: 0;
           }
-          50% { 
+          20% { 
+            opacity: 1;
+          }
+          80% { 
             opacity: 1;
           }
           100% { 
-            transform: translateX(200%) skewX(-12deg);
+            transform: translateX(800px);
             opacity: 0;
           }
+        }
+        
+        .animate-shimmer-trail {
+          animation: shimmer-trail 2.5s ease-out forwards;
         }
         
         @import url('https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap');
