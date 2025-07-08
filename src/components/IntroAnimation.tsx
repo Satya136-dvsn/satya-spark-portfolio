@@ -50,141 +50,31 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
       </div>
 
       <div className="text-center relative flex flex-col items-center">
-        {/* DVS Logo with Hexagonal Outline */}
+        {/* DVS Logo */}
         <div className="mb-8 relative">
-          <svg 
-            width="120" 
-            height="120" 
-            viewBox="0 0 120 120" 
-            className="relative"
-          >
-            {/* Hexagonal Outline */}
-            <polygon
-              points="60,10 95,30 95,70 60,90 25,70 25,30"
-              fill="none"
-              stroke="url(#gradient)"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className={`transition-all duration-1000 ease-out ${
-                showLogo 
-                  ? 'opacity-100 animate-draw-hexagon' 
-                  : 'opacity-0'
-              }`}
+          <img 
+            src="/lovable-uploads/f6409f48-e358-43e9-83a7-3ea14c0973d9.png"
+            alt="DVS Logo"
+            className={`w-32 h-32 transition-all duration-1000 ease-out ${
+              showLogo 
+                ? 'opacity-100 scale-100' 
+                : 'opacity-0 scale-75'
+            }`}
+            style={{
+              filter: showLogo ? 'drop-shadow(0 0 20px rgba(59, 130, 246, 0.4))' : 'none'
+            }}
+          />
+          
+          {/* Shimmer effect for logo */}
+          {showLogo && (
+            <div
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-logo-shimmer"
               style={{
-                filter: showLogo ? 'drop-shadow(0 0 15px rgba(168, 85, 247, 0.4))' : 'none'
+                animationDelay: '800ms',
+                animationFillMode: 'both'
               }}
             />
-            
-            {/* DVS Monogram - Centered and Creative */}
-            <g className={`transition-all duration-800 ease-out ${showMonogram ? 'opacity-100' : 'opacity-0'}`}>
-              {/* Individual letters with staggered animation - centered in hexagon */}
-              <text
-                x="50"
-                y="55"
-                textAnchor="middle"
-                className={`text-xl font-bold transition-all duration-600 ${showMonogram ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}
-                style={{
-                  fill: 'url(#textGradient)',
-                  filter: showMonogram ? 'drop-shadow(0 0 12px rgba(168, 85, 247, 0.4))' : 'none',
-                  transitionDelay: showMonogram ? '200ms' : '0ms'
-                }}
-              >
-                D
-              </text>
-              <text
-                x="60"
-                y="55"
-                textAnchor="middle"
-                className={`text-xl font-bold transition-all duration-600 ${showMonogram ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}
-                style={{
-                  fill: 'url(#textGradient)',
-                  filter: showMonogram ? 'drop-shadow(0 0 12px rgba(236, 72, 153, 0.4))' : 'none',
-                  transitionDelay: showMonogram ? '400ms' : '0ms'
-                }}
-              >
-                V
-              </text>
-              <text
-                x="70"
-                y="55"
-                textAnchor="middle"
-                className={`text-xl font-bold transition-all duration-600 ${showMonogram ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}
-                style={{
-                  fill: 'url(#textGradient)',
-                  filter: showMonogram ? 'drop-shadow(0 0 12px rgba(236, 72, 153, 0.4))' : 'none',
-                  transitionDelay: showMonogram ? '600ms' : '0ms'
-                }}
-              >
-                S
-              </text>
-              
-              {/* Orbiting particles around the letters */}
-              {showMonogram && (
-                <>
-                  <circle
-                    cx="60"
-                    cy="45"
-                    r="2"
-                    fill="url(#textGradient)"
-                    className="animate-orbit"
-                    style={{
-                      transformOrigin: '60px 60px',
-                      filter: 'drop-shadow(0 0 6px rgba(168, 85, 247, 0.6))'
-                    }}
-                  />
-                  <circle
-                    cx="85"
-                    cy="60"
-                    r="1.5"
-                    fill="url(#textGradient)"
-                    className="animate-orbit-reverse"
-                    style={{
-                      transformOrigin: '60px 60px',
-                      filter: 'drop-shadow(0 0 4px rgba(236, 72, 153, 0.6))'
-                    }}
-                  />
-                </>
-              )}
-            </g>
-            
-            {/* Shimmer effect for logo */}
-            {showMonogram && (
-              <rect
-                x="0"
-                y="0"
-                width="120"
-                height="120"
-                fill="url(#shimmerGradient)"
-                className="animate-logo-shimmer"
-                style={{
-                  animationDelay: '200ms',
-                  animationFillMode: 'both'
-                }}
-              />
-            )}
-            
-            {/* Gradient Definitions */}
-            <defs>
-              <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#a855f7" />
-                <stop offset="50%" stopColor="#ec4899" />
-                <stop offset="100%" stopColor="#f472b6" />
-              </linearGradient>
-              
-              <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#a855f7" />
-                <stop offset="50%" stopColor="#ec4899" />
-                <stop offset="100%" stopColor="#f472b6" />
-              </linearGradient>
-              
-              <linearGradient id="shimmerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="rgba(255,255,255,0)" />
-                <stop offset="50%" stopColor="rgba(255,255,255,0.3)" />
-                <stop offset="100%" stopColor="rgba(255,255,255,0)" />
-              </linearGradient>
-            </defs>
-          </svg>
+          )}
         </div>
 
         {/* Handwriting animation for the name */}
@@ -222,6 +112,13 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
                 <stop offset="30%" stopColor="rgba(255,255,255,0.8)" />
                 <stop offset="70%" stopColor="rgba(255,255,255,0.8)" />
                 <stop offset="100%" stopColor="rgba(255,255,255,0)" />
+              </linearGradient>
+              
+              {/* Text gradient for name */}
+              <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#a855f7" />
+                <stop offset="50%" stopColor="#ec4899" />
+                <stop offset="100%" stopColor="#f472b6" />
               </linearGradient>
             </defs>
             
