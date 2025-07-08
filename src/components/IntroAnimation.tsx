@@ -76,23 +76,77 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
               }}
             />
             
-            {/* DVS Monogram */}
-            <text
-              x="60"
-              y="67"
-              textAnchor="middle"
-              className={`text-2xl font-bold transition-all duration-800 ease-out ${
-                showMonogram 
-                  ? 'opacity-100 fill-current' 
-                  : 'opacity-0'
-              }`}
-              style={{
-                fill: 'url(#textGradient)',
-                filter: showMonogram ? 'drop-shadow(0 0 10px rgba(236, 72, 153, 0.3))' : 'none'
-              }}
-            >
-              DVS
-            </text>
+            {/* DVS Monogram - Centered and Creative */}
+            <g className={`transition-all duration-800 ease-out ${showMonogram ? 'opacity-100' : 'opacity-0'}`}>
+              {/* Individual letters with staggered animation */}
+              <text
+                x="45"
+                y="67"
+                textAnchor="middle"
+                className={`text-xl font-bold transition-all duration-600 ${showMonogram ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}
+                style={{
+                  fill: 'url(#textGradient)',
+                  filter: showMonogram ? 'drop-shadow(0 0 12px rgba(168, 85, 247, 0.4))' : 'none',
+                  transitionDelay: showMonogram ? '200ms' : '0ms'
+                }}
+              >
+                D
+              </text>
+              <text
+                x="60"
+                y="67"
+                textAnchor="middle"
+                className={`text-xl font-bold transition-all duration-600 ${showMonogram ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}
+                style={{
+                  fill: 'url(#textGradient)',
+                  filter: showMonogram ? 'drop-shadow(0 0 12px rgba(236, 72, 153, 0.4))' : 'none',
+                  transitionDelay: showMonogram ? '400ms' : '0ms'
+                }}
+              >
+                V
+              </text>
+              <text
+                x="75"
+                y="67"
+                textAnchor="middle"
+                className={`text-xl font-bold transition-all duration-600 ${showMonogram ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}
+                style={{
+                  fill: 'url(#textGradient)',
+                  filter: showMonogram ? 'drop-shadow(0 0 12px rgba(236, 72, 153, 0.4))' : 'none',
+                  transitionDelay: showMonogram ? '600ms' : '0ms'
+                }}
+              >
+                S
+              </text>
+              
+              {/* Orbiting particles around the letters */}
+              {showMonogram && (
+                <>
+                  <circle
+                    cx="60"
+                    cy="45"
+                    r="2"
+                    fill="url(#textGradient)"
+                    className="animate-orbit"
+                    style={{
+                      transformOrigin: '60px 60px',
+                      filter: 'drop-shadow(0 0 6px rgba(168, 85, 247, 0.6))'
+                    }}
+                  />
+                  <circle
+                    cx="85"
+                    cy="60"
+                    r="1.5"
+                    fill="url(#textGradient)"
+                    className="animate-orbit-reverse"
+                    style={{
+                      transformOrigin: '60px 60px',
+                      filter: 'drop-shadow(0 0 4px rgba(236, 72, 153, 0.6))'
+                    }}
+                  />
+                </>
+              )}
+            </g>
             
             {/* Shimmer effect for logo */}
             {showMonogram && (
@@ -298,6 +352,32 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
         
         .animate-shimmer-trail {
           animation: shimmer-trail 2.5s ease-out forwards;
+        }
+        
+        @keyframes orbit {
+          0% { 
+            transform: rotate(0deg) translateX(15px) rotate(0deg);
+          }
+          100% { 
+            transform: rotate(360deg) translateX(15px) rotate(-360deg);
+          }
+        }
+        
+        .animate-orbit {
+          animation: orbit 3s linear infinite;
+        }
+        
+        @keyframes orbit-reverse {
+          0% { 
+            transform: rotate(0deg) translateX(20px) rotate(0deg);
+          }
+          100% { 
+            transform: rotate(-360deg) translateX(20px) rotate(360deg);
+          }
+        }
+        
+        .animate-orbit-reverse {
+          animation: orbit-reverse 4s linear infinite;
         }
         
         @import url('https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap');
