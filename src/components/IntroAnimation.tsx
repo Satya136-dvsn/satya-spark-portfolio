@@ -39,21 +39,21 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
   }, [onComplete]);
 
   return (
-    <div className={`fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 transition-opacity duration-1000 ${fadeOut ? 'opacity-0' : 'opacity-100'}`}>
+    <div className={`fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-slate-800 via-blue-900 to-slate-900 transition-opacity duration-1000 ${fadeOut ? 'opacity-0' : 'opacity-100'}`}>
       {/* Animated background particles */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-purple-400/5 rounded-full animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-24 h-24 bg-pink-400/5 rounded-full animate-pulse delay-1000"></div>
-        <div className="absolute top-3/4 left-3/4 w-20 h-20 bg-blue-400/5 rounded-full animate-pulse delay-500"></div>
-        <div className="absolute top-1/2 left-1/6 w-16 h-16 bg-purple-300/3 rounded-full animate-pulse delay-700"></div>
-        <div className="absolute bottom-1/3 left-2/3 w-28 h-28 bg-pink-300/4 rounded-full animate-pulse delay-300"></div>
+        <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-blue-400/8 rounded-full animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-24 h-24 bg-slate-400/6 rounded-full animate-pulse delay-1000"></div>
+        <div className="absolute top-3/4 left-3/4 w-20 h-20 bg-blue-300/8 rounded-full animate-pulse delay-500"></div>
+        <div className="absolute top-1/2 left-1/6 w-16 h-16 bg-slate-300/5 rounded-full animate-pulse delay-700"></div>
+        <div className="absolute bottom-1/3 left-2/3 w-28 h-28 bg-blue-400/6 rounded-full animate-pulse delay-300"></div>
       </div>
 
       <div className="text-center relative flex flex-col items-center">
         {/* DVS Logo */}
         <div className="mb-8 relative">
           <img 
-            src="/lovable-uploads/f6409f48-e358-43e9-83a7-3ea14c0973d9.png"
+            src="/lovable-uploads/c51f92f6-acbc-4922-996a-d8b6eebdbddc.png"
             alt="DVS Logo"
             className={`w-32 h-32 transition-all duration-1000 ease-out ${
               showLogo 
