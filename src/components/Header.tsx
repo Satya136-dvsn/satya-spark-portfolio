@@ -41,8 +41,12 @@ const Header = () => {
     }`}>
       <nav className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-            DVS
+          <div className="flex items-center">
+            <img 
+              src="/lovable-uploads/c51f92f6-acbc-4922-996a-d8b6eebdbddc.png"
+              alt="DVS Logo"
+              className="w-10 h-10"
+            />
           </div>
 
           {/* Desktop Navigation with Dropdown */}

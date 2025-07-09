@@ -116,9 +116,9 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
               
               {/* Text gradient for name */}
               <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#a855f7" />
-                <stop offset="50%" stopColor="#ec4899" />
-                <stop offset="100%" stopColor="#f472b6" />
+                <stop offset="0%" stopColor="#3b82f6" />
+                <stop offset="50%" stopColor="#1d4ed8" />
+                <stop offset="100%" stopColor="#1e40af" />
               </linearGradient>
             </defs>
             
