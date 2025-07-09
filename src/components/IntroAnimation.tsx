@@ -55,7 +55,7 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
           <img 
             src="/lovable-uploads/c51f92f6-acbc-4922-996a-d8b6eebdbddc.png"
             alt="DVS Logo"
-            className={`w-32 h-32 transition-all duration-1000 ease-out ${
+            className={`w-40 h-40 transition-all duration-1000 ease-out ${
               showLogo 
                 ? 'opacity-100 scale-100' 
                 : 'opacity-0 scale-75'
@@ -116,9 +116,9 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
               
               {/* Text gradient for name */}
               <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#3b82f6" />
-                <stop offset="50%" stopColor="#1d4ed8" />
-                <stop offset="100%" stopColor="#1e40af" />
+                <stop offset="0%" stopColor="#ffffff" />
+                <stop offset="50%" stopColor="#f8fafc" />
+                <stop offset="100%" stopColor="#e2e8f0" />
               </linearGradient>
             </defs>
             

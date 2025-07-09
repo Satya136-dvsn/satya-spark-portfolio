@@ -45,7 +45,7 @@ const Header = () => {
             <img 
               src="/lovable-uploads/c51f92f6-acbc-4922-996a-d8b6eebdbddc.png"
               alt="DVS Logo"
-              className="w-10 h-10"
+              className="w-12 h-12"
             />
           </div>
 
