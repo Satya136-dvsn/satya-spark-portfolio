@@ -69,7 +69,7 @@ const Skills = () => {
   return (
     <section id="skills" className="py-20 px-6 relative z-10 min-h-screen">
       <div className="container mx-auto max-w-7xl">
-        <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+        <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent leading-tight py-2">
           Skills & Expertise
         </h2>
 

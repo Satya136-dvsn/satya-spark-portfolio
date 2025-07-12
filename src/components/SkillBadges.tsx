@@ -97,7 +97,7 @@ const SkillBadges = () => {
   return (
     <section id="skill-badges" className="py-16 px-6 relative z-10">
       <div className="container mx-auto max-w-7xl">
-        <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+        <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent leading-tight py-2">
           Skill Badges
         </h2>
 
