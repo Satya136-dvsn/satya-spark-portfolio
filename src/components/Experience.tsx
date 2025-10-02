@@ -2,6 +2,14 @@
 const Experience = () => {
   const experiences = [
     {
+      title: "Infosys Springboard 6.0 Internship",
+      company: "Infosys Springboard",
+      period: "September 21, 2024 - Present",
+      grade: "Ongoing",
+      description: "Comprehensive training and hands-on experience in Java Full Stack development, covering both frontend and backend technologies.",
+      skills: ["Java", "Spring Boot", "React", "Full Stack Development", "REST APIs", "Database Management"]
+    },
+    {
       title: "Robotics with Arduino Internship",
       company: "Shri MK Embedded Solutions",
       period: "May 20, 2024 - June 20, 2024",
