@@ -68,7 +68,7 @@ const Hero = () => {
             View My Work
           </a>
           <a 
-            href="https://drive.google.com/file/d/1_rET6Ws_18T28-vFmAA5grDdTb3b2T0O/view?usp=sharing" 
+            href="https://drive.google.com/file/d/1AKkQn-vrcAFgVp5WJaVulBdAU0S7fPuO/view?usp=drive_link" 
             target="_blank"
             rel="noopener noreferrer"
             className="px-8 py-3 border-2 border-purple-400 rounded-full text-purple-400 font-semibold hover:bg-purple-400 hover:text-white transition-all duration-300"

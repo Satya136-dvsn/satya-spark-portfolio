@@ -2,6 +2,13 @@
 const Projects = () => {
   const projects = [
     {
+      title: "Java Budget AI-Driven Expense Tracker and Budget Advisor (Full Stack)",
+      period: "21 Sep 2025 – Present",
+      description: "Developing a full-stack application with Java (Backend), modern frontend, and MySQL for secure data persistence. Implementing robust RESTful APIs and server-side logic for automated expense tracking and intelligent budget recommendations (simulated AI logic), demonstrating scalable architecture.",
+      tech: ["Java", "MySQL", "REST API", "Full Stack", "Backend"],
+      status: "In Progress"
+    },
+    {
       title: "32-Bit Hybrid Multiplier using FPGA",
       period: "August 2024 - April 2025",
       description: "Creating an efficient 32-bit hybrid multiplier using Vedic and Karatsuba algorithms for improved multiplication efficiency.",
