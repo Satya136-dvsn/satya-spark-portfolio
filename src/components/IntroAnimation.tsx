@@ -15,19 +15,19 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
 
   useEffect(() => {
     // Start logo hexagon animation
-    const logoTimer = setTimeout(() => setShowLogo(true), 300);
+    const logoTimer = setTimeout(() => setShowLogo(true), 100);
     
     // Show DVS monogram after hexagon draws
-    const monogramTimer = setTimeout(() => setShowMonogram(true), 1000);
+    const monogramTimer = setTimeout(() => setShowMonogram(true), 300);
     
     // Start name animation after logo completes
-    const nameTimer = setTimeout(() => setShowName(true), 1500);
+    const nameTimer = setTimeout(() => setShowName(true), 500);
     
-    // Start fade out after 3.5-4 seconds total
-    const fadeTimer = setTimeout(() => setFadeOut(true), 3500);
+    // Start fade out after 1 second total
+    const fadeTimer = setTimeout(() => setFadeOut(true), 800);
     
     // Complete animation
-    const completeTimer = setTimeout(() => onComplete(), 4000);
+    const completeTimer = setTimeout(() => onComplete(), 1000);
 
     return () => {
       clearTimeout(logoTimer);

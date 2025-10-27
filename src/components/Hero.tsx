@@ -44,19 +44,30 @@ const Hero = () => {
           </div>
         </div>
 
-        <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent animate-fade-in leading-tight py-2">
+        <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent animate-fade-in leading-tight py-2">
           Duba Venkata Satyanarayana
         </h1>
 
-        <div className="text-xl md:text-2xl text-gray-300 mb-6 h-8">
-          <span className="border-r-2 border-purple-400 animate-pulse">{text}</span>
+        <div className="text-2xl md:text-3xl font-semibold text-white mb-6">
+          Full Stack Developer | Java & Cloud Specialist
         </div>
 
-        <p className="text-lg text-gray-400 mb-8 max-w-2xl mx-auto leading-relaxed">
-          Passionate engineering student specializing in electronics, programming, and web development. 
-          Seeking to grow technical and management skills through hands-on experience in robotics, 
-          cloud computing, and data analytics.
+        <p className="text-lg text-gray-300 mb-6 max-w-2xl mx-auto leading-relaxed">
+          Electronics Engineering student with expertise in Java, Python, and modern web technologies. 
+          Proven track record in full-stack development, data analytics, and embedded systems.
         </p>
+
+        {/* Tech Stack Badges */}
+        <div className="flex flex-wrap justify-center gap-3 mb-8 max-w-3xl mx-auto">
+          {['Java', 'Python', 'JavaScript', 'React', 'Spring Boot', 'MySQL', 'AWS', 'Arduino'].map((tech) => (
+            <span 
+              key={tech}
+              className="px-4 py-2 bg-white/10 backdrop-blur-sm border border-purple-400/30 rounded-full text-sm font-medium text-purple-300 hover:bg-white/20 transition-all duration-200"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
           <a 
