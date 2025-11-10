@@ -29,29 +29,18 @@ const Hero = () => {
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative z-10 px-6 pt-20">
       <div className="text-center max-w-4xl mx-auto">
-        {/* Enhanced Profile Photo */}
-        <div className="mb-12 relative">
-          <div className="relative inline-block">
-            {/* Animated gradient ring */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 rounded-full blur-sm opacity-75 animate-pulse"></div>
-            
-            {/* Main photo container */}
-            <div 
-              className="relative w-40 h-40 sm:w-48 sm:h-48 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 p-1.5 cursor-pointer transition-all duration-500 hover:scale-110 hover:rotate-3"
-              onClick={handleProfileClick}
-            >
-              <div className="w-full h-full rounded-full bg-slate-900 overflow-hidden ring-4 ring-white/10">
-                <img 
-                  src="/lovable-uploads/95f43a83-175b-4961-9937-4e95596ecffd.png" 
-                  alt="Duba Venkata Satyanarayana - Full Stack Developer"
-                  className="w-full h-full object-cover rounded-full hover:scale-105 transition-transform duration-500"
-                />
-              </div>
+        <div className="mb-8 relative">
+          <div 
+            className="w-32 h-32 mx-auto mb-8 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 p-1 cursor-pointer transition-all duration-300 hover:scale-105"
+            onClick={handleProfileClick}
+          >
+            <div className="w-full h-full rounded-full bg-slate-900 overflow-hidden">
+              <img 
+                src="/lovable-uploads/95f43a83-175b-4961-9937-4e95596ecffd.png" 
+                alt="Duba Venkata Satyanarayana"
+                className="w-full h-full object-cover rounded-full"
+              />
             </div>
-
-            {/* Decorative dots */}
-            <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full animate-bounce"></div>
-            <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-gradient-to-br from-blue-400 to-purple-400 rounded-full animate-pulse"></div>
           </div>
         </div>
 
@@ -90,7 +79,7 @@ const Hero = () => {
             View My Work
           </a>
           <a 
-            href="https://drive.google.com/file/d/19T_JDr0LGO2taxvkuOHjY3COHLWDGgwX/view?usp=sharing" 
+            href="https://drive.google.com/file/d/1AKkQn-vrcAFgVp5WJaVulBdAU0S7fPuO/view?usp=drive_link" 
             target="_blank"
             rel="noopener noreferrer"
             className="px-8 py-3 border-2 border-purple-400 rounded-full text-purple-400 font-semibold hover:bg-purple-400 hover:text-white transition-all duration-300"
