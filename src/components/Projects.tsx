@@ -32,7 +32,7 @@ const Projects = () => {
       status: "Completed",
       impact: "40% improvement in multiplication efficiency over standard methods",
       github: "https://github.com/Satya136-dvsn",
-      category: "Embedded"
+      category: "FPGA/VLSI"
     },
     {
       title: "Stock Market Portfolio Optimization",
@@ -96,7 +96,7 @@ const Projects = () => {
     }
   ];
 
-  const categories = ['All', 'Full Stack', 'Data Analytics', 'Web Development', 'Embedded'];
+  const categories = ['All', 'Full Stack', 'Data Analytics', 'Web Development', 'FPGA/VLSI', 'Embedded'];
 
   const filteredProjects = activeFilter === 'All'
     ? projects

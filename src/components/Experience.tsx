@@ -7,7 +7,8 @@ const Experience = () => {
       period: "September 21, 2024 - Present",
       grade: "Ongoing",
       description: "Comprehensive training and hands-on experience in Java Full Stack development, covering both frontend and backend technologies.",
-      skills: ["Java", "Spring Boot", "React", "Full Stack Development", "REST APIs", "Database Management"]
+      skills: ["Java", "Spring Boot", "React", "Full Stack Development", "REST APIs", "Database Management"],
+      certificate: "https://drive.google.com/file/d/1xLbMRDrlONk-4vwuM-ZmQql2KRmQ-c6U/view?usp=drive_link"
     },
     {
       title: "Robotics with Arduino Internship",
@@ -39,12 +40,12 @@ const Experience = () => {
                   <p className="text-green-400 font-bold">Grade: {exp.grade}</p>
                 </div>
               </div>
-              
+
               <p className="text-gray-300 mb-6 leading-relaxed">{exp.description}</p>
-              
+
               <div className="flex flex-wrap gap-2">
                 {exp.skills.map((skill, skillIndex) => (
-                  <span 
+                  <span
                     key={skillIndex}
                     className="px-3 py-1 bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-400/30 rounded-full text-sm text-purple-300 hover:scale-105 transition-transform duration-200"
                   >
@@ -52,6 +53,20 @@ const Experience = () => {
                   </span>
                 ))}
               </div>
+
+              {/* Certificate Link */}
+              {exp.certificate && (
+                <div className="mt-4 pt-4 border-t border-white/10">
+                  <a
+                    href={exp.certificate}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors duration-300 text-sm font-semibold"
+                  >
+                    📜 View Certificate →
+                  </a>
+                </div>
+              )}
             </div>
           ))}
         </div>

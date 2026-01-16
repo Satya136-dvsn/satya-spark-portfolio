@@ -91,7 +91,7 @@ const Hero = () => {
             View My Work
           </a>
           <a
-            href="https://drive.google.com/file/d/1AKkQn-vrcAFgVp5WJaVulBdAU0S7fPuO/view?usp=drive_link"
+            href="https://drive.google.com/file/d/1pGHlX5_5QleUNegN7roQsLPvd0i9kdFu/view?usp=drive_link"
             target="_blank"
             rel="noopener noreferrer"
             onClick={handleResumeDownload}
