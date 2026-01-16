@@ -6,10 +6,10 @@ const Projects = () => {
   const projects = [
     {
       title: "Biz Stratosphere - AI Business Intelligence Platform",
-      period: "September 2025 – December 2025",
+      period: "November 2025 – Present",
       description: "Enterprise-grade AI-powered business intelligence platform with serverless architecture. Features include AI chat assistant with hallucination prevention, browser-based ML predictions (96% churn accuracy), real-time dashboards with 8+ chart types, automation engine with email notifications, and workspace management with RBAC.",
       tech: ["React", "TypeScript", "Supabase", "TensorFlow.js", "PostgreSQL", "Gemini AI"],
-      status: "Completed",
+      status: "In Progress",
       impact: "Zero operational cost with production-ready AI capabilities and 98% test coverage",
       github: "https://github.com/Satya136-dvsn/biz-stratosphere",
       category: "Full Stack"
