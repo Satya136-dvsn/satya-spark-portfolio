@@ -1,82 +1,102 @@
 import { Badge } from "@/components/ui/badge";
+import { Code2, Wrench, Lightbulb, Users } from "lucide-react";
 
 const Skills = () => {
   const skillCategories = [
     {
-      title: "Languages",
-      skills: ["Python", "Java", "JavaScript", "TypeScript", "SQL", "HTML/CSS"]
+      title: "Programming Languages",
+      icon: Code2,
+      skills: ["Python", "Java", "JavaScript", "SQL", "HTML5", "CSS3"],
+      color: "from-blue-500 to-cyan-500"
     },
     {
-      title: "Frameworks & Libraries",
-      skills: ["React", "Spring Boot", "Node.js", "TensorFlow.js", "Tailwind CSS"]
+      title: "Technical Skills",
+      icon: Wrench,
+      skills: ["Data Analysis & Visualization", "Arduino Programming", "Power BI", "Tableau", "AWS Cloud", "FPGA Design", "REST API", "MySQL", "Full Stack Development"],
+      color: "from-purple-500 to-pink-500"
     },
     {
-      title: "Tools & Platforms",
-      skills: ["AWS", "Git", "Docker", "Power BI", "Tableau", "MySQL", "PostgreSQL"]
+      title: "Tools & Technologies",
+      icon: Lightbulb,
+      skills: ["Microsoft Office", "Adobe Suite", "Git", "Project Management"],
+      color: "from-orange-500 to-red-500"
     },
     {
-      title: "Domains",
-      skills: ["Full Stack Development", "Data Analytics", "FPGA Design", "Embedded Systems", "REST APIs"]
+      title: "Soft Skills",
+      icon: Users,
+      skills: ["Leadership", "Event Coordination", "Student Engagement", "Team Collaboration", "Problem Solving", "Communication"],
+      color: "from-green-500 to-emerald-500"
     }
   ];
 
   return (
-    <section id="skills" className="py-16 md:py-24 px-6 relative z-10">
-      <div className="container mx-auto max-w-4xl">
+    <section id="skills" className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 relative z-10">
+      <div className="container mx-auto max-w-6xl">
         {/* Section Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
-            Skills
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent leading-tight">
+            Technical Competencies
           </h2>
-          <div className="w-12 h-1 bg-purple-500 mx-auto rounded-full"></div>
+          <p className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto">
+            A comprehensive toolkit built through hands-on experience and continuous learning
+          </p>
         </div>
 
-        {/* Skills List */}
-        <div className="space-y-8">
-          {skillCategories.map((category, index) => (
-            <div key={index} className="flex flex-col md:flex-row md:items-start gap-4">
-              {/* Category Label */}
-              <div className="md:w-48 flex-shrink-0">
-                <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">
-                  {category.title}
-                </h3>
-              </div>
+        {/* Skills Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+          {skillCategories.map((category, categoryIndex) => {
+            const Icon = category.icon;
+            return (
+              <div
+                key={categoryIndex}
+                className="group bg-white/5 backdrop-blur-sm rounded-xl p-5 border border-white/10 hover:border-purple-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/10 hover:-translate-y-1"
+              >
+                {/* Category Header */}
+                <div className="flex items-center gap-3 mb-4 border-b border-white/10 pb-3">
+                  <div className={`p-2 rounded-lg bg-gradient-to-br ${category.color} bg-opacity-20`}>
+                    <Icon className="w-5 h-5 text-white" />
+                  </div>
+                  <h3 className="text-lg font-bold text-white tracking-wide">
+                    {category.title}
+                  </h3>
+                </div>
 
-              {/* Skills */}
-              <div className="flex-1 flex flex-wrap gap-2">
-                {category.skills.map((skill, skillIndex) => (
-                  <Badge
-                    key={skillIndex}
-                    variant="secondary"
-                    className="bg-white/10 hover:bg-white/15 text-white border-0 px-3 py-1.5 text-sm font-medium rounded-md transition-colors"
-                  >
-                    {skill}
-                  </Badge>
-                ))}
+                {/* Skills */}
+                <div className="flex flex-wrap gap-2">
+                  {category.skills.map((skill, skillIndex) => (
+                    <Badge
+                      key={skillIndex}
+                      className="bg-white/5 hover:bg-white/10 text-gray-200 border border-white/10 px-2.5 py-1 text-xs font-medium transition-colors duration-200 cursor-default"
+                    >
+                      {skill}
+                    </Badge>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
-        {/* Subtle Divider */}
-        <div className="mt-12 pt-8 border-t border-white/10">
-          <div className="flex flex-wrap justify-center gap-8 text-center">
-            <div>
-              <div className="text-2xl font-bold text-white">9+</div>
-              <div className="text-xs text-gray-400 uppercase tracking-wider">Projects</div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold text-white">11+</div>
-              <div className="text-xs text-gray-400 uppercase tracking-wider">Certifications</div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold text-white">1</div>
-              <div className="text-xs text-gray-400 uppercase tracking-wider">Publication</div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold text-white">2</div>
-              <div className="text-xs text-gray-400 uppercase tracking-wider">Internships</div>
-            </div>
+        {/* Core Strengths */}
+        <div className="bg-gradient-to-r from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-white/10">
+          <h3 className="text-xl sm:text-2xl font-bold text-center mb-6 text-white">
+            Core Strengths
+          </h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {[
+              { title: "Problem Solving", icon: "🧠" },
+              { title: "Fast Learner", icon: "⚡" },
+              { title: "Team Leadership", icon: "👥" },
+              { title: "Innovation", icon: "💡" }
+            ].map((item, index) => (
+              <div
+                key={index}
+                className="text-center p-4 bg-white/5 rounded-xl border border-white/10 hover:border-purple-400/30 transition-all duration-300"
+              >
+                <div className="text-2xl mb-2">{item.icon}</div>
+                <h4 className="text-sm font-semibold text-white">{item.title}</h4>
+              </div>
+            ))}
           </div>
         </div>
       </div>
