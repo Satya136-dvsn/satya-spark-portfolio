@@ -43,7 +43,7 @@ const Skills = () => {
         </div>
 
         {/* Skills Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
           {skillCategories.map((category, categoryIndex) => {
             const Icon = category.icon;
             return (
@@ -77,31 +77,7 @@ const Skills = () => {
           })}
         </div>
 
-        {/* Core Strengths */}
-        <div className="bg-gradient-to-br from-purple-900/20 to-pink-900/20 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-purple-500/20">
-          <h3 className="text-2xl sm:text-3xl font-bold text-center mb-8 text-white">
-            Core Strengths
-          </h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-            {[
-              { title: "Problem Solving", desc: "Analytical & Critical Thinking", percent: "95%" },
-              { title: "Innovation", desc: "Creative Solutions", percent: "90%" },
-              { title: "Fast Learner", desc: "Quick Adaptation", percent: "95%" },
-              { title: "Team Leadership", desc: "Collaborative Excellence", percent: "90%" }
-            ].map((item, index) => (
-              <div
-                key={index}
-                className="text-center p-4 sm:p-6 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:border-purple-400/50 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-purple-500/20"
-              >
-                <div className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">
-                  {item.percent}
-                </div>
-                <h4 className="text-sm sm:text-base font-semibold text-white mb-1">{item.title}</h4>
-                <p className="text-gray-400 text-xs sm:text-sm">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+
       </div>
     </section>
   );
