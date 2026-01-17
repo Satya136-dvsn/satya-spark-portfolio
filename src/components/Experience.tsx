@@ -16,7 +16,8 @@ const Experience = () => {
       period: "May 20, 2024 - June 20, 2024",
       grade: "A+",
       description: "Gained hands-on experience in designing, programming, and deploying robotic systems using Arduino.",
-      skills: ["Arduino Programming", "Robotics", "Embedded Systems", "Circuit Design"]
+      skills: ["Arduino Programming", "Robotics", "Embedded Systems", "Circuit Design"],
+      certificate: "https://drive.google.com/file/d/1nmAOSsYlAjonngk7IFURlgYX2xatRgJg/view?usp=drive_link"
     }
   ];
 
