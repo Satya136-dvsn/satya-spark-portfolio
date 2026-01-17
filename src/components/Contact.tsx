@@ -23,7 +23,7 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!formData.name || !formData.email || !formData.message) {
       toast({
         title: "Error",
@@ -37,15 +37,15 @@ const Contact = () => {
 
     try {
       await emailjs.send(
-        'service_nkkohmr',
-        'template_1rzo75j',
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
         {
           from_name: formData.name,
           from_email: formData.email,
           message: formData.message,
           to_email: 'd.v.satyanarayana260@gmail.com'
         },
-        'W2pas8rVP9po8uB0l'
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       );
 
       toast({
@@ -77,7 +77,7 @@ const Contact = () => {
           <div className="space-y-8">
             <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
               <h3 className="text-2xl font-bold mb-6 text-white">Get In Touch</h3>
-              
+
               <div className="space-y-4">
                 <div className="flex items-center space-x-4">
                   <div className="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center">
@@ -117,9 +117,9 @@ const Contact = () => {
 
             <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
               <h3 className="text-2xl font-bold mb-6 text-white">Follow Me</h3>
-              
+
               <div className="flex space-x-4">
-                <a 
+                <a
                   href="https://www.linkedin.com/in/venkatasatyanarayana-duba-679372255"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -127,7 +127,7 @@ const Contact = () => {
                 >
                   <Linkedin className="w-6 h-6 text-blue-400 group-hover:text-blue-300" />
                 </a>
-                <a 
+                <a
                   href="https://github.com/Satya136-dvsn"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -141,7 +141,7 @@ const Contact = () => {
 
           <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
             <h3 className="text-2xl font-bold mb-6 text-white">Send Message</h3>
-            
+
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
