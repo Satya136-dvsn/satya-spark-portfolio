@@ -43,7 +43,7 @@ const Skills = () => {
         </div>
 
         {/* Skills Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
           {skillCategories.map((category, categoryIndex) => {
             const Icon = category.icon;
             return (
@@ -77,7 +77,28 @@ const Skills = () => {
           })}
         </div>
 
-
+        {/* Core Strengths */}
+        <div className="bg-gradient-to-r from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-white/10">
+          <h3 className="text-xl sm:text-2xl font-bold text-center mb-6 text-white">
+            Core Strengths
+          </h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {[
+              { title: "Problem Solving", icon: "🧠" },
+              { title: "Fast Learner", icon: "⚡" },
+              { title: "Team Leadership", icon: "👥" },
+              { title: "Innovation", icon: "💡" }
+            ].map((item, index) => (
+              <div
+                key={index}
+                className="text-center p-4 bg-white/5 rounded-xl border border-white/10 hover:border-purple-400/30 transition-all duration-300"
+              >
+                <div className="text-2xl mb-2">{item.icon}</div>
+                <h4 className="text-sm font-semibold text-white">{item.title}</h4>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
