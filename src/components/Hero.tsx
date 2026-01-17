@@ -40,13 +40,14 @@ const Hero = () => {
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative z-10 px-6 pt-20">
-      <div className="text-center max-w-4xl mx-auto">
-        <div className="mb-8 relative">
+      <div className="text-center max-w-5xl mx-auto">
+        <div className="mb-10 relative inline-block group">
+          <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full blur opacity-40 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
           <div
-            className="w-32 h-32 mx-auto mb-8 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 p-1 cursor-pointer transition-all duration-300 hover:scale-105"
+            className="relative w-48 h-48 md:w-56 md:h-56 mx-auto rounded-full p-1 cursor-pointer transition-transform duration-300 hover:scale-105"
             onClick={handleProfileClick}
           >
-            <div className="w-full h-full rounded-full bg-slate-900 overflow-hidden">
+            <div className="w-full h-full rounded-full bg-slate-900 border-4 border-slate-800 overflow-hidden shadow-2xl">
               <img
                 src="/lovable-uploads/95f43a83-175b-4961-9937-4e95596ecffd.png"
                 alt="Duba Venkata Satyanarayana"
@@ -56,7 +57,7 @@ const Hero = () => {
           </div>
         </div>
 
-        <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent animate-fade-in leading-tight py-2">
+        <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-white via-purple-200 to-white bg-clip-text text-transparent animate-fade-in leading-tight tracking-tight py-2">
           Duba Venkata Satyanarayana
         </h1>
 
