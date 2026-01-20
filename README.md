@@ -31,6 +31,7 @@
 | 📄 **Resume Download** | One-click resume download |
 | 📧 **Contact Form** | Functional email contact via EmailJS |
 | 🔗 **GitHub Integration** | Direct links to all project repositories |
+| 🚀 **SEO Optimized** | Meta tags, Schema Markup, Sitemap, Robots.txt for better search visibility |
 
 ---
 
