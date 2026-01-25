@@ -4,8 +4,8 @@ const Experience = () => {
     {
       title: "Infosys Springboard 6.0 Internship",
       company: "Infosys Springboard",
-      period: "September 21, 2024 - Present",
-      grade: "Ongoing",
+      period: "Sept 2025 - Dec 2025",
+      grade: "Completed",
       description: "Comprehensive training and hands-on experience in Java Full Stack development, covering both frontend and backend technologies.",
       skills: ["Java", "Spring Boot", "React", "Full Stack Development", "REST APIs", "Database Management"],
       certificate: "https://drive.google.com/file/d/1xLbMRDrlONk-4vwuM-ZmQql2KRmQ-c6U/view?usp=drive_link"
