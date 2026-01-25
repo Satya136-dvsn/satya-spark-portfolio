@@ -87,7 +87,7 @@ const Hero = () => {
             <div className="pt-8 border-t border-white/5 mt-8 max-w-xl mx-auto lg:mx-0">
               <p className="text-sm text-gray-500 mb-4 font-medium uppercase tracking-wider">Tech Stack</p>
               <div className="flex flex-wrap justify-center lg:justify-start gap-2">
-                {['Java', 'Spring Boot', 'React', 'AWS', 'Python', 'SQL', 'Arduino'].map((tech) => (
+                {['Java', 'Spring Boot', 'React', 'AWS', 'Python', 'SQL', 'Verilog', 'FPGA', 'Arduino'].map((tech) => (
                   <span key={tech} className="px-3 py-1.5 bg-white/5 hover:bg-white/10 rounded-lg text-xs md:text-sm text-gray-300 border border-white/10 transition-colors cursor-default">
                     {tech}
                   </span>
@@ -114,13 +114,13 @@ const Hero = () => {
             </div>
 
             {/* Floating Badge */}
-            <div className="absolute -bottom-6 -right-6 lg:bottom-8 lg:-right-8 bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-2xl shadow-xl animate-bounce delay-1000 hidden md:block">
+            <div className="absolute -bottom-6 -right-6 lg:bottom-8 lg:-right-8 bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-2xl shadow-xl animate-bounce delay-1000 hidden md:block group-hover:bg-white/20 transition-colors">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-green-500/20 rounded-lg">
                   <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
                 </div>
                 <div>
-                  <p className="text-xs text-gray-400 font-medium">Status</p>
+                  <p className="text-xs text-gray-300 font-medium">Status</p>
                   <p className="text-sm text-white font-bold">Open for work</p>
                 </div>
               </div>
