@@ -179,7 +179,7 @@ const Projects = () => {
 
               {/* Project links with Button Style */}
               {project.github && (
-                <div className="mt-auto pt-4 border-t border-white/10 flex gap-3">
+                <div className="mt-auto -mx-6 px-6 pt-4 border-t border-white/10 flex gap-3">
                   <a
                     href={project.github}
                     target="_blank"
