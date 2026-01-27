@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Github, ExternalLink } from 'lucide-react';
 
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState('All');
@@ -61,7 +62,7 @@ const Projects = () => {
       tech: ["HTML", "CSS", "JavaScript", "Web Development"],
       status: "Completed",
       impact: "Responsive design with 100+ product listings and search",
-      github: "https://github.com/Satya136-dvsn",
+      github: "https://github.com/Satya136-dvsn/Amazon_clone",
       category: "Web Development"
     },
     {
@@ -134,7 +135,7 @@ const Projects = () => {
           {filteredProjects.map((project, index) => (
             <div
               key={index}
-              className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 group cursor-pointer"
+              className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 group cursor-pointer flex flex-col h-full"
             >
               <div className="flex justify-between items-start mb-4">
                 <h3 className="text-xl font-bold text-white group-hover:text-purple-400 transition-colors duration-300">
@@ -149,7 +150,7 @@ const Projects = () => {
               </div>
 
               <p className="text-sm text-gray-400 mb-3">{project.period}</p>
-              <p className="text-gray-300 mb-3 leading-relaxed text-sm">{project.description}</p>
+              <p className="text-gray-300 mb-3 leading-relaxed text-sm flex-grow">{project.description}</p>
 
               {/* Impact metrics */}
               {project.impact && (
@@ -158,7 +159,7 @@ const Projects = () => {
                 </div>
               )}
 
-              <div className="flex flex-wrap gap-2 mb-3">
+              <div className="flex flex-wrap gap-2 mb-4">
                 {project.tech.map((tech, techIndex) => (
                   <span
                     key={techIndex}
@@ -170,22 +171,25 @@ const Projects = () => {
               </div>
 
               {/* Category badge */}
-              <div className="mb-3">
+              <div className="mb-4">
                 <span className="px-2 py-1 bg-blue-500/20 border border-blue-400/30 rounded text-xs text-blue-300">
                   {project.category}
                 </span>
               </div>
 
-              {/* Project links */}
+              {/* Project links with Button Style */}
               {project.github && (
-                <div className="mt-4 pt-4 border-t border-white/10 flex gap-3">
+                <div className="mt-auto pt-4 border-t border-white/10 flex gap-3">
                   <a
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-purple-400 hover:text-purple-300 transition-colors duration-300 text-sm font-semibold flex items-center gap-1"
+                    className="flex-1 inline-flex justify-center items-center gap-2 px-4 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-purple-500/30 rounded-lg text-white font-medium transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/10 group/btn"
                   >
-                    View on GitHub →
+                    <Github className="w-4 h-4 text-purple-400 group-hover/btn:text-purple-300" />
+                    <span className="bg-gradient-to-r from-purple-200 to-purple-400 bg-clip-text text-transparent group-hover/btn:from-white group-hover/btn:to-white transition-all duration-300">
+                      GitHub Code
+                    </span>
                   </a>
                 </div>
               )}
