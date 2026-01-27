@@ -184,10 +184,11 @@ const Projects = () => {
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 inline-flex justify-center items-center gap-2 px-4 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-purple-500/30 rounded-lg text-white font-medium transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/10 group/btn"
+                    className="flex-1 inline-flex justify-center items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-purple-600/20 to-pink-600/20 hover:from-purple-600/30 hover:to-pink-600/30 border border-purple-500/50 hover:border-purple-400 rounded-lg text-white font-semibold transition-all duration-300 shadow-[0_0_15px_rgba(168,85,247,0.15)] hover:shadow-[0_0_25px_rgba(168,85,247,0.3)] group/btn relative overflow-hidden"
                   >
-                    <Github className="w-4 h-4 text-purple-400 group-hover/btn:text-purple-300" />
-                    <span className="bg-gradient-to-r from-purple-200 to-purple-400 bg-clip-text text-transparent group-hover/btn:from-white group-hover/btn:to-white transition-all duration-300">
+                    <div className="absolute inset-0 bg-white/5 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                    <Github className="w-4 h-4 text-purple-200 group-hover/btn:text-white transition-colors" />
+                    <span className="text-purple-100 group-hover/btn:text-white transition-colors tracking-wide">
                       GitHub Code
                     </span>
                   </a>
