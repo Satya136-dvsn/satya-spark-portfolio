@@ -32,7 +32,7 @@ const Projects = () => {
       tech: ["FPGA", "Verilog", "Digital Design", "Algorithms"],
       status: "Completed",
       impact: "40% improvement in multiplication efficiency over standard methods",
-      github: "https://github.com/Satya136-dvsn",
+      github: "https://github.com/Satya136-dvsn/32-Bit-Hybrid-Multiplier-using-FPGA",
       category: "FPGA/VLSI"
     },
     {
