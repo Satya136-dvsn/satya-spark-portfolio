@@ -1,3 +1,4 @@
+import { ExternalLink } from 'lucide-react';
 
 const Experience = () => {
   const experiences = [
@@ -57,14 +58,18 @@ const Experience = () => {
 
               {/* Certificate Link */}
               {exp.certificate && (
-                <div className="mt-4 pt-4 border-t border-white/10">
+                <div className="mt-6 pt-6 border-t border-white/10 -mx-8 px-8 flex">
                   <a
                     href={exp.certificate}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors duration-300 text-sm font-semibold"
+                    className="flex-1 inline-flex justify-center items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-purple-600/20 to-pink-600/20 hover:from-purple-600/30 hover:to-pink-600/30 border border-purple-500/50 hover:border-purple-400 rounded-lg text-white font-semibold transition-all duration-300 shadow-[0_0_15px_rgba(168,85,247,0.15)] hover:shadow-[0_0_25px_rgba(168,85,247,0.3)] group/btn relative overflow-hidden"
                   >
-                    📜 View Certificate →
+                    <div className="absolute inset-0 bg-white/5 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                    <ExternalLink className="w-4 h-4 text-purple-200 group-hover/btn:text-white transition-colors" />
+                    <span className="text-purple-100 group-hover/btn:text-white transition-colors tracking-wide">
+                      View Certificate
+                    </span>
                   </a>
                 </div>
               )}

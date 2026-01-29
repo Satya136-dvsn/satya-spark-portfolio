@@ -1,3 +1,4 @@
+import { ExternalLink } from 'lucide-react';
 
 const SkillBadges = () => {
   const skillBadges = [
@@ -103,7 +104,7 @@ const SkillBadges = () => {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {skillBadges.map((badge, index) => (
-            <div 
+            <div
               key={index}
               className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 group"
             >
@@ -116,19 +117,23 @@ const SkillBadges = () => {
               <h3 className="text-xl font-bold text-white group-hover:text-purple-400 transition-colors duration-300 mb-2">
                 {badge.title}
               </h3>
-              
+
               <p className="text-purple-300 font-semibold mb-3">{badge.provider}</p>
               <p className="text-gray-300 text-sm leading-relaxed">{badge.description}</p>
 
               {badge.badgeUrl && (
-                <div className="mt-4 pt-4 border-t border-white/10">
+                <div className="mt-auto -mx-6 px-6 pt-4 border-t border-white/10 flex gap-3">
                   <a
                     href={badge.badgeUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-purple-400 hover:text-purple-300 transition-colors duration-300 text-sm font-semibold"
+                    className="flex-1 inline-flex justify-center items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-purple-600/20 to-pink-600/20 hover:from-purple-600/30 hover:to-pink-600/30 border border-purple-500/50 hover:border-purple-400 rounded-lg text-white font-semibold transition-all duration-300 shadow-[0_0_15px_rgba(168,85,247,0.15)] hover:shadow-[0_0_25px_rgba(168,85,247,0.3)] group/btn relative overflow-hidden"
                   >
-                    View Badge →
+                    <div className="absolute inset-0 bg-white/5 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                    <ExternalLink className="w-4 h-4 text-purple-200 group-hover/btn:text-white transition-colors" />
+                    <span className="text-purple-100 group-hover/btn:text-white transition-colors tracking-wide">
+                      View Badge
+                    </span>
                   </a>
                 </div>
               )}
