@@ -8,7 +8,7 @@ const Certifications = () => {
       description: "Certified in data analytics and storytelling through Accenture's virtual program, covering data cleaning, modeling, visualization, and client-ready presentations",
       score: "Certified",
       type: "Virtual Experience",
-      certificateUrl: "https://drive.google.com/file/d/1CXfG9XX0pFSkfjUVu0HHaBhddGVXdwO6/view?usp=sharing"
+      certificateUrl: "https://drive.google.com/file/d/1rVPAPUUYvllInj5_7MSqwLjQ6Eleq3mk/view?usp=drive_link"
     },
     {
       title: "AWS APAC Solutions Architecture",
@@ -16,7 +16,7 @@ const Certifications = () => {
       description: "Completed a virtual experience designing a scalable cloud hosting architecture using AWS Elastic Beanstalk, and communicated technical solutions in clear business terms",
       score: "Certified",
       type: "Virtual Experience",
-      certificateUrl: "https://drive.google.com/file/d/1u39Iz8A2v3f5qY_YWD7uS2mBUrohPFCs/view?usp=sharing"
+      certificateUrl: "https://drive.google.com/file/d/15r189HgXjNwUT7gwcZKnHJcOXylir3Er/view?usp=drive_link"
     },
     {
       title: "Deloitte Australia Data Analytics",
@@ -24,7 +24,7 @@ const Certifications = () => {
       description: "Completed a data analytics simulation involving forensic analysis, data classification in Excel, and interactive dashboard creation using Tableau",
       score: "Certified",
       type: "Virtual Experience",
-      certificateUrl: "https://drive.google.com/file/d/1UupXoeoRMCBsrZlfkRpjLPSsn5KK7p4i/view?usp=drive_link"
+      certificateUrl: "https://drive.google.com/file/d/1ZbyvfGLnISXvalmyd1ZvO_T1efEJqFUl/view?usp=drive_link"
     },
     {
       title: "NCAT Participation Certificate",
@@ -32,7 +32,7 @@ const Certifications = () => {
       description: "Secured 49/60 with an All India Rank of 1886 in the Naukri Campus All-India Online Aptitude Test, demonstrating strong problem-solving and analytical skills",
       score: "49/60 (AIR: 1886)",
       type: "Competition",
-      certificateUrl: "https://www.naukri.com/campus/certificates/naukri_campus_ai_ncat_participation_may_2025/v0/683a1f17892c1f3133ab2ac2?utm_source=certificate&utm_medium=copy&utm_campaign=683a1f17892c1f3133ab2ac2",
+      certificateUrl: "https://drive.google.com/file/d/1IIQC9TqMzPhoM4IGGIv7Ah9x1EVz6ZwS/view?usp=drive_link",
       scoreUrl: "https://www.naukri.com/campus/contests/all-india-online-aptitude-test/assessment/2025-NjgyMjBjYTc4N2M5NzY3NzJiZmEyOWEx?utm_source=score_card_share"
     },
     {
@@ -41,7 +41,7 @@ const Certifications = () => {
       description: "Certified in Generative AI Foundations, covering advanced prompt engineering, AI-powered research, automation, and problem-solving—endorsed by Microsoft and upGrad.",
       score: "Certified",
       type: "Professional Certificate",
-      certificateUrl: "https://drive.google.com/file/d/1HteJMu-N7oG1k_HTXvjITMG5hO2FFAPh/view?usp=drive_link"
+      certificateUrl: "https://drive.google.com/file/d/1ShharIB84CbAUJ0W1zfQuRMZ9NO6G_pD/view?usp=drive_link"
     },
     {
       title: "Introduction to Operating Systems",
@@ -49,7 +49,7 @@ const Certifications = () => {
       description: "8-week course covering service models, deployment models, virtualization, storage, and security",
       score: "55/100",
       type: "Course",
-      certificateUrl: "https://drive.google.com/file/d/1GavwG7waIwsRqK-URB1AAIhlZz4TIdj8/view?usp=drive_link"
+      certificateUrl: "https://drive.google.com/file/d/1nKEZK6CBohYSnWmqy0tnBbsE2wNsUbPM/view?usp=drive_link"
     },
     {
       title: "Professional Certificate in Data Analytics",
@@ -57,7 +57,7 @@ const Certifications = () => {
       description: "Comprehensive certification validating skills in data analysis, visualization, and statistical tools",
       score: "Certified",
       type: "Professional Certificate",
-      certificateUrl: "https://drive.google.com/file/d/16_NwCmsl1E3HZWwp06nlsOotIjGU6ut_/view?usp=drive_link"
+      certificateUrl: "https://drive.google.com/file/d/1BYj_FAxaRLFzFzR5X-EetSuWW-nC3T3c/view?usp=drive_link"
     },
     {
       title: "Cloud Computing",
@@ -65,7 +65,7 @@ const Certifications = () => {
       description: "12-week course covering service models, deployment models, virtualization, storage, and security",
       score: "57/100",
       type: "Course",
-      certificateUrl: "https://drive.google.com/file/d/1DvMXn_UIVQw7B_z7Q6iipEFlYdqN7biF/view?usp=drive_link"
+      certificateUrl: "https://drive.google.com/file/d/1dvY8TOCpROkIpDSbCeUvjBMmaS9Y3VOM/view?usp=drive_link"
     },
     {
       title: "JavaScript Specialist",
@@ -73,7 +73,7 @@ const Certifications = () => {
       description: "Certified specialist with proficiency in web development and dynamic web applications",
       score: "Certified",
       type: "Specialist Certification",
-      certificateUrl: "https://drive.google.com/file/d/1tV7BQowL3Fane-HueQW3hA9YukcvTAh8/view?usp=drive_link"
+      certificateUrl: "https://drive.google.com/file/d/1aJAr1yjWDK-ijCEOXB_TmQmMHC575Noj/view?usp=drive_link"
     },
     {
       title: "CSS3 Specialist",
@@ -81,7 +81,7 @@ const Certifications = () => {
       description: "Expertise in creating visually appealing and responsive web experiences",
       score: "Certified",
       type: "Specialist Certification",
-      certificateUrl: "https://drive.google.com/file/d/1nDr6tn35giKGBz5Z-1lAjIUeWXU8LL-8/view?usp=drive_link"
+      certificateUrl: "https://drive.google.com/file/d/1qMK4238V-emVIv2aQIcSWv7TlN-CZKmk/view?usp=drive_link"
     },
     {
       title: "HTML5 Specialist",
@@ -89,7 +89,7 @@ const Certifications = () => {
       description: "Demonstrating expertise in creating innovative and user-friendly web applications",
       score: "Certified",
       type: "Specialist Certification",
-      certificateUrl: "https://drive.google.com/file/d/1khgGgsNyst1K0mMI-df9kubyei_tMklH/view?usp=drive_link"
+      certificateUrl: "https://drive.google.com/file/d/1uq5tXHnF55H8dRWqCkLjQ5n5TqC3sEvx/view?usp=drive_link"
     }
   ];
 

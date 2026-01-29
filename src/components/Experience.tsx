@@ -9,7 +9,7 @@ const Experience = () => {
       grade: "Completed",
       description: "Comprehensive training and hands-on experience in Java Full Stack development, covering both frontend and backend technologies.",
       skills: ["Java", "Spring Boot", "React", "Full Stack Development", "REST APIs", "Database Management"],
-      certificate: "https://drive.google.com/file/d/1xLbMRDrlONk-4vwuM-ZmQql2KRmQ-c6U/view?usp=drive_link"
+      certificate: "https://drive.google.com/file/d/1gHR9Gq92zqMiFZbXu4BkukEceGANdkCq/view?usp=sharing"
     },
     {
       title: "Robotics with Arduino Internship",
@@ -18,7 +18,7 @@ const Experience = () => {
       grade: "A+",
       description: "Gained hands-on experience in designing, programming, and deploying robotic systems using Arduino.",
       skills: ["Arduino Programming", "Robotics", "Embedded Systems", "Circuit Design"],
-      certificate: "https://drive.google.com/file/d/1nmAOSsYlAjonngk7IFURlgYX2xatRgJg/view?usp=drive_link"
+      certificate: "https://drive.google.com/file/d/10KuBOrpprgsHmYgdh0fPO3oJQfWiBuSt/view?usp=drive_link"
     }
   ];
 
