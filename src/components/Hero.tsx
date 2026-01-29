@@ -109,6 +109,9 @@ const Hero = () => {
                 src="/lovable-uploads/95f43a83-175b-4961-9937-4e95596ecffd.png"
                 alt="Duba Venkata Satyanarayana"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                fetchPriority="high"
+                width="450"
+                height="450"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500"></div>
             </div>
