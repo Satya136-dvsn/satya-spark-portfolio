@@ -124,10 +124,6 @@ const SkillBadges = () => {
             <div className="text-3xl font-bold text-green-400 mb-2">4</div>
             <div className="text-gray-300 text-sm">IBM Badges</div>
           </div>
-          <div className="text-center p-6 bg-gradient-to-br from-purple-500/20 to-blue-500/20 backdrop-blur-lg rounded-xl border border-white/20">
-            <div className="text-3xl font-bold text-purple-400 mb-2">3</div>
-            <div className="text-gray-300 text-sm">Data Science</div>
-          </div>
         </div>
       </div>
     </section>

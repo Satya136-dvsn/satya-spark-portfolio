@@ -142,22 +142,22 @@ const Awards = () => {
             {leadership.map((role, index) => (
               <div
                 key={index}
-                className="bg-white/10 backdrop-blur-lg rounded-xl p-4 border border-white/10 hover:scale-105 transition-transform duration-300"
+                className="bg-black/40 backdrop-blur-xl rounded-xl p-5 border border-purple-500/20 hover:border-purple-500/40 hover:scale-105 transition-all duration-300 shadow-lg"
               >
-                <h4 className="text-lg font-bold text-purple-400 mb-2">{role.role}</h4>
+                <h4 className="text-lg font-bold text-white mb-2">{role.role}</h4>
 
-                <div className="mb-2">
+                <div className="mb-3">
                   {role.organizations.map((org, orgIndex) => (
                     <span
                       key={orgIndex}
-                      className="inline-block px-2 py-0.5 bg-purple-500/20 border border-purple-400/30 rounded text-[10px] text-purple-300 mr-2 mb-1"
+                      className="inline-block px-2 py-0.5 bg-purple-600/20 border border-purple-400/30 rounded text-[11px] font-medium text-purple-200 mr-2 mb-1"
                     >
                       {org}
                     </span>
                   ))}
                 </div>
 
-                <p className="text-gray-300 text-xs leading-normal">{role.description}</p>
+                <p className="text-gray-200 text-xs leading-relaxed opacity-90">{role.description}</p>
               </div>
             ))}
           </div>

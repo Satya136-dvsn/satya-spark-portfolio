@@ -58,6 +58,22 @@ const Certifications = () => {
       type: "Course",
       certificateUrl: "https://drive.google.com/file/d/1dvY8TOCpROkIpDSbCeUvjBMmaS9Y3VOM/view?usp=drive_link"
     }
+    {
+      title: "Oracle Cloud Infrastructure AI Foundations Associate",
+      provider: "Oracle",
+      description: "Foundational knowledge of AI, Machine Learning, and Deep Learning concepts in OCI.",
+      score: "Certified",
+      type: "Professional Certificate",
+      certificateUrl: "https://drive.google.com/file/d/1Hus4e39-a1AnMrEtenMWhGa935ketECR/view?usp=drive_link"
+    },
+    {
+      title: "Hack2Skill Recognition",
+      provider: "Hack2Skill",
+      description: "Recognized for active participation and skill demonstration in hackathons and coding challenges.",
+      score: "Verified",
+      type: "Virtual Experience",
+      certificateUrl: "https://drive.google.com/file/d/1Iq4g22nKyXlvC1yDqJOZoxzW4tIlu9Ky/view?usp=drive_link"
+    }
   ];
 
   // Separate certifications into categories
@@ -73,8 +89,8 @@ const Certifications = () => {
     <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 group flex flex-col h-full">
       <div className="flex justify-between items-start mb-4">
         <span className={`px-3 py-1 rounded-full text-xs font-semibold ${cert.type === 'Professional Certificate' ? 'bg-green-500/20 text-green-400 border border-green-500/30' :
-            cert.type === 'Virtual Experience' ? 'bg-orange-500/20 text-orange-400 border border-orange-500/30' :
-              'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+          cert.type === 'Virtual Experience' ? 'bg-orange-500/20 text-orange-400 border border-orange-500/30' :
+            'bg-blue-500/20 text-blue-400 border border-blue-500/30'
           }`}>
           {cert.type}
         </span>
