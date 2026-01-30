@@ -6,19 +6,9 @@ const Projects = () => {
 
   const projects = [
     {
-      title: "Biz Stratosphere - AI Business Intelligence Platform",
-      period: "November 2025 – Present",
-      description: "Enterprise-grade AI-powered business intelligence platform with serverless architecture. Features include AI chat assistant with hallucination prevention, browser-based ML predictions (96% churn accuracy), real-time dashboards with 8+ chart types, automation engine with email notifications, and workspace management with RBAC.",
-      tech: ["React", "TypeScript", "Supabase", "TensorFlow.js", "PostgreSQL", "Gemini AI"],
-      status: "In Progress",
-      impact: "Zero operational cost with production-ready AI capabilities and 98% test coverage",
-      github: "https://github.com/Satya136-dvsn/biz-stratosphere",
-      category: "Full Stack"
-    },
-    {
-      title: "Java Budget AI-Driven Expense Tracker and Budget Advisor (Full Stack)",
+      title: "Java Budget AI-Driven Expense Tracker",
       period: "September 2025 – December 2025",
-      description: "Developing a full-stack application with Java (Backend), modern frontend, and MySQL for secure data persistence. Implementing robust RESTful APIs and server-side logic for automated expense tracking and intelligent budget recommendations (simulated AI logic), demonstrating scalable architecture.",
+      description: "Problem: Users struggle with manual expense tracking and lack personalized insights. solution: Built a full-stack automated tracker with secure multi-user data persistence. Outcome: Delivered scalable architecture for real-time financial management.",
       tech: ["Java", "MySQL", "REST API", "Full Stack", "Backend"],
       status: "Completed",
       impact: "Building scalable architecture for multi-user expense management",
@@ -28,7 +18,7 @@ const Projects = () => {
     {
       title: "32-Bit Hybrid Multiplier using FPGA",
       period: "August 2024 - April 2025",
-      description: "Creating an efficient 32-bit hybrid multiplier using Vedic and Karatsuba algorithms for improved multiplication efficiency.",
+      description: "Problem: Standard multipliers are inefficient for high-speed DSP applications. Solution: Designed a hybrid multiplier combining Vedic and Karatsuba algorithms on FPGA. Outcome: Achieved 40% higher computational efficiency.",
       tech: ["FPGA", "Verilog", "Digital Design", "Algorithms"],
       status: "Completed",
       impact: "40% improvement in multiplication efficiency over standard methods",
@@ -36,9 +26,19 @@ const Projects = () => {
       category: "FPGA/VLSI"
     },
     {
+      title: "Biz Stratosphere - AI Business Intelligence Platform",
+      period: "November 2025 – Present",
+      description: "Problem: Small businesses lack affordable BI tools with actionable AI insights. Solution: Developed a serverless platform with extensive dashboards and hallucination-proof AI chat. Outcome: Zero-cost architecture with 96% ML prediction accuracy.",
+      tech: ["React", "TypeScript", "Supabase", "TensorFlow.js", "PostgreSQL", "Gemini AI"],
+      status: "In Progress",
+      impact: "Zero operational cost with production-ready AI capabilities and 98% test coverage",
+      github: "https://github.com/Satya136-dvsn/biz-stratosphere",
+      category: "Full Stack"
+    },
+    {
       title: "Stock Market Portfolio Optimization",
       period: "September 2024",
-      description: "Optimized stock market portfolios using Python by analyzing price trends, expected returns, volatilities, and correlations for diversification.",
+      description: "Problem: Investors face difficulty in diversifying portfolios for maximum returns. Solution: Implemented statistical models in Python to analyze 50+ stocks. Outcome: Generated data-driven allocation strategies based on risk-return analysis.",
       tech: ["Python", "Data Analysis", "Finance", "Optimization"],
       status: "Completed",
       impact: "Analyzed 50+ stocks with data-driven portfolio recommendations",
@@ -48,8 +48,8 @@ const Projects = () => {
     {
       title: "T20 World Cup 2022 Analysis",
       period: "September 2024",
-      description: "Analyzed sports event data to evaluate player and team performance using Python for data-driven insights.",
-      tech: ["Python", "Data Analytics", "Visualization", "Sports Analytics"],
+      description: "Problem: Complex sports data is hard to interpret for strategic decisions. Solution: Processed match data using Python pandas and visualization libraries. Outcome: Derived key performance metrics for players and teams.",
+      tech: ["Python", "Data Analysis", "Visualization", "Sports Analytics"],
       status: "Completed",
       impact: "Processed 100+ matches with comprehensive player performance metrics",
       github: "https://github.com/Satya136-dvsn/T20-World-cup-2022-analysis",
@@ -58,42 +58,12 @@ const Projects = () => {
     {
       title: "Amazon Clone Page",
       period: "May 2024",
-      description: "Developed an Amazon website clone featuring product listings and dynamic search functionality.",
+      description: "Problem: Replicating complex e-commerce UI logic. Solution: Developed a responsive clone with dynamic product listings. Outcome: Demonstrated proficiency in frontend layout and responsiveness.",
       tech: ["HTML", "CSS", "JavaScript", "Web Development"],
       status: "Completed",
       impact: "Responsive design with 100+ product listings and search",
       github: "https://github.com/Satya136-dvsn/Amazon_clone",
       category: "Web Development"
-    },
-    {
-      title: "Mini Calculator",
-      period: "April 2024",
-      description: "Created a calculator application with clean UI design showcasing problem-solving skills.",
-      tech: ["HTML", "CSS", "JavaScript", "UI Design"],
-      status: "Completed",
-      impact: "Clean, intuitive interface with advanced operations",
-      github: "https://github.com/Satya136-dvsn/Calculator",
-      category: "Web Development"
-    },
-    {
-      title: "Snake Game",
-      period: "March 2024",
-      description: "Built a Snake Game demonstrating web development skills and game mechanics implementation.",
-      tech: ["HTML", "CSS", "JavaScript", "Game Development"],
-      status: "Completed",
-      impact: "Smooth gameplay with score tracking and difficulty levels",
-      github: "https://github.com/Satya136-dvsn/Snake-Game",
-      category: "Web Development"
-    },
-    {
-      title: "Arduino Door Lock System",
-      period: "June 2023",
-      description: "Developed a secure door lock system with Arduino, I2C LCD, and keypad for code-based access control.",
-      tech: ["Arduino", "I2C", "LCD", "Security Systems"],
-      status: "Completed",
-      impact: "Secure access control system with real-time user feedback",
-      github: "https://github.com/Satya136-dvsn",
-      category: "Embedded"
     }
   ];
 

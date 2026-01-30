@@ -29,11 +29,7 @@ const About = () => {
           <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 backdrop-blur-lg rounded-2xl p-8 border border-white/20 px-[32px]">
             <h3 className="text-2xl font-bold mb-6 text-white">Summary</h3>
             <p className="text-gray-300 leading-relaxed">
-              Electronics and Communication Engineering graduate with strong fundamentals in digital electronics, system design, and software
-              development Experienced in FPGA-based research and designing, developing, and testing backend systems using REST APIs, SQL
-              databases, and cloud-based deployment workflows. Demonstrated ability to work across hardware and software domains, solve complex
-              problems, and quickly learn new technologies. Seeking entry-level engineering opportunities across software, systems, and core
-              engineering roles.
+              B.Tech Electronics & Communication Engineering (2025) graduate with hands-on experience in Java full-stack development, data analytics, and FPGA-based digital design. Built scalable applications, data-driven solutions, and performance-optimized hardware projects through internships, certifications, and real-world projects. Actively seeking entry-level software, data, or cloud engineering roles.
             </p>
 
             <div className="mt-6 grid grid-cols-2 gap-4">
@@ -50,8 +46,10 @@ const About = () => {
 
           <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 hover:scale-105 transition-transform duration-300">
             <h3 className="text-2xl font-bold mb-4 text-purple-400">Leadership</h3>
-            <p className="text-gray-300">Student President for ELEKTRA 2K25 Tech Fest</p>
-            <p className="text-gray-400">Active member of IEEE, ISTE, and IETE</p>
+            <p className="text-gray-300 text-sm mb-1">• Student President – ELEKTRA 2K25</p>
+            <p className="text-gray-300 text-sm mb-1">• NSS Unit-2 Coordinator (2023–2025)</p>
+            <p className="text-gray-300 text-sm mb-1">• GDG Vizag Member & DevFest Volunteer</p>
+            <p className="text-gray-300 text-sm">• Class Representative</p>
           </div>
         </div>
       </div>

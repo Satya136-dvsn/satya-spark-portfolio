@@ -4,27 +4,27 @@ import { Code2, Wrench, Lightbulb, Users } from "lucide-react";
 const Skills = () => {
   const skillCategories = [
     {
-      title: "Programming Languages",
+      title: "Programming & Frameworks",
       icon: Code2,
-      skills: ["Python", "Java", "JavaScript", "SQL", "HTML5", "CSS3"],
+      skills: ["Java", "Python", "SQL", "JavaScript", "React", "HTML5", "CSS3", "Verilog"],
       color: "from-blue-500 to-cyan-500"
     },
     {
       title: "Technical Skills",
       icon: Wrench,
-      skills: ["Data Analysis & Visualization", "Arduino Programming", "Power BI", "Tableau", "AWS Cloud", "FPGA Design", "REST API", "MySQL", "Full Stack Development"],
+      skills: ["Data Analysis", "REST API", "Full Stack Development", "FPGA Design", "MySQL", "AWS Cloud Basics", "Power BI"],
       color: "from-purple-500 to-pink-500"
     },
     {
       title: "Tools & Technologies",
       icon: Lightbulb,
-      skills: ["Microsoft Office", "Adobe Suite", "Git", "Project Management"],
+      skills: ["Git/GitHub", "VS Code", "Matlab", "Xilinx Vivado", "Tableau", "Streamlit"],
       color: "from-orange-500 to-red-500"
     },
     {
       title: "Soft Skills",
       icon: Users,
-      skills: ["Leadership", "Event Coordination", "Student Engagement", "Team Collaboration", "Problem Solving", "Communication"],
+      skills: ["Leadership", "Problem Solving", "Team Collaboration", "Communication", "Event Management"],
       color: "from-green-500 to-emerald-500"
     }
   ];

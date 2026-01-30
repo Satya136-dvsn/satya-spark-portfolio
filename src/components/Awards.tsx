@@ -5,60 +5,65 @@ const Awards = () => {
     {
       title: "Student President",
       event: "ELEKTRA 2K25 Tech Fest",
-      description: "Elected as Student President for the prestigious tech fest, leading organizational activities and student engagement.",
+      description: "Led and coordinated the national-level technical festival, managing teams and sponsorships.",
       icon: "🏆",
       type: "Leadership",
       certificateUrl: "https://drive.google.com/file/d/1W26ywj17KK0uVMHQMmtzv1Hz3rx03R-f/view?usp=drive_link"
     },
     {
-      title: "Charm With Grace",
-      event: "ELEKTRA 2K24",
-      description: "Volunteered and received recognition for outstanding contributions during the tech fest.",
-      icon: "⭐",
-      type: "Volunteer",
-      certificateUrl: "https://drive.google.com/file/d/1qzaBXyS9n_zrnGgaD82JJ5ow284cTayw/view?usp=drive_link"
-    },
-    {
-      title: "Poster Designing Award",
-      event: "ELEKTRA 2K24",
-      description: "Awarded for designing creative posters and banners, showcasing artistic and design skills.",
-      icon: "🎨",
-      type: "Creative",
-      certificateUrl: "https://drive.google.com/file/d/10X8pE3XuGqBdEShDi1lshFPG3e3Ak1-7/view?usp=drive_link"
+      title: "IEEE Publication Recognition",
+      event: "International Conference",
+      description: "Acknowledged for contributions to FPGA-based digital system research.",
+      icon: "📜",
+      type: "Academic",
+      certificateUrl: "" // Placeholder
     },
     {
       title: "Photography Recognition",
       event: "ELEKTRA 2K24",
-      description: "Recognized for exceptional photography contributions, highlighting skills in event photography.",
+      description: "Recognized for exceptional event photography and visual storytelling coverage.",
       icon: "📸",
       type: "Creative",
       certificateUrl: "https://drive.google.com/file/d/1kg_jxDlwVx6csSCJlXxYyer9oKDnLeuU/view?usp=drive_link"
     },
     {
-      title: "Student Body Recognition",
+      title: "Poster & Creative Designer",
       event: "ELEKTRA 2K24",
-      description: "Certificate of Recognition for contributions as a Student ACES Member during the national tech fest.",
-      icon: "🎖️",
-      type: "Recognition",
-      certificateUrl: "https://drive.google.com/file/d/1tom_z5zHUVMGcht358bwRRnAxFKmaTG7/view?usp=drive_link"
+      description: "Designed promotional assets and visual identity for the technical festival.",
+      icon: "🎨",
+      type: "Creative",
+      certificateUrl: "https://drive.google.com/file/d/10X8pE3XuGqBdEShDi1lshFPG3e3Ak1-7/view?usp=drive_link"
+    },
+    {
+      title: "Photography Coordinator",
+      event: "DevFest Vizag 2025",
+      description: "Coordinated media coverage and documentation for the DevFest community event.",
+      icon: "📷",
+      type: "Volunteering",
+      certificateUrl: "" // Placeholder
     }
   ];
 
   const leadership = [
     {
-      role: "Student Coordinator",
-      organizations: ["NSS", "Green Club", "Wall Magazine Club"],
-      description: "Demonstrated leadership and organizational skills across multiple student organizations."
+      role: "Student President",
+      organizations: ["ELEKTRA 2K25"],
+      description: "Led a team of 100+ students, managed ₹3L sponsorship, and coordinated event logistics."
+    },
+    {
+      role: "NSS Unit–2 Coordinator",
+      organizations: ["National Service Scheme"],
+      description: "Organized community service camps and social awareness drives (2023–2025)."
+    },
+    {
+      role: "GDG Vizag Member & DevFest Volunteer",
+      organizations: ["Google Developer Groups"],
+      description: "Volunteered for community events and technical workshops."
     },
     {
       role: "Class Representative",
       organizations: ["ECE Department"],
-      description: "Served as the primary liaison between students and faculty, facilitating communication and addressing concerns."
-    },
-    {
-      role: "Active Member",
-      organizations: ["IEEE Communication Society", "ISTE", "IETE"],
-      description: "Actively participated in professional organizations, contributing to technical discussions and events."
+      description: "Facilitated communication between students and faculty."
     }
   ];
 
@@ -86,12 +91,6 @@ const Awards = () => {
       event: "Brainovision Solutions",
       desc: "4-day AWS workshop and 24-hour hackathon on cloud solutions",
       certificateUrl: "https://drive.google.com/file/d/19FmqSwxLkPmAcW9ZwuZ3YLNvln8wETx-/view?usp=drive_link"
-    },
-    {
-      name: "Arduino Workshop",
-      event: "IEEE EDS SB Chapter ANITS",
-      desc: "Hands-on workshop enhancing microcontroller and embedded systems knowledge",
-      certificateUrl: "https://drive.google.com/file/d/10QNHUyteg-tF9duOMZtcwFu8ZmlDNVms/view?usp=drive_link"
     }
   ];
 
@@ -112,12 +111,12 @@ const Awards = () => {
               <div className="flex items-center justify-between mb-4">
                 <div className="text-4xl">{award.icon}</div>
                 <span className={`px-3 py-1 rounded-full text-xs font-semibold ${award.type === 'Leadership'
-                    ? 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30'
-                    : award.type === 'Creative'
-                      ? 'bg-pink-500/20 text-pink-400 border border-pink-500/30'
-                      : award.type === 'Volunteer'
-                        ? 'bg-green-500/20 text-green-400 border border-green-500/30'
-                        : 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+                  ? 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30'
+                  : award.type === 'Creative'
+                    ? 'bg-pink-500/20 text-pink-400 border border-pink-500/30'
+                    : award.type === 'Volunteer'
+                      ? 'bg-green-500/20 text-green-400 border border-green-500/30'
+                      : 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
                   }`}>
                   {award.type}
                 </span>

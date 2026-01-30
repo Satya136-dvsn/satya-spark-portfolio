@@ -27,29 +27,12 @@ const Certifications = () => {
       certificateUrl: "https://drive.google.com/file/d/1ZbyvfGLnISXvalmyd1ZvO_T1efEJqFUl/view?usp=drive_link"
     },
     {
-      title: "NCAT Participation Certificate",
-      provider: "Naukri Campus",
-      description: "Secured 49/60 with an All India Rank of 1886 in the Naukri Campus All-India Online Aptitude Test, demonstrating strong problem-solving and analytical skills",
-      score: "49/60 (AIR: 1886)",
-      type: "Competition",
-      certificateUrl: "https://drive.google.com/file/d/1IIQC9TqMzPhoM4IGGIv7Ah9x1EVz6ZwS/view?usp=drive_link",
-      scoreUrl: "https://www.naukri.com/campus/contests/all-india-online-aptitude-test/assessment/2025-NjgyMjBjYTc4N2M5NzY3NzJiZmEyOWEx?utm_source=score_card_share"
-    },
-    {
       title: "Generative AI Foundations Certificate",
       provider: "upGrad",
       description: "Certified in Generative AI Foundations, covering advanced prompt engineering, AI-powered research, automation, and problem-solving—endorsed by Microsoft and upGrad.",
       score: "Certified",
       type: "Professional Certificate",
       certificateUrl: "https://drive.google.com/file/d/1ShharIB84CbAUJ0W1zfQuRMZ9NO6G_pD/view?usp=drive_link"
-    },
-    {
-      title: "Introduction to Operating Systems",
-      provider: "NPTEL",
-      description: "8-week course covering service models, deployment models, virtualization, storage, and security",
-      score: "55/100",
-      type: "Course",
-      certificateUrl: "https://drive.google.com/file/d/1nKEZK6CBohYSnWmqy0tnBbsE2wNsUbPM/view?usp=drive_link"
     },
     {
       title: "Professional Certificate in Data Analytics",
@@ -60,36 +43,20 @@ const Certifications = () => {
       certificateUrl: "https://drive.google.com/file/d/1BYj_FAxaRLFzFzR5X-EetSuWW-nC3T3c/view?usp=drive_link"
     },
     {
+      title: "Introduction to Operating Systems",
+      provider: "NPTEL",
+      description: "8-week course covering service models, deployment models, virtualization, storage, and security",
+      score: "55/100",
+      type: "Course",
+      certificateUrl: "https://drive.google.com/file/d/1nKEZK6CBohYSnWmqy0tnBbsE2wNsUbPM/view?usp=drive_link"
+    },
+    {
       title: "Cloud Computing",
       provider: "NPTEL",
       description: "12-week course covering service models, deployment models, virtualization, storage, and security",
       score: "57/100",
       type: "Course",
       certificateUrl: "https://drive.google.com/file/d/1dvY8TOCpROkIpDSbCeUvjBMmaS9Y3VOM/view?usp=drive_link"
-    },
-    {
-      title: "JavaScript Specialist",
-      provider: "Dollar Design School",
-      description: "Certified specialist with proficiency in web development and dynamic web applications",
-      score: "Certified",
-      type: "Specialist Certification",
-      certificateUrl: "https://drive.google.com/file/d/1aJAr1yjWDK-ijCEOXB_TmQmMHC575Noj/view?usp=drive_link"
-    },
-    {
-      title: "CSS3 Specialist",
-      provider: "Framework Tech",
-      description: "Expertise in creating visually appealing and responsive web experiences",
-      score: "Certified",
-      type: "Specialist Certification",
-      certificateUrl: "https://drive.google.com/file/d/1qMK4238V-emVIv2aQIcSWv7TlN-CZKmk/view?usp=drive_link"
-    },
-    {
-      title: "HTML5 Specialist",
-      provider: "Framework Tech",
-      description: "Demonstrating expertise in creating innovative and user-friendly web applications",
-      score: "Certified",
-      type: "Specialist Certification",
-      certificateUrl: "https://drive.google.com/file/d/1uq5tXHnF55H8dRWqCkLjQ5n5TqC3sEvx/view?usp=drive_link"
     }
   ];
 
