@@ -10,18 +10,32 @@ const SkillBadges = () => {
       badgeUrl: "https://www.credly.com/badges/ab5eff35-f358-4bb7-910c-0d1b2adb224d/public_url"
     },
     {
+      title: "Develop GenAI Apps with Gemini and Streamlit",
+      provider: "Google Cloud",
+      description: "Demonstrated proficiency in developing generative AI applications using Gemini and Streamlit",
+      type: "Skill Badge",
+      badgeUrl: "https://www.credly.com/badges/9f5949d8-b02b-4301-bcb8-83fcfd872865/public_url"
+    },
+    {
+      title: "Inspect Rich Documents with Gemini Multimodality",
+      provider: "Google Cloud",
+      description: "Expertise in analyzing rich documents using Gemini's multimodality features and RAG techniques",
+      type: "Skill Badge",
+      badgeUrl: "https://www.credly.com/badges/94cc5a7d-3761-4f23-9913-b6ddb4ae26bd/public_url"
+    },
+    {
+      title: "Explore Generative AI with the Gemini API",
+      provider: "Google Cloud",
+      description: "Proficiency in leveraging the Gemini API within Vertex AI for generative AI applications",
+      type: "Skill Badge",
+      badgeUrl: "https://www.credly.com/badges/18304b8e-f5b3-4d14-8316-ddefaffcb049/public_url"
+    },
+    {
       title: "SQL for Data Science",
       provider: "IBM",
       description: "Proficiency in SQL database querying and data manipulation for data science applications",
       type: "Skill Badge",
       badgeUrl: "https://www.credly.com/badges/ffd12ba2-b6dd-414f-a7b8-4ba6b89c8ff7/public_url"
-    },
-    {
-      title: "Python Essentials",
-      provider: "IBM",
-      description: "Fundamental programming skills in Python including syntax, data structures, and basic programming concepts",
-      type: "Skill Badge",
-      badgeUrl: "https://www.credly.com/badges/1b59e9a9-3eba-4ae8-a0b5-b44d677bc8d8/public_url"
     },
     {
       title: "Analyzing Data with Python",

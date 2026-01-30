@@ -60,6 +60,55 @@ const Certifications = () => {
     }
   ];
 
+  // Separate certifications into categories
+  const professionalCerts = certifications.filter(c =>
+    c.type === "Professional Certificate" || c.type === "Course" || c.type === "Specialist Certification"
+  );
+
+  const virtualCerts = certifications.filter(c =>
+    c.type === "Virtual Experience" || c.type === "Skill Badge" || c.type === "Competition"
+  );
+
+  const CertCard = ({ cert }: { cert: any }) => (
+    <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 group flex flex-col h-full">
+      <div className="flex justify-between items-start mb-4">
+        <span className={`px-3 py-1 rounded-full text-xs font-semibold ${cert.type === 'Professional Certificate' ? 'bg-green-500/20 text-green-400 border border-green-500/30' :
+            cert.type === 'Virtual Experience' ? 'bg-orange-500/20 text-orange-400 border border-orange-500/30' :
+              'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+          }`}>
+          {cert.type}
+        </span>
+        <div className="text-right">
+          {cert.score !== "Certified" && <span className="text-yellow-400 font-bold text-sm">{cert.score}</span>}
+        </div>
+      </div>
+
+      <h3 className="text-xl font-bold text-white group-hover:text-purple-400 transition-colors duration-300 mb-2">
+        {cert.title}
+      </h3>
+
+      <p className="text-purple-300 font-semibold mb-3">{cert.provider}</p>
+      <p className="text-gray-300 text-sm leading-relaxed mb-4">{cert.description}</p>
+
+      {cert.certificateUrl && (
+        <div className="mt-auto -mx-6 px-6 pt-4 border-t border-white/10 flex gap-3">
+          <a
+            href={cert.certificateUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 inline-flex justify-center items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-purple-600/20 to-pink-600/20 hover:from-purple-600/30 hover:to-pink-600/30 border border-purple-500/50 hover:border-purple-400 rounded-lg text-white font-semibold transition-all duration-300 shadow-[0_0_15px_rgba(168,85,247,0.15)] hover:shadow-[0_0_25px_rgba(168,85,247,0.3)] group/btn relative overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-white/5 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+            <ExternalLink className="w-4 h-4 text-purple-200 group-hover/btn:text-white transition-colors" />
+            <span className="text-purple-100 group-hover/btn:text-white transition-colors tracking-wide">
+              View Certificate
+            </span>
+          </a>
+        </div>
+      )}
+    </div>
+  );
+
   return (
     <section id="certifications" className="py-16 px-6 relative z-10">
       <div className="container mx-auto max-w-7xl">
@@ -67,85 +116,27 @@ const Certifications = () => {
           Certifications
         </h2>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {certifications.map((cert, index) => (
-            <div
-              key={index}
-              className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 group flex flex-col h-full"
-            >
-              <div className="flex justify-between items-start mb-4">
-                <span className={`px-3 py-1 rounded-full text-xs font-semibold ${cert.type === 'Professional Certificate'
-                  ? 'bg-green-500/20 text-green-400 border border-green-500/30'
-                  : cert.type === 'Specialist Certification'
-                    ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
-                    : cert.type === 'Virtual Experience'
-                      ? 'bg-orange-500/20 text-orange-400 border border-orange-500/30'
-                      : cert.type === 'Competition'
-                        ? 'bg-red-500/20 text-red-400 border border-red-500/30'
-                        : 'bg-purple-500/20 text-purple-400 border border-purple-500/30'
-                  }`}>
-                  {cert.type}
-                </span>
-                <div className="text-right">
-                  {cert.scoreUrl ? (
-                    <a
-                      href={cert.scoreUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-yellow-400 hover:text-yellow-300 font-bold text-sm transition-colors duration-300"
-                    >
-                      {cert.score}
-                    </a>
-                  ) : (
-                    <span className="text-yellow-400 font-bold text-sm">{cert.score}</span>
-                  )}
-                </div>
-              </div>
-
-              <h3 className="text-xl font-bold text-white group-hover:text-purple-400 transition-colors duration-300 mb-2">
-                {cert.title}
-              </h3>
-
-              <p className="text-purple-300 font-semibold mb-3">{cert.provider}</p>
-              <p className="text-gray-300 text-sm leading-relaxed">{cert.description}</p>
-
-              {cert.certificateUrl && (
-                <div className="mt-auto -mx-6 px-6 pt-4 border-t border-white/10 flex gap-3">
-                  <a
-                    href={cert.certificateUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 inline-flex justify-center items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-purple-600/20 to-pink-600/20 hover:from-purple-600/30 hover:to-pink-600/30 border border-purple-500/50 hover:border-purple-400 rounded-lg text-white font-semibold transition-all duration-300 shadow-[0_0_15px_rgba(168,85,247,0.15)] hover:shadow-[0_0_25px_rgba(168,85,247,0.3)] group/btn relative overflow-hidden"
-                  >
-                    <div className="absolute inset-0 bg-white/5 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
-                    <ExternalLink className="w-4 h-4 text-purple-200 group-hover/btn:text-white transition-colors" />
-                    <span className="text-purple-100 group-hover/btn:text-white transition-colors tracking-wide">
-                      View Certificate
-                    </span>
-                  </a>
-                </div>
-              )}
-            </div>
-          ))}
+        {/* Professional Certifications */}
+        <div className="mb-16">
+          <h3 className="text-2xl font-bold text-white mb-8 border-l-4 border-purple-500 pl-4">
+            Professional Certifications
+          </h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {professionalCerts.map((cert, index) => (
+              <CertCard key={index} cert={cert} />
+            ))}
+          </div>
         </div>
 
-        {/* Stats */}
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
-          <div className="text-center p-6 bg-gradient-to-br from-purple-500/20 to-pink-500/20 backdrop-blur-lg rounded-xl border border-white/20">
-            <div className="text-3xl font-bold text-purple-400 mb-2">11</div>
-            <div className="text-gray-300 text-sm">Certifications</div>
-          </div>
-          <div className="text-center p-6 bg-gradient-to-br from-blue-500/20 to-purple-500/20 backdrop-blur-lg rounded-xl border border-white/20">
-            <div className="text-3xl font-bold text-blue-400 mb-2">3</div>
-            <div className="text-gray-300 text-sm">Specialist Certs</div>
-          </div>
-          <div className="text-center p-6 bg-gradient-to-br from-green-500/20 to-blue-500/20 backdrop-blur-lg rounded-xl border border-white/20">
-            <div className="text-3xl font-bold text-green-400 mb-2">2</div>
-            <div className="text-gray-300 text-sm">NPTEL Courses</div>
-          </div>
-          <div className="text-center p-6 bg-gradient-to-br from-pink-500/20 to-purple-500/20 backdrop-blur-lg rounded-xl border border-white/20">
-            <div className="text-3xl font-bold text-pink-400 mb-2">3</div>
-            <div className="text-gray-300 text-sm">Virtual Experiences</div>
+        {/* Virtual Experience */}
+        <div>
+          <h3 className="text-2xl font-bold text-white mb-8 border-l-4 border-orange-500 pl-4">
+            Virtual Experience & Skill-Based
+          </h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {virtualCerts.map((cert, index) => (
+              <CertCard key={index} cert={cert} />
+            ))}
           </div>
         </div>
       </div>
