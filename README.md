@@ -7,7 +7,7 @@
 **Full Stack Developer | Java & Cloud Specialist**
 
 [![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Visit_Site-purple?style=for-the-badge)](https://satyaportfolio-ten.vercel.app/)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/duba-venkata-satyanarayana-3bb8a1259/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/venkatasatyanarayana-duba-679372255)
 [![GitHub](https://img.shields.io/badge/GitHub-Follow-black?style=for-the-badge&logo=github)](https://github.com/Satya136-dvsn)
 
 </div>
@@ -129,7 +129,7 @@ This project is deployed on **Vercel** with automatic deployments from the `main
 | Platform | Link |
 |----------|------|
 | 📧 **Email** | [d.v.satyanarayana260@gmail.com](mailto:d.v.satyanarayana260@gmail.com) |
-| 💼 **LinkedIn** | [Duba Venkata Satyanarayana](https://www.linkedin.com/in/duba-venkata-satyanarayana-3bb8a1259/) |
+| 💼 **LinkedIn** | [Duba Venkata Satyanarayana](https://www.linkedin.com/in/venkatasatyanarayana-duba-679372255) |
 | 🐙 **GitHub** | [Satya136-dvsn](https://github.com/Satya136-dvsn) |
 
 </div>

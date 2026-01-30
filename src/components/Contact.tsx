@@ -75,27 +75,27 @@ const Contact = () => {
 
         <div className="grid md:grid-cols-2 gap-12">
           <div className="space-y-8">
-            <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
+            <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 md:p-8 border border-white/20">
               <h3 className="text-2xl font-bold mb-6 text-white">Get In Touch</h3>
 
               <div className="space-y-4">
                 <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center">
+                  <div className="w-12 h-12 bg-purple-500/20 rounded-full flex-shrink-0 flex items-center justify-center">
                     <Mail className="w-6 h-6 text-purple-400" />
                   </div>
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <p className="text-gray-300">Email</p>
-                    <a href="mailto:d.v.satyanarayana260@gmail.com" className="text-white hover:text-purple-400 transition-colors">
+                    <a href="mailto:d.v.satyanarayana260@gmail.com" className="text-white hover:text-purple-400 transition-colors break-all">
                       d.v.satyanarayana260@gmail.com
                     </a>
                   </div>
                 </div>
 
                 <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center">
+                  <div className="w-12 h-12 bg-purple-500/20 rounded-full flex-shrink-0 flex items-center justify-center">
                     <Phone className="w-6 h-6 text-purple-400" />
                   </div>
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <p className="text-gray-300">Phone</p>
                     <a href="tel:+918639796150" className="text-white hover:text-purple-400 transition-colors">
                       +91 8639796150
@@ -104,10 +104,10 @@ const Contact = () => {
                 </div>
 
                 <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center">
+                  <div className="w-12 h-12 bg-purple-500/20 rounded-full flex-shrink-0 flex items-center justify-center">
                     <MapPin className="w-6 h-6 text-purple-400" />
                   </div>
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <p className="text-gray-300">Location</p>
                     <p className="text-white">Visakhapatnam, India</p>
                   </div>
@@ -124,6 +124,7 @@ const Contact = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center hover:bg-blue-500/30 transition-colors group"
+                  aria-label="LinkedIn Profile"
                 >
                   <Linkedin className="w-6 h-6 text-blue-400 group-hover:text-blue-300" />
                 </a>
@@ -132,6 +133,7 @@ const Contact = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-12 h-12 bg-gray-500/20 rounded-full flex items-center justify-center hover:bg-gray-500/30 transition-colors group"
+                  aria-label="GitHub Profile"
                 >
                   <Github className="w-6 h-6 text-gray-400 group-hover:text-gray-300" />
                 </a>

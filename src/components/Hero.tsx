@@ -72,7 +72,7 @@ const Hero = () => {
                 View Projects
               </a>
               <a
-                href="https://drive.google.com/file/d/1pGHlX5_5QleUNegN7roQsLPvd0i9kdFu/view?usp=sharing"
+                href="https://drive.google.com/file/d/11rZ6GyvXbUFW7T33JYh07Qk_j9INeN96/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={handleResumeDownload}

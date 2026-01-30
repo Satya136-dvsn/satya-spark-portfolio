@@ -95,6 +95,7 @@ const Header = () => {
           <button
             className="md:hidden p-2 text-white transition-transform duration-300 hover:scale-110"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>

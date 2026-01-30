@@ -63,6 +63,7 @@ const Footer = () => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-purple-500/30 transition-colors duration-300 group"
+                                aria-label="GitHub Profile"
                             >
                                 <Github className="w-5 h-5 text-gray-400 group-hover:text-purple-400" />
                             </a>
@@ -71,12 +72,14 @@ const Footer = () => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-blue-500/30 transition-colors duration-300 group"
+                                aria-label="LinkedIn Profile"
                             >
                                 <Linkedin className="w-5 h-5 text-gray-400 group-hover:text-blue-400" />
                             </a>
                             <a
                                 href="mailto:d.v.satyanarayana260@gmail.com"
                                 className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-pink-500/30 transition-colors duration-300 group"
+                                aria-label="Send Email"
                             >
                                 <Mail className="w-5 h-5 text-gray-400 group-hover:text-pink-400" />
                             </a>
