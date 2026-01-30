@@ -67,7 +67,7 @@ const Projects = () => {
     }
   ];
 
-  const categories = ['All', 'Full Stack', 'Data Analytics', 'Web Development', 'FPGA/VLSI', 'Embedded'];
+  const categories = ['All', 'Full Stack', 'Data Analytics', 'Web Development', 'FPGA/VLSI'];
 
   const filteredProjects = activeFilter === 'All'
     ? projects

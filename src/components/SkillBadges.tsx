@@ -117,11 +117,11 @@ const SkillBadges = () => {
             <div className="text-gray-300 text-sm">Skill Badges</div>
           </div>
           <div className="text-center p-6 bg-gradient-to-br from-blue-500/20 to-purple-500/20 backdrop-blur-lg rounded-xl border border-white/20">
-            <div className="text-3xl font-bold text-blue-400 mb-2">1</div>
+            <div className="text-3xl font-bold text-blue-400 mb-2">4</div>
             <div className="text-gray-300 text-sm">Google Cloud</div>
           </div>
           <div className="text-center p-6 bg-gradient-to-br from-green-500/20 to-blue-500/20 backdrop-blur-lg rounded-xl border border-white/20">
-            <div className="text-3xl font-bold text-green-400 mb-2">5</div>
+            <div className="text-3xl font-bold text-green-400 mb-2">4</div>
             <div className="text-gray-300 text-sm">IBM Badges</div>
           </div>
           <div className="text-center p-6 bg-gradient-to-br from-purple-500/20 to-blue-500/20 backdrop-blur-lg rounded-xl border border-white/20">

@@ -19,9 +19,9 @@ const Awards = () => {
       certificateUrl: "" // Placeholder
     },
     {
-      title: "Photography Recognition",
-      event: "ELEKTRA 2K24",
-      description: "Recognized for exceptional event photography and visual storytelling coverage.",
+      title: "Photography Lead & Recognition",
+      event: "DevFest 2025 & ELEKTRA 2K24",
+      description: "Coordinated media for DevFest and recognized for exceptional visual storytelling at ELEKTRA.",
       icon: "📸",
       type: "Creative",
       certificateUrl: "https://drive.google.com/file/d/1kg_jxDlwVx6csSCJlXxYyer9oKDnLeuU/view?usp=drive_link"
@@ -33,14 +33,6 @@ const Awards = () => {
       icon: "🎨",
       type: "Creative",
       certificateUrl: "https://drive.google.com/file/d/10X8pE3XuGqBdEShDi1lshFPG3e3Ak1-7/view?usp=drive_link"
-    },
-    {
-      title: "Photography Coordinator",
-      event: "DevFest Vizag 2025",
-      description: "Coordinated media coverage and documentation for the DevFest community event.",
-      icon: "📷",
-      type: "Volunteering",
-      certificateUrl: "" // Placeholder
     }
   ];
 
@@ -54,11 +46,6 @@ const Awards = () => {
       role: "NSS Unit–2 Coordinator",
       organizations: ["National Service Scheme"],
       description: "Organized community service camps and social awareness drives (2023–2025)."
-    },
-    {
-      role: "GDG Vizag Member & DevFest Volunteer",
-      organizations: ["Google Developer Groups"],
-      description: "Volunteered for community events and technical workshops."
     },
     {
       role: "Class Representative",
@@ -148,29 +135,29 @@ const Awards = () => {
         </div>
 
         {/* Leadership Section */}
-        <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 backdrop-blur-lg rounded-2xl p-8 border border-white/20 mb-16">
-          <h3 className="text-3xl font-bold text-center mb-8 text-white">Leadership Roles</h3>
+        <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 backdrop-blur-lg rounded-2xl p-6 border border-white/20 mb-16">
+          <h3 className="text-2xl font-bold text-center mb-6 text-white">Leadership Roles</h3>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-6">
             {leadership.map((role, index) => (
               <div
                 key={index}
-                className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10 hover:scale-105 transition-transform duration-300"
+                className="bg-white/10 backdrop-blur-lg rounded-xl p-4 border border-white/10 hover:scale-105 transition-transform duration-300"
               >
-                <h4 className="text-xl font-bold text-purple-400 mb-3">{role.role}</h4>
+                <h4 className="text-lg font-bold text-purple-400 mb-2">{role.role}</h4>
 
-                <div className="mb-3">
+                <div className="mb-2">
                   {role.organizations.map((org, orgIndex) => (
                     <span
                       key={orgIndex}
-                      className="inline-block px-2 py-1 bg-purple-500/20 border border-purple-400/30 rounded-md text-xs text-purple-300 mr-2 mb-2"
+                      className="inline-block px-2 py-0.5 bg-purple-500/20 border border-purple-400/30 rounded text-[10px] text-purple-300 mr-2 mb-1"
                     >
                       {org}
                     </span>
                   ))}
                 </div>
 
-                <p className="text-gray-300 text-sm leading-relaxed">{role.description}</p>
+                <p className="text-gray-300 text-xs leading-normal">{role.description}</p>
               </div>
             ))}
           </div>
