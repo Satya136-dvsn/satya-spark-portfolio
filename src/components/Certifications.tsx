@@ -57,7 +57,7 @@ const Certifications = () => {
       score: "57/100",
       type: "Course",
       certificateUrl: "https://drive.google.com/file/d/1dvY8TOCpROkIpDSbCeUvjBMmaS9Y3VOM/view?usp=drive_link"
-    }
+    },
     {
       title: "Oracle Cloud Infrastructure AI Foundations Associate",
       provider: "Oracle",

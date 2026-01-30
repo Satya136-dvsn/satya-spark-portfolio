@@ -111,16 +111,16 @@ const SkillBadges = () => {
         </div>
 
         {/* Stats */}
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
-          <div className="text-center p-6 bg-gradient-to-br from-purple-500/20 to-pink-500/20 backdrop-blur-lg rounded-xl border border-white/20">
+        <div className="mt-16 flex flex-wrap justify-center gap-6">
+          <div className="w-full md:w-64 text-center p-6 bg-gradient-to-br from-purple-500/20 to-pink-500/20 backdrop-blur-lg rounded-xl border border-white/20">
             <div className="text-3xl font-bold text-purple-400 mb-2">{skillBadges.length}</div>
             <div className="text-gray-300 text-sm">Skill Badges</div>
           </div>
-          <div className="text-center p-6 bg-gradient-to-br from-blue-500/20 to-purple-500/20 backdrop-blur-lg rounded-xl border border-white/20">
+          <div className="w-full md:w-64 text-center p-6 bg-gradient-to-br from-blue-500/20 to-purple-500/20 backdrop-blur-lg rounded-xl border border-white/20">
             <div className="text-3xl font-bold text-blue-400 mb-2">4</div>
             <div className="text-gray-300 text-sm">Google Cloud</div>
           </div>
-          <div className="text-center p-6 bg-gradient-to-br from-green-500/20 to-blue-500/20 backdrop-blur-lg rounded-xl border border-white/20">
+          <div className="w-full md:w-64 text-center p-6 bg-gradient-to-br from-green-500/20 to-blue-500/20 backdrop-blur-lg rounded-xl border border-white/20">
             <div className="text-3xl font-bold text-green-400 mb-2">4</div>
             <div className="text-gray-300 text-sm">IBM Badges</div>
           </div>
