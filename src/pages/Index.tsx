@@ -22,12 +22,12 @@ const Index = () => {
   const [showIntro, setShowIntro] = useState(false);
 
   useEffect(() => {
-    // Check if this is the first visit
-    // const hasVisited = localStorage.getItem('portfolio-visited');
-    // if (!hasVisited) {
-    setShowIntro(true);
-    //   localStorage.setItem('portfolio-visited', 'true');
-    // }
+    // Check if this is the first visit in this session
+    const hasVisited = sessionStorage.getItem('portfolio-session-visited');
+    if (!hasVisited) {
+      setShowIntro(true);
+      sessionStorage.setItem('portfolio-session-visited', 'true');
+    }
   }, []);
 
   useEffect(() => {
