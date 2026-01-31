@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { useEffect, useState, useRef } from 'react';
+import { ArrowRight, Terminal, Cloud, Code } from 'lucide-react';
 
 interface IntroAnimationProps {
   onComplete: () => void;
@@ -7,77 +7,215 @@ interface IntroAnimationProps {
 
 const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
   const [showLogo, setShowLogo] = useState(false);
-  const [showName, setShowName] = useState(false);
   const [showButton, setShowButton] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
+  const [decodedText, setDecodedText] = useState("");
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  // Use a ref to track exiting state inside the canvas loop without re-triggering useEffect
+  const isExitingRef = useRef(false);
+
+  const originalText = "Duba Venkata Satyanarayana";
 
   useEffect(() => {
-    // Start logo animation
-    const logoTimer = setTimeout(() => setShowLogo(true), 100);
+    // 1. Matrix/Tron Rain Effect
+    const canvas = canvasRef.current;
+    if (!canvas) return;
 
-    // Start name animation
-    const nameTimer = setTimeout(() => setShowName(true), 800);
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
-    // Show Enter button
-    const buttonTimer = setTimeout(() => setShowButton(true), 2500);
+    const setCanvasSize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    setCanvasSize();
+
+    const columns = Math.floor(canvas.width / 20);
+    const drops: number[] = [];
+    const chars = "01ADCDEF@#$%^&*";
+
+    for (let i = 0; i < columns; i++) {
+      drops[i] = Math.random() * -100;
+    }
+
+    const draw = () => {
+      // Clear with slight transparency for trail effect
+      // When exiting, we want trails to look a bit "longer" (blurrier), so we can adjust alpha if needed
+      // varying alpha: 0.2 normally, 0.1 during exit -> longer trails
+      ctx.fillStyle = isExitingRef.current ? 'rgba(5, 5, 17, 0.1)' : 'rgba(5, 5, 17, 0.2)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.font = '15px monospace';
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = chars[Math.floor(Math.random() * chars.length)];
+        ctx.fillStyle = Math.random() > 0.5 ? '#a855f7' : '#3b82f6';
+        ctx.fillText(text, i * 20, drops[i] * 20);
+
+        if (drops[i] * 20 > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+
+        // ACCELERATION LOGIC:
+        // Normal speed: 1
+        // Exit speed: 3 (Faster, but not "glitchy" fast like 5/10)
+        drops[i] += isExitingRef.current ? 3 : 1;
+      }
+    };
+
+    const intervalId = setInterval(draw, 33); // ~30FPS
+
+    const handleResize = () => {
+      setCanvasSize();
+    };
+    window.addEventListener('resize', handleResize);
+
+    // 2. Logo Animation
+    setTimeout(() => setShowLogo(true), 100);
+
+    // 3. Decryption Text Animation
+    let iteration = 0;
+    const textInterval = setInterval(() => {
+      setDecodedText(() => {
+        return originalText
+          .split("")
+          .map((_letter, index) => {
+            if (index < iteration) {
+              return originalText[index];
+            }
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*";
+            return chars[Math.floor(Math.random() * chars.length)];
+          })
+          .join("");
+      });
+
+      if (iteration >= originalText.length) {
+        clearInterval(textInterval);
+      }
+
+      iteration += 1 / 4; // Slower resolve
+    }, 30);
+
+    // 4. Show Button
+    setTimeout(() => setShowButton(true), 2500);
 
     return () => {
-      clearTimeout(logoTimer);
-      clearTimeout(nameTimer);
-      clearTimeout(buttonTimer);
+      clearInterval(intervalId);
+      clearInterval(textInterval);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 
   const handleEnter = () => {
+    // Update both Ref (for canvas loop) and State (for CSS transitions)
+    isExitingRef.current = true;
     setIsExiting(true);
-    setTimeout(onComplete, 800); // Wait for exit animation
+
+    // 1.5s delay allows the "Warp" effect to be seen before full fade-out
+    setTimeout(onComplete, 1500);
   };
 
   return (
-    <div className={`fixed inset-0 z-50 flex items-center justify-center bg-[#0a0a1f] transition-all duration-800 ${isExiting ? 'opacity-0 scale-105 pointer-events-none' : 'opacity-100'}`}>
-      {/* Animated background particles */}
+    <div className={`fixed inset-0 z-50 flex items-center justify-center bg-[#050511] transition-all duration-[1500ms] ease-in-out ${isExiting ? 'opacity-0 scale-[5] filter blur-xl' : 'opacity-100 scale-100'}`}>
+      {/* Matrix/Tron Background Canvas */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 opacity-20 pointer-events-none"
+      />
+
+      {/* Cinematic Overlays */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-600/10 rounded-full blur-[100px] animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] animate-pulse delay-1000"></div>
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px] animate-pulse"></div>
+        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px] animate-pulse delay-1000"></div>
+        <div className="absolute inset-0 bg-[url('/noise.png')] opacity-5"></div>
       </div>
 
-      <div className="text-center relative flex flex-col items-center z-10 px-4">
-        {/* DVS Logo */}
+      <div className="text-center relative flex flex-col items-center z-10 px-4 w-full max-w-7xl">
+        {/* DVS Logo with Glow */}
         <div className="mb-12 relative group perspective-1000">
-          <div className={`relative transition-all duration-1000 ease-out transform ${showLogo ? 'opacity-100 translate-y-0 rotate-0' : 'opacity-0 translate-y-10 rotate-x-90'}`}>
-            <div className="absolute -inset-4 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
+          <div className={`relative transition-all duration-1000 ease-out transform ${showLogo ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-10 scale-50'}`}>
+            <div className="absolute -inset-8 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full blur-2xl opacity-30 group-hover:opacity-60 transition-opacity duration-500 animate-pulse"></div>
             <img
               src="/lovable-uploads/c51f92f6-acbc-4922-996a-d8b6eebdbddc.png"
               alt="DVS Logo"
-              className="w-32 h-32 md:w-40 md:h-40 relative z-10 drop-shadow-[0_0_15px_rgba(168,85,247,0.5)]"
+              className="w-28 h-28 md:w-40 md:h-40 relative z-10 drop-shadow-[0_0_25px_rgba(168,85,247,0.6)]"
             />
+            {/* Tech Icons Orbiting */}
+            <div className={`absolute top-0 right-0 animate-spin-slow transition-opacity duration-1000 ${showLogo ? 'opacity-100' : 'opacity-0'}`}>
+              <Code className="w-6 h-6 text-blue-400 absolute -top-4 -right-4" />
+            </div>
+            <div className={`absolute bottom-0 left-0 animate-spin-reverse-slow transition-opacity duration-1000 delay-300 ${showLogo ? 'opacity-100' : 'opacity-0'}`}>
+              <Cloud className="w-6 h-6 text-purple-400 absolute -bottom-4 -left-4" />
+            </div>
           </div>
         </div>
 
-        {/* Name Reveal */}
-        <div className={`transition-all duration-1000 delay-300 ${showName ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-          <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-white via-purple-100 to-gray-300 bg-clip-text text-transparent mb-4 tracking-tight drop-shadow-sm font-['Poppins']">
-            Duba Venkata Satyanarayana
+        {/* Decrypting Name Effect */}
+        <div className="relative mb-6 w-full flex items-center justify-center">
+          <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-bold font-['Poppins'] tracking-tight text-white drop-shadow-lg text-center leading-tight whitespace-nowrap overflow-visible">
+            <span className="bg-gradient-to-r from-white via-blue-100 to-purple-200 bg-clip-text text-transparent">
+              {decodedText}
+            </span>
+            <span className="animate-pulse text-purple-400 ml-1">_</span>
           </h1>
-          <p className="text-gray-400 text-lg md:text-xl tracking-widest uppercase font-light">
-            Full Stack Developer & Cloud Specialist
-          </p>
+        </div>
+
+        {/* Subtitle */}
+        <div className={`transition-all duration-1000 delay-1000 ${showLogo ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+          <div className="flex items-center gap-3 text-gray-400 text-xs md:text-xl tracking-[0.2em] uppercase font-light border-y border-white/10 py-2 px-8 bg-white/5 backdrop-blur-sm rounded-full">
+            <Terminal className="w-3 h-3 md:w-4 md:h-4 text-purple-400" />
+            <span>Full Stack Developer & Cloud Specialist</span>
+          </div>
         </div>
 
         {/* Enter Button */}
-        <div className={`mt-16 transition-all duration-1000 delay-500 ${showButton ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+        <div className={`mt-16 transition-all duration-1000 delay-[2000ms] ${showButton ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
           <button
             onClick={handleEnter}
-            className="group relative px-8 py-4 bg-white/5 hover:bg-white/10 backdrop-blur-md rounded-full border border-white/10 hover:border-purple-500/50 transition-all duration-500 hover:scale-105 hover:shadow-[0_0_30px_rgba(168,85,247,0.3)] overflow-hidden"
+            className="group relative px-10 py-4 bg-transparent overflow-hidden rounded-full transition-all duration-300 hover:scale-105 cursor-pointer"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-blue-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <div className="relative flex items-center gap-3">
-              <span className="text-white font-medium tracking-wide">Enter Portfolio</span>
-              <ArrowRight className="w-5 h-5 text-purple-400 group-hover:translate-x-1 transition-transform duration-300" />
+            {/* Button Border Gradient */}
+            <div className="absolute inset-0 rounded-full p-[1px] bg-gradient-to-r from-purple-500 via-blue-500 to-purple-500 bg-[length:200%_auto] animate-gradient-border">
+              <div className="h-full w-full bg-[#0a0a1f] rounded-full"></div>
             </div>
+
+            {/* Button Content */}
+            <div className="relative flex items-center gap-4 px-2">
+              <span className="text-white font-medium tracking-widest uppercase text-sm group-hover:text-purple-300 transition-colors z-10">Enter System</span>
+              <ArrowRight className="w-5 h-5 text-blue-400 group-hover:translate-x-2 transition-transform duration-300 z-10" />
+            </div>
+
+            {/* Glow Effect */}
+            <div className="absolute inset-0 rounded-full bg-purple-500/20 blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-500"></div>
           </button>
         </div>
       </div>
+
+      <style>{`
+        @keyframes spin-slow {
+          from { transform: rotate(0deg) translateX(60px) rotate(0deg); }
+          to { transform: rotate(360deg) translateX(60px) rotate(-360deg); }
+        }
+        @keyframes spin-reverse-slow {
+          from { transform: rotate(360deg) translateX(60px) rotate(-360deg); }
+          to { transform: rotate(0deg) translateX(60px) rotate(0deg); }
+        }
+        .animate-spin-slow {
+          animation: spin-slow 8s linear infinite;
+        }
+        .animate-spin-reverse-slow {
+          animation: spin-reverse-slow 10s linear infinite;
+        }
+        @keyframes gradient-border {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        .animate-gradient-border {
+          animation: gradient-border 3s ease infinite;
+        }
+      `}</style>
     </div>
   );
 };

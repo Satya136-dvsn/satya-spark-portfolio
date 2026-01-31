@@ -23,11 +23,11 @@ const Index = () => {
 
   useEffect(() => {
     // Check if this is the first visit
-    const hasVisited = localStorage.getItem('portfolio-visited');
-    if (!hasVisited) {
-      setShowIntro(true);
-      localStorage.setItem('portfolio-visited', 'true');
-    }
+    // const hasVisited = localStorage.getItem('portfolio-visited');
+    // if (!hasVisited) {
+    setShowIntro(true);
+    //   localStorage.setItem('portfolio-visited', 'true');
+    // }
   }, []);
 
   useEffect(() => {
