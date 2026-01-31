@@ -23,7 +23,7 @@ const Hero = () => {
   const handleProfileClick = () => {
     setIsProfileClicked(true);
     // Open the image in a new tab for preview
-    window.open('/lovable-uploads/95f43a83-175b-4961-9937-4e95596ecffd.png', '_blank');
+    window.open('/lovable-uploads/DSC_1452.jpg', '_blank');
   };
 
   const { toast } = useToast();
@@ -106,7 +106,7 @@ const Hero = () => {
               onClick={handleProfileClick}
             >
               <img
-                src="/lovable-uploads/95f43a83-175b-4961-9937-4e95596ecffd.png"
+                src="/lovable-uploads/DSC_1452.jpg"
                 alt="Duba Venkata Satyanarayana"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 fetchPriority="high"
