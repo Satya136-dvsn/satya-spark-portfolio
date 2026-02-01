@@ -41,10 +41,20 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
             drops[i] = Math.random() * -100;
           }
 
-          const draw = () => {
+          let animationFrameId: number;
+          let lastTime = 0;
+          const fps = 30; // Cap at 30FPS for performance
+          const interval = 1000 / fps;
+
+          const draw = (currentTime: number) => {
+            animationFrameId = requestAnimationFrame(draw);
+
+            const deltaTime = currentTime - lastTime;
+            if (deltaTime < interval) return;
+
+            lastTime = currentTime - (deltaTime % interval);
+
             // Clear with slight transparency for trail effect
-            // When exiting, we want trails to look a bit "longer" (blurrier), so we can adjust alpha if needed
-            // varying alpha: 0.2 normally, 0.1 during exit -> longer trails
             ctx.fillStyle = isExitingRef.current ? 'rgba(5, 5, 17, 0.1)' : 'rgba(5, 5, 17, 0.2)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -60,16 +70,22 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
               }
 
               // ACCELERATION LOGIC:
-              // Normal speed: 1
-              // Exit speed: 3 (Faster, but not "glitchy" fast like 5/10)
               drops[i] += isExitingRef.current ? 3 : 1;
             }
           };
 
-          const intervalId = setInterval(draw, 33); // ~30FPS
+          // Start animation loop
+          requestAnimationFrame(draw);
 
           const handleResize = () => {
             setCanvasSize();
+          };
+          window.addEventListener('resize', handleResize);
+
+          // Cleanup inside the conditional block
+          var cleanupCanvas = () => {
+            cancelAnimationFrame(animationFrameId);
+            window.removeEventListener('resize', handleResize);
           };
           window.addEventListener('resize', handleResize);
 
@@ -132,6 +148,7 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
       <canvas
         ref={canvasRef}
         className="absolute inset-0 opacity-20 pointer-events-none"
+        aria-hidden="true"
       />
 
       {/* Cinematic Overlays */}
