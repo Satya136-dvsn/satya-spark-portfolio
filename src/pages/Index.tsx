@@ -60,9 +60,11 @@ const Index = () => {
           }}
         />
 
-        <AnimatedBackground />
+        {/* Defer AnimatedBackground until Intro is done to save CPU/GPU during startup */}
+        {!showIntro && <AnimatedBackground />}
+
         <Header />
-        <Hero />
+        <Hero delayAnimation={showIntro} />
         <About />
         <Suspense fallback={<div className="min-h-screen" />}>
           <Experience />

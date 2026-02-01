@@ -2,12 +2,18 @@ import { useEffect, useState } from 'react';
 import { ArrowDown, Download } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 
-const Hero = () => {
+interface HeroProps {
+  delayAnimation?: boolean;
+}
+
+const Hero = ({ delayAnimation = false }: HeroProps) => {
   const [text, setText] = useState('');
   const [isProfileClicked, setIsProfileClicked] = useState(false);
   const fullText = "Electronics & Web Development Enthusiast";
 
   useEffect(() => {
+    if (delayAnimation) return; // Don't start if delayed
+
     let index = 0;
     const timer = setInterval(() => {
       setText(fullText.slice(0, index));
@@ -18,7 +24,7 @@ const Hero = () => {
     }, 100);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [delayAnimation]);
 
   const handleProfileClick = () => {
     setIsProfileClicked(true);
