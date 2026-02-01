@@ -2,11 +2,11 @@ import { useEffect, useState, lazy, Suspense } from 'react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
-import About from '../components/About';
-import AnimatedBackground from '../components/AnimatedBackground';
 import IntroAnimation from '../components/IntroAnimation';
 
 // Lazy load below-the-fold components
+const About = lazy(() => import('../components/About'));
+const AnimatedBackground = lazy(() => import('../components/AnimatedBackground')); // Heavy Canvas
 const Experience = lazy(() => import('../components/Experience'));
 const Projects = lazy(() => import('../components/Projects'));
 const Skills = lazy(() => import('../components/Skills'));
@@ -68,8 +68,10 @@ const Index = () => {
 
         <Header />
         <Hero delayAnimation={showIntro} />
-        <About />
+        <Hero delayAnimation={showIntro} />
+
         <Suspense fallback={<div className="min-h-screen" />}>
+          <About />
           <Experience />
           <Projects />
           <Skills />

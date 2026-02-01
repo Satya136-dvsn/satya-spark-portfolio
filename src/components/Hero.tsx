@@ -112,7 +112,7 @@ const Hero = ({ delayAnimation = false }: HeroProps) => {
               onClick={handleProfileClick}
             >
               <img
-                src="/lovable-uploads/DSC_1452.jpg"
+                src="/lovable-uploads/DSC_1452_optimized.jpg"
                 alt="Duba Venkata Satyanarayana"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 fetchPriority="high"
