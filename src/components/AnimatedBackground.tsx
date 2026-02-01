@@ -23,8 +23,10 @@ const AnimatedBackground = () => {
       opacity: number;
     }> = [];
 
-    // Create particles
-    for (let i = 0; i < 50; i++) {
+    // Create particles (Reduced count for mobile to save CPU)
+    const particleCount = window.innerWidth < 768 ? 20 : 50;
+
+    for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,

@@ -31,7 +31,9 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
     };
     setCanvasSize();
 
-    const columns = Math.floor(canvas.width / 20);
+    // Optimization: Wider columns on mobile = Fewer draw calls = Higher FPS
+    const fontSize = window.innerWidth < 768 ? 20 : 15;
+    const columns = Math.floor(canvas.width / fontSize);
     const drops: number[] = [];
     const chars = "01ADCDEF@#$%^&*";
 
@@ -46,14 +48,14 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
       ctx.fillStyle = isExitingRef.current ? 'rgba(5, 5, 17, 0.1)' : 'rgba(5, 5, 17, 0.2)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      ctx.font = '15px monospace';
+      ctx.font = `${fontSize}px monospace`;
 
       for (let i = 0; i < drops.length; i++) {
         const text = chars[Math.floor(Math.random() * chars.length)];
         ctx.fillStyle = Math.random() > 0.5 ? '#a855f7' : '#3b82f6';
-        ctx.fillText(text, i * 20, drops[i] * 20);
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-        if (drops[i] * 20 > canvas.height && Math.random() > 0.975) {
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
           drops[i] = 0;
         }
 

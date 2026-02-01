@@ -112,6 +112,7 @@ const Hero = () => {
                 fetchPriority="high"
                 width="450"
                 height="450"
+                loading="eager"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500"></div>
             </div>
