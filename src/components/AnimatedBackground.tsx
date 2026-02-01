@@ -12,6 +12,7 @@ const AnimatedBackground = () => {
     if (!ctx) return;
 
     // Mobile Performance: Disable canvas entirely on mobile to hit 100% Performance Score
+    // Using a static background (via CSS) is enough for mobile.
     if (window.innerWidth < 768) return;
 
     canvas.width = window.innerWidth;
@@ -26,8 +27,8 @@ const AnimatedBackground = () => {
       opacity: number;
     }> = [];
 
-    // Create particles (Reduced count for mobile to save CPU)
-    const particleCount = window.innerWidth < 768 ? 20 : 50;
+    // Create particles (Desktop only)
+    const particleCount = 50;
 
     for (let i = 0; i < particleCount; i++) {
       particles.push({
@@ -84,6 +85,15 @@ const AnimatedBackground = () => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  // Return null on mobile to ensure no DOM elements are created
+  // The useEffect above will handle the logic, but we also want to avoid rendering the canvas element itself
+  // However, since we're using useEffect for the check, better to just hide it via CSS or conditional rendering
+  // A cleaner React way:
+
+  if (typeof window !== 'undefined' && window.innerWidth < 768) {
+    return null;
+  }
 
   return (
     <canvas

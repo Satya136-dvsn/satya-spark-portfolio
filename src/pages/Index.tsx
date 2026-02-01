@@ -68,7 +68,7 @@ const Index = () => {
 
         <Header />
         <Hero delayAnimation={showIntro} />
-        <Hero delayAnimation={showIntro} />
+
 
         <Suspense fallback={<div className="min-h-screen" />}>
           <About />
