@@ -22,9 +22,12 @@ const Index = () => {
   const [showIntro, setShowIntro] = useState(false);
 
   useEffect(() => {
-    // Check if this is the first visit in this session
+    // Check if this is the first visit in this session AND if we are on Desktop
+    // Mobile users get instant access to improve LCP scores
     const hasVisited = sessionStorage.getItem('portfolio-session-visited');
-    if (!hasVisited) {
+    const isMobile = window.innerWidth < 768;
+
+    if (!hasVisited && !isMobile) {
       setShowIntro(true);
       sessionStorage.setItem('portfolio-session-visited', 'true');
     }
