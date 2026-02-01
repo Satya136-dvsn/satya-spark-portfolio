@@ -20,58 +20,67 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
   useEffect(() => {
     // 1. Matrix/Tron Rain Effect
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (canvas) {
+      // Mobile Performance: ONLY run canvas logic if width > 768px
+      if (window.innerWidth >= 768) {
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+          const setCanvasSize = () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+          };
+          setCanvasSize();
 
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+          // Optimization: Wider columns on mobile = Fewer draw calls = Higher FPS
+          const fontSize = window.innerWidth < 768 ? 20 : 15;
+          const columns = Math.floor(canvas.width / fontSize);
+          const drops: number[] = [];
+          const chars = "01ADCDEF@#$%^&*";
 
-    const setCanvasSize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-    setCanvasSize();
+          for (let i = 0; i < columns; i++) {
+            drops[i] = Math.random() * -100;
+          }
 
-    // Optimization: Wider columns on mobile = Fewer draw calls = Higher FPS
-    const fontSize = window.innerWidth < 768 ? 20 : 15;
-    const columns = Math.floor(canvas.width / fontSize);
-    const drops: number[] = [];
-    const chars = "01ADCDEF@#$%^&*";
+          const draw = () => {
+            // Clear with slight transparency for trail effect
+            // When exiting, we want trails to look a bit "longer" (blurrier), so we can adjust alpha if needed
+            // varying alpha: 0.2 normally, 0.1 during exit -> longer trails
+            ctx.fillStyle = isExitingRef.current ? 'rgba(5, 5, 17, 0.1)' : 'rgba(5, 5, 17, 0.2)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    for (let i = 0; i < columns; i++) {
-      drops[i] = Math.random() * -100;
-    }
+            ctx.font = `${fontSize}px monospace`;
 
-    const draw = () => {
-      // Clear with slight transparency for trail effect
-      // When exiting, we want trails to look a bit "longer" (blurrier), so we can adjust alpha if needed
-      // varying alpha: 0.2 normally, 0.1 during exit -> longer trails
-      ctx.fillStyle = isExitingRef.current ? 'rgba(5, 5, 17, 0.1)' : 'rgba(5, 5, 17, 0.2)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < drops.length; i++) {
+              const text = chars[Math.floor(Math.random() * chars.length)];
+              ctx.fillStyle = Math.random() > 0.5 ? '#a855f7' : '#3b82f6';
+              ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-      ctx.font = `${fontSize}px monospace`;
+              if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                drops[i] = 0;
+              }
 
-      for (let i = 0; i < drops.length; i++) {
-        const text = chars[Math.floor(Math.random() * chars.length)];
-        ctx.fillStyle = Math.random() > 0.5 ? '#a855f7' : '#3b82f6';
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+              // ACCELERATION LOGIC:
+              // Normal speed: 1
+              // Exit speed: 3 (Faster, but not "glitchy" fast like 5/10)
+              drops[i] += isExitingRef.current ? 3 : 1;
+            }
+          };
 
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
+          const intervalId = setInterval(draw, 33); // ~30FPS
+
+          const handleResize = () => {
+            setCanvasSize();
+          };
+          window.addEventListener('resize', handleResize);
+
+          // Cleanup inside the conditional block
+          var cleanupCanvas = () => {
+            clearInterval(intervalId);
+            window.removeEventListener('resize', handleResize);
+          };
         }
-
-        // ACCELERATION LOGIC:
-        // Normal speed: 1
-        // Exit speed: 3 (Faster, but not "glitchy" fast like 5/10)
-        drops[i] += isExitingRef.current ? 3 : 1;
       }
-    };
-
-    const intervalId = setInterval(draw, 33); // ~30FPS
-
-    const handleResize = () => {
-      setCanvasSize();
-    };
-    window.addEventListener('resize', handleResize);
+    }
 
     // 2. Logo Animation
     setTimeout(() => setShowLogo(true), 100);
@@ -103,9 +112,8 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
     setTimeout(() => setShowButton(true), 2500);
 
     return () => {
-      clearInterval(intervalId);
+      if (typeof cleanupCanvas === 'function') cleanupCanvas();
       clearInterval(textInterval);
-      window.removeEventListener('resize', handleResize);
     };
   }, []);
 

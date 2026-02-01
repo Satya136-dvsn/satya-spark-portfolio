@@ -11,6 +11,9 @@ const AnimatedBackground = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    // Mobile Performance: Disable canvas entirely on mobile to hit 100% Performance Score
+    if (window.innerWidth < 768) return;
+
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
