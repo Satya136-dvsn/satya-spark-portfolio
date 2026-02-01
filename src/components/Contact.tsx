@@ -1,14 +1,13 @@
-
 import { Mail, Phone, MapPin, Linkedin, Github } from 'lucide-react';
 import { useState } from 'react';
 import { useToast } from "@/hooks/use-toast";
-import emailjs from '@emailjs/browser';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    message: ''
+    message: '',
+    'bot-field': '' // Custom Honeypot
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
@@ -24,6 +23,11 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    // 🛡️ Custom Honeypot Check
+    if (formData['bot-field']) {
+      return; // Silently ignore bots
+    }
+
     if (!formData.name || !formData.email || !formData.message) {
       toast({
         title: "Error",
@@ -36,26 +40,35 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      await emailjs.send(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-        {
-          from_name: formData.name,
-          from_email: formData.email,
-          message: formData.message,
-          to_email: 'd.v.satyanarayana260@gmail.com'
+      // Send to Web3Forms API
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
         },
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-      );
-
-      toast({
-        title: "Message sent!",
-        description: "Thank you for your message. I'll get back to you soon!",
+        body: JSON.stringify({
+          access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY,
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        }),
       });
 
-      setFormData({ name: '', email: '', message: '' });
+      const result = await response.json();
+
+      if (result.success) {
+        toast({
+          title: "Message sent!",
+          description: "Thank you for sending me a message. I'll get back to you soon!",
+        });
+        setFormData({ name: '', email: '', message: '', 'bot-field': '' });
+      } else {
+        throw new Error(result.message || "Failed to send");
+      }
+
     } catch (error) {
-      console.error('EmailJS Error:', error);
+      console.error('Web3Forms Error:', error);
       toast({
         title: "Error",
         description: "Failed to send message. Please try again later.",
@@ -192,6 +205,17 @@ const Contact = () => {
                   required
                 ></textarea>
               </div>
+
+              {/* Honeypot Field - Hidden */}
+              <input
+                type="text"
+                name="bot-field"
+                value={formData['bot-field']}
+                onChange={handleInputChange}
+                className="hidden"
+                autoComplete="off"
+                tabIndex={-1}
+              />
 
               <button
                 type="submit"
