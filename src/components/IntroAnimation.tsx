@@ -163,11 +163,14 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
         <div className="mb-12 relative group perspective-1000">
           <div className={`relative transition-all duration-1000 ease-out transform ${showLogo ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-10 scale-50'}`}>
             <div className="absolute -inset-8 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full blur-2xl opacity-30 group-hover:opacity-60 transition-opacity duration-500 animate-pulse"></div>
-            <img
-              src="/lovable-uploads/c51f92f6-acbc-4922-996a-d8b6eebdbddc.png"
-              alt="DVS Logo"
-              className="w-28 h-28 md:w-40 md:h-40 relative z-10 drop-shadow-[0_0_25px_rgba(168,85,247,0.6)]"
-            />
+            {/* Logo Image with 3D Rotation */}
+            <div className="animate-cinematic-rotate bg-white rounded-full p-1"> {/* Added container for better rotation context if needed, or apply directly */}
+              <img
+                src="/lovable-uploads/c51f92f6-acbc-4922-996a-d8b6eebdbddc.png"
+                alt="DVS Logo"
+                className="w-28 h-28 md:w-40 md:h-40 relative z-10 drop-shadow-[0_0_25px_rgba(168,85,247,0.6)] rounded-full"
+              />
+            </div>
             {/* Tech Icons Orbiting */}
             <div className={`absolute top-0 right-0 animate-spin-slow transition-opacity duration-1000 ${showLogo ? 'opacity-100' : 'opacity-0'}`}>
               <Code className="w-6 h-6 text-blue-400 absolute -top-4 -right-4" />
@@ -241,6 +244,16 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
         }
         .animate-gradient-border {
           animation: gradient-border 3s ease infinite;
+        }
+        
+        /* New Cinematic 3D Rotation */
+        @keyframes cinematic-rotate {
+            0% { transform: perspective(1000px) rotateY(0deg); }
+            100% { transform: perspective(1000px) rotateY(360deg); }
+        }
+        .animate-cinematic-rotate {
+            animation: cinematic-rotate 12s linear infinite;
+            transform-style: preserve-3d;
         }
       `}</style>
     </div>
