@@ -2,6 +2,7 @@ import { ExternalLink } from 'lucide-react';
 
 const SkillBadges = () => {
   const skillBadges = [
+    // ... (keep existing data)
     {
       title: "Build Real World AI Applications with Gemini and Imagen",
       provider: "Google Cloud",
@@ -75,7 +76,8 @@ const SkillBadges = () => {
           {skillBadges.map((badge, index) => (
             <div
               key={index}
-              className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 group flex flex-col h-full"
+              className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 group flex flex-col h-full animate-float"
+              style={{ animationDelay: `${index * 0.2}s` }}
             >
               <div className="flex justify-between items-start mb-4">
                 <span className="px-3 py-1 rounded-full text-xs font-semibold bg-purple-500/20 text-purple-400 border border-purple-500/30">
@@ -126,6 +128,16 @@ const SkillBadges = () => {
           </div>
         </div>
       </div>
+      <style>{`
+        @keyframes float {
+          0% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+          100% { transform: translateY(0px); }
+        }
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+      `}</style>
     </section>
   );
 };

@@ -87,13 +87,6 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
             cancelAnimationFrame(animationFrameId);
             window.removeEventListener('resize', handleResize);
           };
-          window.addEventListener('resize', handleResize);
-
-          // Cleanup inside the conditional block
-          var cleanupCanvas = () => {
-            clearInterval(intervalId);
-            window.removeEventListener('resize', handleResize);
-          };
         }
       }
     }
