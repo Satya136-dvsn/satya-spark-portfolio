@@ -1,5 +1,43 @@
+const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+    'bot-field': '' // Custom Honeypot
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [cooldown, setCooldown] = useState(0); // Cooldown in seconds
+  const { toast } = useToast();
+
+  // Check for existing cooldown on mount
+  useState(() => {
+    const lastSubmission = localStorage.getItem('lastContactSubmission');
+    if (lastSubmission) {
+      const timePassed = Math.floor((Date.now() - parseInt(lastSubmission)) / 1000);
+      const remainingTime = 120 - timePassed;
+      if (remainingTime > 0) {
+        setCooldown(remainingTime);
+      }
+    }
+  });
+
+  // Countdown timer effect
+  useState(() => { // Using useState instead of useEffect for the initial setup to ensure hydration matches, but actually useEffect is better for the interval.
+    // Changing to useEffect below.
+  });
+
+  // Actually, let's just use useEffect for the interval logic
+  import { useEffect } from 'react'; // Allow me to add this import if missing, but it is standard. 
+  // Wait, I cannot add imports easily inside the component body. I need to be careful with the replace block.
+  // I will assume React is imported or available, but I should look at lines 1-3.
+  // Line 2 has `import { useState } from 'react';`. I need to change that line too.
+
+  // Let's rewrite the component start to include useEffect.
+};
+// RESETTING THOUGHTS: I will use a larger block to handle imports and the logic cleanly.
+
 import { Mail, Phone, MapPin, Linkedin, Github } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useToast } from "@/hooks/use-toast";
 
 const Contact = () => {
@@ -10,7 +48,38 @@ const Contact = () => {
     'bot-field': '' // Custom Honeypot
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [cooldown, setCooldown] = useState(0);
   const { toast } = useToast();
+
+  // Check LocalStorage on Mount & Run Timer
+  useEffect(() => {
+    const checkCooldown = () => {
+      const lastSubmission = localStorage.getItem('lastContactSubmission');
+      if (lastSubmission) {
+        const timePassed = Math.floor((Date.now() - parseInt(lastSubmission)) / 1000);
+        const remainingTime = 120 - timePassed; // 120 seconds = 2 minutes
+
+        if (remainingTime > 0) {
+          setCooldown(remainingTime);
+        } else {
+          setCooldown(0);
+        }
+      }
+    };
+
+    checkCooldown();
+
+    const timer = setInterval(() => {
+      setCooldown((prev) => {
+        if (prev <= 1) {
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -26,6 +95,15 @@ const Contact = () => {
     // 🛡️ Custom Honeypot Check
     if (formData['bot-field']) {
       return; // Silently ignore bots
+    }
+
+    if (cooldown > 0) {
+      toast({
+        title: "Please wait",
+        description: \`You can send another message in \${cooldown} seconds.\`,
+        variant: "destructive"
+      });
+      return;
     }
 
     if (!formData.name || !formData.email || !formData.message) {
@@ -63,6 +141,12 @@ const Contact = () => {
           description: "Thank you for sending me a message. I'll get back to you soon!",
         });
         setFormData({ name: '', email: '', message: '', 'bot-field': '' });
+        
+        // Start Cooldown
+        const now = Date.now();
+        localStorage.setItem('lastContactSubmission', now.toString());
+        setCooldown(120);
+
       } else {
         throw new Error(result.message || "Failed to send");
       }
@@ -219,10 +303,15 @@ const Contact = () => {
 
               <button
                 type="submit"
-                disabled={isSubmitting}
-                className="w-full px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg text-white font-semibold hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                disabled={isSubmitting || cooldown > 0}
+                className="w-full px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg text-white font-semibold hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:grayscale"
               >
-                {isSubmitting ? 'Sending...' : 'Send Message'}
+                {cooldown > 0 
+                  ? \`Wait \${Math.floor(cooldown / 60)}:\${(cooldown % 60).toString().padStart(2, '0')}s\` 
+                  : isSubmitting 
+                    ? 'Sending...' 
+                    : 'Send Message'
+                }
               </button>
             </form>
           </div>
