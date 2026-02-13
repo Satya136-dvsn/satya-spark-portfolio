@@ -7,27 +7,13 @@ interface HeroProps {
 }
 
 const Hero = ({ delayAnimation = false }: HeroProps) => {
-  const [text, setText] = useState('');
-  const [isProfileClicked, setIsProfileClicked] = useState(false);
-  const fullText = "Electronics & Web Development Enthusiast";
-
+  // Animation delay logic kept for props API compatibility, but unused state removed for performance.
   useEffect(() => {
-    if (delayAnimation) return; // Don't start if delayed
-
-    let index = 0;
-    const timer = setInterval(() => {
-      setText(fullText.slice(0, index));
-      index++;
-      if (index > fullText.length) {
-        clearInterval(timer);
-      }
-    }, 100);
-
-    return () => clearInterval(timer);
+    // Kept to satisfy linter if needed, or can be fully removed. 
+    // For now, removing the heavy interval logic.
   }, [delayAnimation]);
 
   const handleProfileClick = () => {
-    setIsProfileClicked(true);
     // Open the image in a new tab for preview
     window.open('/lovable-uploads/DSC_1452.jpg', '_blank');
   };

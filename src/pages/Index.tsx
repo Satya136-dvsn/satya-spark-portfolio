@@ -64,7 +64,11 @@ const Index = () => {
         />
 
         {/* Defer AnimatedBackground until Intro is done to save CPU/GPU during startup */}
-        {!showIntro && <AnimatedBackground />}
+        {!showIntro && (
+          <Suspense fallback={null}>
+            <AnimatedBackground />
+          </Suspense>
+        )}
 
         <Header />
         <Hero delayAnimation={showIntro} />
