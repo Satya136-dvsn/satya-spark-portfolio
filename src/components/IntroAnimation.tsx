@@ -18,6 +18,8 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
   const originalText = "Duba Venkata Satyanarayana";
 
   useEffect(() => {
+    let cleanupCanvas: (() => void) | undefined;
+
     // 1. Matrix/Tron Rain Effect
     const canvas = canvasRef.current;
     if (canvas) {
@@ -83,7 +85,7 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
           window.addEventListener('resize', handleResize);
 
           // Cleanup inside the conditional block
-          var cleanupCanvas = () => {
+          cleanupCanvas = () => {
             cancelAnimationFrame(animationFrameId);
             window.removeEventListener('resize', handleResize);
           };
@@ -122,7 +124,7 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
 
     return () => {
       // Cleanup Canvas
-      if (typeof cleanupCanvas === 'function') cleanupCanvas();
+      if (cleanupCanvas) cleanupCanvas();
 
       // Cleanup Timers
       clearTimeout(logoTimer);

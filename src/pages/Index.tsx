@@ -2,9 +2,8 @@ import { useEffect, useState, lazy, Suspense } from 'react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
-import IntroAnimation from '../components/IntroAnimation';
-
 // Lazy load below-the-fold components
+const IntroAnimation = lazy(() => import('../components/IntroAnimation'));
 const About = lazy(() => import('../components/About'));
 const AnimatedBackground = lazy(() => import('../components/AnimatedBackground')); // Heavy Canvas
 const Experience = lazy(() => import('../components/Experience'));
@@ -49,7 +48,11 @@ const Index = () => {
   return (
     <>
       {/* Intro Animation - shows only on first visit */}
-      {showIntro && <IntroAnimation onComplete={handleIntroComplete} />}
+      {showIntro && (
+        <Suspense fallback={null}>
+          <IntroAnimation onComplete={handleIntroComplete} />
+        </Suspense>
+      )}
 
       {/* Main Content - Dark theme only */}
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white relative overflow-x-hidden animate-fade-in">
