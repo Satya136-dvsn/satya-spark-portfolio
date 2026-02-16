@@ -25,8 +25,6 @@ const Hero = ({ delayAnimation = false }: HeroProps) => {
       title: "📄 Resume Download Started!",
       description: "Thank you for your interest. The resume will open in a new tab.",
     });
-    // Track download (you can add analytics here)
-    console.log('Resume downloaded at:', new Date().toISOString());
   };
 
   return (
@@ -77,7 +75,7 @@ const Hero = ({ delayAnimation = false }: HeroProps) => {
 
             {/* Quick Tech Stack */}
             <div className="pt-8 border-t border-white/5 mt-8 max-w-xl mx-auto lg:mx-0">
-              <p className="text-sm text-gray-500 mb-4 font-medium uppercase tracking-wider">Tech Stack</p>
+              <p className="text-sm text-gray-400 mb-4 font-medium uppercase tracking-wider">Tech Stack</p>
               <div className="flex flex-wrap justify-center lg:justify-start gap-2">
                 {['Java', 'Spring Boot', 'React', 'AWS', 'Python', 'SQL', 'Verilog', 'FPGA', 'Arduino'].map((tech) => (
                   <span key={tech} className="px-3 py-1.5 bg-white/5 hover:bg-white/10 rounded-lg text-xs md:text-sm text-gray-300 border border-white/10 transition-colors cursor-default">

@@ -92,7 +92,7 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
     }
 
     // 2. Logo Animation
-    setTimeout(() => setShowLogo(true), 100);
+    const logoTimer = setTimeout(() => setShowLogo(true), 100);
 
     // 3. Decryption Text Animation
     let iteration = 0;
@@ -118,11 +118,16 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
     }, 30);
 
     // 4. Show Button
-    setTimeout(() => setShowButton(true), 2500);
+    const buttonTimer = setTimeout(() => setShowButton(true), 2500);
 
     return () => {
+      // Cleanup Canvas
       if (typeof cleanupCanvas === 'function') cleanupCanvas();
+
+      // Cleanup Timers
+      clearTimeout(logoTimer);
       clearInterval(textInterval);
+      clearTimeout(buttonTimer);
     };
   }, []);
 

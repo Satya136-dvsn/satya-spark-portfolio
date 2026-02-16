@@ -1,0 +1,25 @@
+{
+    "name": "Satya Portfolio",
+    "short_name": "Satya",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#050511",
+    "theme_color": "#050511",
+    "icons": [
+        {
+            "src": "/favicon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml"
+        },
+        {
+            "src": "/lovable-uploads/c51f92f6-acbc-4922-996a-d8b6eebdbddc.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/lovable-uploads/c51f92f6-acbc-4922-996a-d8b6eebdbddc.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
