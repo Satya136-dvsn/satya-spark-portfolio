@@ -18,19 +18,18 @@ const Footer = lazy(() => import('../components/Footer'));
 
 const Index = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [showIntro, setShowIntro] = useState(false);
 
-  useEffect(() => {
-    // Check if this is the first visit in this session AND if we are on Desktop
-    // Mobile users get instant access to improve LCP scores
+  // Synchronous initialization to prevent flash and ensure correct initial state
+  const [showIntro, setShowIntro] = useState(() => {
     const hasVisited = sessionStorage.getItem('portfolio-session-visited');
     const isMobile = window.innerWidth < 768;
 
     if (!hasVisited && !isMobile) {
-      setShowIntro(true);
       sessionStorage.setItem('portfolio-session-visited', 'true');
+      return true;
     }
-  }, []);
+    return false;
+  });
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -49,7 +48,14 @@ const Index = () => {
     <>
       {/* Intro Animation - shows only on first visit */}
       {showIntro && (
-        <Suspense fallback={null}>
+        <Suspense
+          fallback={
+            <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#050511]">
+              <div className="w-28 h-28 md:w-40 md:h-40 rounded-full bg-slate-900/50 border border-white/10 animate-pulse mb-8"></div>
+              <div className="h-8 w-64 bg-slate-800/50 rounded animate-pulse"></div>
+            </div>
+          }
+        >
           <IntroAnimation onComplete={handleIntroComplete} />
         </Suspense>
       )}
@@ -66,12 +72,10 @@ const Index = () => {
           }}
         />
 
-        {/* Defer AnimatedBackground until Intro is done to save CPU/GPU during startup */}
-        {!showIntro && (
-          <Suspense fallback={null}>
-            <AnimatedBackground />
-          </Suspense>
-        )}
+        {/* Render AnimatedBackground in parallel (Lazy loaded) */}
+        <Suspense fallback={null}>
+          <AnimatedBackground />
+        </Suspense>
 
         <Header />
         <Hero delayAnimation={showIntro} />
