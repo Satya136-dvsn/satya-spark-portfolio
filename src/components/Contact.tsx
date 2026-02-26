@@ -214,6 +214,7 @@ const Contact = () => {
                   name="name"
                   value={formData.name}
                   onChange={handleInputChange}
+                  maxLength={100}
                   className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent"
                   placeholder="Your Name"
                   required
@@ -230,6 +231,8 @@ const Contact = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
+                  maxLength={254}
+                  pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
                   className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent"
                   placeholder="your.email@example.com"
                   required
@@ -246,6 +249,7 @@ const Contact = () => {
                   rows={4}
                   value={formData.message}
                   onChange={handleInputChange}
+                  maxLength={2000}
                   className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent resize-none"
                   placeholder="Your message..."
                   required
