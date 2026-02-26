@@ -176,57 +176,76 @@ const Projects = () => {
           </div>
         )}
 
-        {/* Project Details Modal — Compact, card-matched design */}
+        {/* Project Details Modal — Premium Glassmorphic Design */}
         <Dialog open={!!selectedProject} onOpenChange={(open) => !open && setSelectedProject(null)}>
-          <DialogContent className="sm:max-w-[480px] bg-white/10 backdrop-blur-xl border-white/20 rounded-2xl text-white p-5 max-h-[85vh] overflow-y-auto">
+          <DialogContent className="sm:max-w-[520px] p-0 bg-transparent border-0 shadow-none overflow-visible">
             {selectedProject && (
-              <>
-                <DialogHeader className="space-y-1">
-                  <div className="flex items-center gap-2">
-                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-semibold border ${selectedProject.status === 'Completed' ? 'bg-green-500/20 text-green-400 border-green-500/30' : 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30'}`}>{selectedProject.status}</span>
-                    <span className="px-2 py-0.5 rounded-full text-[10px] bg-purple-500/20 text-purple-300 border border-purple-400/30">{selectedProject.category}</span>
-                  </div>
-                  <DialogTitle className="text-lg font-bold text-white leading-snug">
-                    {selectedProject.title}
-                  </DialogTitle>
-                  <DialogDescription className="text-xs text-gray-400">
-                    {selectedProject.period}
-                  </DialogDescription>
-                </DialogHeader>
+              <div className="relative">
+                {/* Glow border effect */}
+                <div className="absolute -inset-[1px] bg-gradient-to-br from-purple-500/50 via-blue-500/30 to-pink-500/50 rounded-2xl blur-[2px]" />
 
-                <div className="space-y-3 pt-2">
-                  <p className="text-gray-300 text-sm leading-relaxed">
-                    {selectedProject.description}
-                  </p>
+                {/* Main glass container */}
+                <div className="relative bg-slate-900/80 backdrop-blur-2xl rounded-2xl border border-white/10 overflow-hidden">
+                  {/* Top gradient accent bar */}
+                  <div className="h-1 bg-gradient-to-r from-purple-500 via-blue-500 to-pink-500" />
 
-                  {selectedProject.impact && (
-                    <div className="flex items-start gap-2 p-2 bg-green-500/10 border border-green-500/20 rounded-lg">
-                      <span className="text-green-400 text-xs">✓</span>
-                      <p className="text-green-300 text-xs font-medium">{selectedProject.impact}</p>
+                  <div className="p-6 space-y-4">
+                    {/* Header */}
+                    <DialogHeader className="space-y-2">
+                      <div className="flex items-center gap-2">
+                        <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${selectedProject.status === 'Completed' ? 'bg-green-500/20 text-green-400 border border-green-500/30 shadow-[0_0_8px_rgba(34,197,94,0.2)]' : 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 shadow-[0_0_8px_rgba(234,179,8,0.2)]'}`}>{selectedProject.status}</span>
+                        <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-purple-500/20 text-purple-300 border border-purple-400/30">{selectedProject.category}</span>
+                      </div>
+                      <DialogTitle className="text-xl font-bold text-white leading-snug">
+                        {selectedProject.title}
+                      </DialogTitle>
+                      <DialogDescription className="text-xs text-gray-400 font-medium">
+                        {selectedProject.period}
+                      </DialogDescription>
+                    </DialogHeader>
+
+                    {/* Description — frosted glass card */}
+                    <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/5">
+                      <p className="text-gray-300 text-sm leading-relaxed">
+                        {selectedProject.description}
+                      </p>
                     </div>
-                  )}
 
-                  <div className="flex flex-wrap gap-1.5">
-                    {selectedProject.tech.map((tech) => (
-                      <span key={tech} className="px-2 py-1 bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-400/30 rounded-lg text-xs text-purple-300">
-                        {tech}
-                      </span>
-                    ))}
+                    {/* Impact — accent glow card */}
+                    {selectedProject.impact && (
+                      <div className="relative">
+                        <div className="absolute -inset-[0.5px] bg-gradient-to-r from-green-500/30 to-emerald-500/30 rounded-xl blur-[1px]" />
+                        <div className="relative flex items-start gap-2.5 p-3 bg-green-500/5 backdrop-blur-sm rounded-xl border border-green-500/10">
+                          <div className="w-2 h-2 rounded-full bg-green-500 mt-1 shrink-0 shadow-[0_0_6px_rgba(34,197,94,0.5)]" />
+                          <p className="text-green-300 text-xs font-medium leading-relaxed">{selectedProject.impact}</p>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Tech badges — gradient style matching cards */}
+                    <div className="flex flex-wrap gap-1.5">
+                      {selectedProject.tech.map((tech) => (
+                        <span key={tech} className="px-3 py-1 bg-gradient-to-r from-purple-500/15 to-pink-500/15 border border-purple-400/20 rounded-full text-xs text-purple-200 font-medium hover:border-purple-400/40 hover:shadow-[0_0_8px_rgba(168,85,247,0.15)] transition-all duration-300">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* CTA Button */}
+                    {selectedProject.github && (
+                      <a
+                        href={selectedProject.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full inline-flex justify-center items-center gap-2 px-5 py-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white rounded-xl text-sm font-semibold transition-all duration-300 shadow-lg shadow-purple-500/20 hover:shadow-purple-500/40 hover:-translate-y-0.5 group"
+                      >
+                        <Github className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                        View Source Code
+                      </a>
+                    )}
                   </div>
-
-                  {selectedProject.github && (
-                    <a
-                      href={selectedProject.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full inline-flex justify-center items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-xl text-sm font-semibold transition-all shadow-lg shadow-purple-500/25 group"
-                    >
-                      <Github className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                      View Source Code
-                    </a>
-                  )}
                 </div>
-              </>
+              </div>
             )}
           </DialogContent>
         </Dialog>
