@@ -93,7 +93,7 @@ const Awards = () => {
           {awards.map((award, index) => (
             <div
               key={index}
-              className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 group flex flex-col h-full"
+              className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 hover:-translate-y-1 hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300 group flex flex-col h-full"
             >
               <div className="flex items-center justify-between mb-4">
                 <div className="text-4xl">{award.icon}</div>
@@ -142,7 +142,7 @@ const Awards = () => {
             {leadership.map((role, index) => (
               <div
                 key={index}
-                className="bg-black/40 backdrop-blur-xl rounded-xl p-5 border border-purple-500/20 hover:border-purple-500/40 hover:scale-105 transition-all duration-300 shadow-lg"
+                className="bg-black/40 backdrop-blur-xl rounded-xl p-5 border border-purple-500/20 hover:border-purple-500/40 hover:-translate-y-1 hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300 shadow-lg"
               >
                 <h4 className="text-lg font-bold text-white mb-2">{role.role}</h4>
 
@@ -171,7 +171,7 @@ const Awards = () => {
             {workshops.map((workshop, index) => (
               <div
                 key={index}
-                className="bg-white/5 backdrop-blur-lg rounded-xl p-4 border border-white/10 hover:scale-105 transition-transform duration-300 flex flex-col h-full"
+                className="bg-white/5 backdrop-blur-lg rounded-xl p-4 border border-white/10 hover:-translate-y-1 hover:shadow-xl hover:shadow-purple-500/10 transition-transform duration-300 flex flex-col h-full"
               >
                 <h4 className="text-lg font-semibold text-white mb-1">{workshop.name}</h4>
                 <p className="text-purple-300 text-sm font-medium mb-2">{workshop.event}</p>

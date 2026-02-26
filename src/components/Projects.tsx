@@ -121,7 +121,7 @@ const Projects = () => {
             <div key={index} onClick={() => setSelectedProject(project)}>
               {/* Wrapped in a button-like div to handle interaction, but using State driven Dialog below */}
               <div
-                className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 group cursor-pointer flex flex-col h-full"
+                className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 hover:-translate-y-1 hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300 group cursor-pointer flex flex-col h-full"
               >
                 <div className="flex justify-between items-start mb-4">
                   <h3 className="text-xl font-bold text-white group-hover:text-purple-400 transition-colors duration-300 line-clamp-2">

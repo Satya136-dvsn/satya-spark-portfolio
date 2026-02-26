@@ -7,7 +7,7 @@ const About = () => {
 
       <div className="grid md:grid-cols-2 gap-12 items-center">
         <div className="space-y-6">
-          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 hover:scale-105 transition-transform duration-300">
+          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 hover:-translate-y-1 hover:shadow-xl hover:shadow-purple-500/10 transition-transform duration-300">
             <h3 className="text-2xl font-bold mb-4 text-purple-400">Education</h3>
             <div className="space-y-3">
               <h4 className="text-xl font-semibold">Bachelor of Technology</h4>
@@ -17,7 +17,7 @@ const About = () => {
             </div>
           </div>
 
-          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 hover:scale-105 transition-transform duration-300">
+          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 hover:-translate-y-1 hover:shadow-xl hover:shadow-purple-500/10 transition-transform duration-300">
             <h3 className="text-2xl font-bold mb-4 text-pink-400">Location</h3>
             <p className="text-gray-300">Visakhapatnam, India</p>
             <p className="text-gray-400">+91 8639796150</p>
@@ -44,7 +44,7 @@ const About = () => {
             </div>
           </div>
 
-          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 hover:scale-105 transition-transform duration-300">
+          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 hover:-translate-y-1 hover:shadow-xl hover:shadow-purple-500/10 transition-transform duration-300">
             <h3 className="text-2xl font-bold mb-4 text-purple-400">Leadership</h3>
             <p className="text-gray-300 text-sm mb-1">• Student President – ELEKTRA 2K25</p>
             <p className="text-gray-300 text-sm mb-1">• NSS Unit-2 Coordinator (2023–2025)</p>

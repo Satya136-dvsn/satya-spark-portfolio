@@ -1,107 +1,72 @@
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
 
 const AnimatedBackground = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    // Mobile Performance: Disable canvas entirely on mobile to hit 100% Performance Score
-    // Using a static background (via CSS) is enough for mobile.
-    if (window.innerWidth < 768) return;
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const particles: Array<{
-      x: number;
-      y: number;
-      vx: number;
-      vy: number;
-      size: number;
-      opacity: number;
-    }> = [];
-
-    // Create particles (Desktop only)
-    const particleCount = 50;
-
-    for (let i = 0; i < particleCount; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        size: Math.random() * 2 + 1,
-        opacity: Math.random() * 0.5 + 0.2,
-      });
-    }
-
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      particles.forEach((particle, index) => {
-        particle.x += particle.vx;
-        particle.y += particle.vy;
-
-        if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
-        if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
-
-        ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(168, 85, 247, ${particle.opacity})`;
-        ctx.fill();
-
-        // Draw connections
-        particles.slice(index + 1).forEach(otherParticle => {
-          const dx = particle.x - otherParticle.x;
-          const dy = particle.y - otherParticle.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-
-          if (distance < 100) {
-            ctx.beginPath();
-            ctx.moveTo(particle.x, particle.y);
-            ctx.lineTo(otherParticle.x, otherParticle.y);
-            ctx.strokeStyle = `rgba(168, 85, 247, ${0.1 * (1 - distance / 100)})`;
-            ctx.stroke();
-          }
-        });
-      });
-
-      requestAnimationFrame(animate);
-    };
-
-    animate();
-
-    const handleResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    setMounted(true);
   }, []);
 
-  // Return null on mobile to ensure no DOM elements are created
-  // The useEffect above will handle the logic, but we also want to avoid rendering the canvas element itself
-  // However, since we're using useEffect for the check, better to just hide it via CSS or conditional rendering
-  // A cleaner React way:
-
+  // Skip on mobile for performance
   if (typeof window !== 'undefined' && window.innerWidth < 768) {
     return null;
   }
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0"
-      style={{ background: 'transparent' }}
-      aria-hidden="true"
-    />
+    <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden="true">
+      {/* Base dark gradient */}
+      <div className="absolute inset-0 bg-[#050511]" />
+
+      {/* Animated gradient orbs */}
+      <div
+        className={`absolute top-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full transition-opacity duration-[2000ms] ${mounted ? 'opacity-100' : 'opacity-0'}`}
+        style={{
+          background: 'radial-gradient(circle, rgba(124,58,237,0.15) 0%, transparent 70%)',
+          animation: 'drift1 25s ease-in-out infinite',
+        }}
+      />
+      <div
+        className={`absolute top-[30%] right-[-15%] w-[700px] h-[700px] rounded-full transition-opacity duration-[2000ms] ${mounted ? 'opacity-100' : 'opacity-0'}`}
+        style={{
+          background: 'radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 70%)',
+          animation: 'drift2 30s ease-in-out infinite',
+        }}
+      />
+      <div
+        className={`absolute bottom-[-20%] left-[20%] w-[500px] h-[500px] rounded-full transition-opacity duration-[2000ms] ${mounted ? 'opacity-100' : 'opacity-0'}`}
+        style={{
+          background: 'radial-gradient(circle, rgba(236,72,153,0.1) 0%, transparent 70%)',
+          animation: 'drift3 20s ease-in-out infinite',
+        }}
+      />
+
+      {/* Subtle noise/grain overlay for depth */}
+      <div className="absolute inset-0 opacity-[0.03]" style={{
+        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+      }} />
+
+      {/* CSS Keyframes */}
+      <style>{`
+        @keyframes drift1 {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          25% { transform: translate(80px, 40px) scale(1.1); }
+          50% { transform: translate(40px, 80px) scale(0.95); }
+          75% { transform: translate(-30px, 50px) scale(1.05); }
+        }
+        @keyframes drift2 {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          25% { transform: translate(-60px, 30px) scale(1.05); }
+          50% { transform: translate(-30px, -50px) scale(1.1); }
+          75% { transform: translate(40px, -20px) scale(0.95); }
+        }
+        @keyframes drift3 {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          33% { transform: translate(50px, -40px) scale(1.1); }
+          66% { transform: translate(-40px, -20px) scale(0.9); }
+        }
+      `}</style>
+    </div>
   );
 };
 
