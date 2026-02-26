@@ -176,65 +176,54 @@ const Projects = () => {
           </div>
         )}
 
-        {/* Project Details Modal */}
+        {/* Project Details Modal — Compact, card-matched design */}
         <Dialog open={!!selectedProject} onOpenChange={(open) => !open && setSelectedProject(null)}>
-          <DialogContent className="sm:max-w-[700px] bg-[#0a0a1f]/95 backdrop-blur-xl border-purple-500/20 text-white max-h-[90vh] overflow-y-auto">
+          <DialogContent className="sm:max-w-[480px] bg-white/10 backdrop-blur-xl border-white/20 rounded-2xl text-white p-5 max-h-[85vh] overflow-y-auto">
             {selectedProject && (
               <>
-                <DialogHeader>
-                  <div className="flex gap-2 mb-2">
-                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-semibold border ${selectedProject.status === 'Completed' ? 'bg-green-500/10 text-green-400 border-green-500/30' : 'bg-yellow-500/10 text-yellow-400 border-yellow-500/30'}`}>{selectedProject.status}</span>
-                    <span className="px-2 py-0.5 rounded-full text-[10px] bg-blue-500/10 text-blue-300 border border-blue-500/20">{selectedProject.category}</span>
+                <DialogHeader className="space-y-1">
+                  <div className="flex items-center gap-2">
+                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-semibold border ${selectedProject.status === 'Completed' ? 'bg-green-500/20 text-green-400 border-green-500/30' : 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30'}`}>{selectedProject.status}</span>
+                    <span className="px-2 py-0.5 rounded-full text-[10px] bg-purple-500/20 text-purple-300 border border-purple-400/30">{selectedProject.category}</span>
                   </div>
-                  <DialogTitle className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                  <DialogTitle className="text-lg font-bold text-white leading-snug">
                     {selectedProject.title}
                   </DialogTitle>
-                  <DialogDescription className="text-gray-400">
+                  <DialogDescription className="text-xs text-gray-400">
                     {selectedProject.period}
                   </DialogDescription>
                 </DialogHeader>
 
-                <div className="space-y-6 pt-4">
-                  <div className="space-y-2">
-                    <h4 className="text-sm font-semibold text-purple-400 uppercase tracking-wider">Project Overview</h4>
-                    <div className="text-gray-200 leading-relaxed text-sm bg-white/5 p-4 rounded-lg border border-white/10">
-                      {selectedProject.description}
-                    </div>
-                  </div>
+                <div className="space-y-3 pt-2">
+                  <p className="text-gray-300 text-sm leading-relaxed">
+                    {selectedProject.description}
+                  </p>
 
                   {selectedProject.impact && (
-                    <div className="space-y-2">
-                      <h4 className="text-sm font-semibold text-green-400 uppercase tracking-wider">Key Impact</h4>
-                      <div className="flex items-start gap-2 bg-green-500/5 p-3 rounded-lg border border-green-500/10">
-                        <div className="w-1.5 h-1.5 rounded-full bg-green-500 mt-2 shrink-0" />
-                        <p className="text-gray-200 text-sm">{selectedProject.impact}</p>
-                      </div>
+                    <div className="flex items-start gap-2 p-2 bg-green-500/10 border border-green-500/20 rounded-lg">
+                      <span className="text-green-400 text-xs">✓</span>
+                      <p className="text-green-300 text-xs font-medium">{selectedProject.impact}</p>
                     </div>
                   )}
 
-                  <div className="space-y-3">
-                    <h4 className="text-sm font-semibold text-blue-400 uppercase tracking-wider">Technologies Used</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {selectedProject.tech.map((tech) => (
-                        <span key={tech} className="px-3 py-1 bg-blue-500/10 border border-blue-500/20 text-blue-300 rounded-full text-sm">
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {selectedProject.tech.map((tech) => (
+                      <span key={tech} className="px-2 py-1 bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-400/30 rounded-lg text-xs text-purple-300">
+                        {tech}
+                      </span>
+                    ))}
                   </div>
 
                   {selectedProject.github && (
-                    <div className="pt-4 border-t border-white/10">
-                      <a
-                        href={selectedProject.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-full inline-flex justify-center items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg font-semibold transition-all shadow-lg shadow-purple-500/25 group"
-                      >
-                        <Github className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                        View Source Code
-                      </a>
-                    </div>
+                    <a
+                      href={selectedProject.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full inline-flex justify-center items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-xl text-sm font-semibold transition-all shadow-lg shadow-purple-500/25 group"
+                    >
+                      <Github className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                      View Source Code
+                    </a>
                   )}
                 </div>
               </>
