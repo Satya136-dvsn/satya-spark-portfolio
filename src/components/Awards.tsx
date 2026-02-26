@@ -82,18 +82,22 @@ const Awards = () => {
   ];
 
   return (
-    <section id="awards" className="py-12 px-6 relative z-10 min-h-screen">
+    <section id="awards" className="py-24 px-6 relative z-10">
       <div className="container mx-auto max-w-7xl">
-        <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent leading-tight py-2">
-          Awards & Recognition
-        </h2>
+        <div className="text-center mb-16">
+          <p className="text-purple-400 text-sm font-semibold tracking-[0.2em] uppercase mb-3">Achievements</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-white">
+            Awards & Recognition
+          </h2>
+          <div className="mt-4 mx-auto w-16 h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full" />
+        </div>
 
         {/* Awards Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
           {awards.map((award, index) => (
             <div
               key={index}
-              className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 hover:-translate-y-1 hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300 group flex flex-col h-full"
+              className="bg-white/[0.03] backdrop-blur-sm rounded-2xl p-6 border border-white/[0.06] hover:-translate-y-1 hover:border-purple-500/20 hover:shadow-xl hover:shadow-purple-500/5 transition-all duration-300 group flex flex-col h-full"
             >
               <div className="flex items-center justify-between mb-4">
                 <div className="text-4xl">{award.icon}</div>

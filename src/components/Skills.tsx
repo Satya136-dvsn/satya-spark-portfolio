@@ -34,22 +34,24 @@ const Skills = () => {
       <div className="container mx-auto max-w-6xl">
         {/* Section Header */}
         <div className="text-center mb-12 sm:mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent leading-tight">
+          <p className="text-purple-400 text-sm font-semibold tracking-[0.2em] uppercase mb-3">What I work with</p>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">
             Technical Competencies
           </h2>
-          <p className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto">
+          <div className="mt-4 mx-auto w-16 h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full" />
+          <p className="text-gray-500 text-sm mt-4 max-w-2xl mx-auto">
             A comprehensive toolkit built through hands-on experience and continuous learning
           </p>
         </div>
 
         {/* Skills Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
           {skillCategories.map((category, categoryIndex) => {
             const Icon = category.icon;
             return (
               <div
                 key={categoryIndex}
-                className="group bg-white/5 backdrop-blur-sm rounded-xl p-5 border border-white/10 hover:border-purple-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/10 hover:-translate-y-1"
+                className="group bg-white/[0.03] backdrop-blur-sm rounded-xl p-5 border border-white/[0.06] hover:border-purple-500/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-purple-500/5"
               >
                 {/* Category Header */}
                 <div className="flex items-center gap-3 mb-4 border-b border-white/10 pb-3">
