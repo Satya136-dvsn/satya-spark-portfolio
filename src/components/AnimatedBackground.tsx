@@ -114,10 +114,10 @@ const AnimatedBackground = () => {
 
     // Blob centers (normalized 0-1)
     const blobs = [
-      { cx: 0.2, cy: 0.25, r: 0.35, color: [124, 58, 237], speed: 0.4 },   // purple
-      { cx: 0.75, cy: 0.3, r: 0.3, color: [59, 130, 246], speed: 0.3 },     // blue
-      { cx: 0.5, cy: 0.75, r: 0.3, color: [168, 85, 247], speed: 0.35 },    // violet
-      { cx: 0.3, cy: 0.7, r: 0.25, color: [236, 72, 153], speed: 0.45 },    // pink
+      { cx: 0.2, cy: 0.25, r: 0.32, color: [124, 58, 237], speed: 0.4 },   // purple
+      { cx: 0.75, cy: 0.3, r: 0.28, color: [59, 130, 246], speed: 0.3 },    // blue
+      { cx: 0.5, cy: 0.72, r: 0.28, color: [139, 92, 246], speed: 0.35 },   // violet
+      { cx: 0.3, cy: 0.65, r: 0.22, color: [99, 102, 241], speed: 0.45 },   // indigo
     ];
 
     const animate = () => {
@@ -151,8 +151,8 @@ const AnimatedBackground = () => {
 
         const grad = ctx.createRadialGradient(finalX, finalY, 0, finalX, finalY, morphR);
         const [cr, cg, cb] = blob.color;
-        grad.addColorStop(0, `rgba(${cr},${cg},${cb},0.18)`);
-        grad.addColorStop(0.4, `rgba(${cr},${cg},${cb},0.06)`);
+        grad.addColorStop(0, `rgba(${cr},${cg},${cb},0.12)`);
+        grad.addColorStop(0.4, `rgba(${cr},${cg},${cb},0.04)`);
         grad.addColorStop(1, `rgba(${cr},${cg},${cb},0)`);
 
         ctx.fillStyle = grad;
