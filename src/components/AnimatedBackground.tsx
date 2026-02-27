@@ -43,8 +43,6 @@ class Noise {
 interface Star {
   x: number;
   y: number;
-  vx: number; // For interactive physics
-  vy: number;
   z: number; // parallax depth
   radius: number;
   pulse: number;
@@ -89,8 +87,6 @@ const AnimatedBackground = () => {
         stars.push({
           x: Math.random() * w,
           y: Math.random() * h,
-          vx: 0,
-          vy: 0,
           z: 0.2 + Math.random() * 0.8, // depth
           radius: 0.8 + Math.random() * 1.5,
           pulse: Math.random() * Math.PI * 2,
@@ -173,7 +169,7 @@ const AnimatedBackground = () => {
       ctx.fillStyle = spotGrad;
       ctx.fillRect(0, 0, w, h);
 
-      // ── Layer 4: Interactive Constellation with parallax and physics ──
+      // ── Layer 4: Constellation with parallax ──
       const mouseWX = m.x * w;
       const mouseWY = m.y * h;
 
@@ -183,63 +179,32 @@ const AnimatedBackground = () => {
         const a = stars[i];
         a.pulse += a.pulseSpeed;
 
-        // Base parallax
-        const baseAx = a.x + (m.x - 0.5) * 40 * a.z;
-        const baseAy = a.y + (m.y - 0.5) * 40 * a.z;
-
-        // Interactive physics (repulsion from mouse)
-        const dxA = mouseWX - baseAx;
-        const dyA = mouseWY - baseAy;
-        const distA = Math.sqrt(dxA * dxA + dyA * dyA);
-
-        if (distA < 200 && distA > 0) {
-          const force = (200 - distA) / 200;
-          a.vx -= (dxA / distA) * force * 0.5;
-          a.vy -= (dyA / distA) * force * 0.5;
-        }
-
-        // Spring back to center
-        a.vx += (0 - a.vx) * 0.05;
-        a.vy += (0 - a.vy) * 0.05;
-
-        // Apply friction
-        a.vx *= 0.9;
-        a.vy *= 0.9;
-
-        const ax = baseAx + a.vx;
-        const ay = baseAy + a.vy;
+        // Parallax position for this star based on depth
+        const ax = a.x + (m.x - 0.5) * 40 * a.z;
+        const ay = a.y + (m.y - 0.5) * 40 * a.z;
 
         for (let j = i + 1; j < stars.length; j++) {
           const b = stars[j];
-
-          const baseBx = b.x + (m.x - 0.5) * 40 * b.z;
-          const baseBy = b.y + (m.y - 0.5) * 40 * b.z;
-          const bx = baseBx + b.vx;
-          const by = baseBy + b.vy;
+          const bx = b.x + (m.x - 0.5) * 40 * b.z;
+          const by = b.y + (m.y - 0.5) * 40 * b.z;
 
           const dx = ax - bx;
           const dy = ay - by;
           const dist = Math.sqrt(dx * dx + dy * dy);
 
           if (dist < CONNECT_DIST) {
-            // Connection line — strong glow near mouse
+            // Connection line — glow near mouse
             const midX = (ax + bx) / 2;
             const midY = (ay + by) / 2;
             const mouseDist = Math.sqrt((mouseWX - midX) ** 2 + (mouseWY - midY) ** 2);
-            // Increased mouse glow influence
-            const mouseGlow = Math.max(0, 1 - mouseDist / 300);
-            const alpha = (1 - dist / CONNECT_DIST) * (0.05 + mouseGlow * 0.4);
+            const mouseGlow = Math.max(0, 1 - mouseDist / 250);
+            const alpha = (1 - dist / CONNECT_DIST) * (0.04 + mouseGlow * 0.2);
 
             ctx.beginPath();
             ctx.moveTo(ax, ay);
             ctx.lineTo(bx, by);
-            // Shift to a brighter, warmer purple near mouse
-            if (mouseGlow > 0.2) {
-              ctx.strokeStyle = `rgba(168,85,247,${alpha * 1.5})`;
-            } else {
-              ctx.strokeStyle = `rgba(139,92,246,${alpha})`;
-            }
-            ctx.lineWidth = 0.5 + mouseGlow * 2;
+            ctx.strokeStyle = `rgba(139,92,246,${alpha})`;
+            ctx.lineWidth = 0.5 + mouseGlow * 1.5;
             ctx.stroke();
           }
         }
@@ -247,27 +212,25 @@ const AnimatedBackground = () => {
 
       // Draw star dots
       for (const star of stars) {
-        const baseSx = star.x + (m.x - 0.5) * 40 * star.z;
-        const baseSy = star.y + (m.y - 0.5) * 40 * star.z;
-        const sx = baseSx + star.vx;
-        const sy = baseSy + star.vy;
+        const sx = star.x + (m.x - 0.5) * 40 * star.z;
+        const sy = star.y + (m.y - 0.5) * 40 * star.z;
 
-        // Mouse proximity for glow
+        // Mouse proximity
         const dx = mouseWX - sx;
         const dy = mouseWY - sy;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        const mouseProx = Math.max(0, 1 - dist / 250);
+        const mouseProx = Math.max(0, 1 - dist / 200);
 
         // Pulse
         const pulse = Math.sin(star.pulse) * 0.3 + 0.7;
-        const r = star.radius * pulse + mouseProx * 2.5;
+        const r = star.radius * pulse + mouseProx * 2;
         const alpha = (0.3 + mouseProx * 0.7) * pulse;
 
-        // Stronger Glow near mouse
+        // Glow
         if (mouseProx > 0.1) {
-          const glowR = r * (6 + mouseProx * 4);
+          const glowR = r * 5;
           const glow = ctx.createRadialGradient(sx, sy, 0, sx, sy, glowR);
-          glow.addColorStop(0, `rgba(168,85,247,${mouseProx * 0.5})`);
+          glow.addColorStop(0, `rgba(139,92,246,${mouseProx * 0.3})`);
           glow.addColorStop(1, 'rgba(139,92,246,0)');
           ctx.beginPath();
           ctx.arc(sx, sy, glowR, 0, Math.PI * 2);
@@ -278,7 +241,7 @@ const AnimatedBackground = () => {
         // Core
         ctx.beginPath();
         ctx.arc(sx, sy, r, 0, Math.PI * 2);
-        ctx.fillStyle = mouseProx > 0.5 ? `rgba(230,210,255,${alpha})` : `rgba(200,180,255,${alpha})`;
+        ctx.fillStyle = `rgba(200,180,255,${alpha})`;
         ctx.fill();
       }
 
