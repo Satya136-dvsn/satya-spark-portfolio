@@ -61,7 +61,7 @@ const Index = () => {
       )}
 
       {/* Main Content - Dark theme only */}
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white relative overflow-x-hidden animate-fade-in">
+      <div className="min-h-screen bg-transparent text-white relative overflow-x-hidden animate-fade-in">
         {/* Custom cursor - hidden on mobile */}
         <div
           className="hidden md:block fixed w-4 h-4 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full pointer-events-none z-40 mix-blend-difference transition-transform duration-100 ease-out"

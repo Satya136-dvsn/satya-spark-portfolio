@@ -1,93 +1,63 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 
-// ── Simplex noise (compact implementation) ──
-class SimplexNoise {
-  private perm: number[];
-  private grad3: number[][];
-
-  constructor(seed = Math.random()) {
-    this.grad3 = [
-      [1, 1, 0], [-1, 1, 0], [1, -1, 0], [-1, -1, 0],
-      [1, 0, 1], [-1, 0, 1], [1, 0, -1], [-1, 0, -1],
-      [0, 1, 1], [0, -1, 1], [0, 1, -1], [0, -1, -1],
-    ];
+// ── Smooth Simplex Noise ──
+class Noise {
+  private p: number[];
+  private G3 = [
+    [1, 1, 0], [-1, 1, 0], [1, -1, 0], [-1, -1, 0],
+    [1, 0, 1], [-1, 0, 1], [1, 0, -1], [-1, 0, -1],
+    [0, 1, 1], [0, -1, 1], [0, 1, -1], [0, -1, -1],
+  ];
+  constructor() {
     const p: number[] = [];
     for (let i = 0; i < 256; i++) p[i] = i;
-    // Seed-based shuffle
-    let s = seed * 256;
     for (let i = 255; i > 0; i--) {
-      s = (s * 16807) % 2147483647;
-      const j = Math.floor((s / 2147483647) * (i + 1));
+      const j = Math.floor(Math.random() * (i + 1));
       [p[i], p[j]] = [p[j], p[i]];
     }
-    this.perm = new Array(512);
-    for (let i = 0; i < 512; i++) this.perm[i] = p[i & 255];
+    this.p = [...p, ...p];
   }
-
-  noise2D(x: number, y: number): number {
-    const F2 = 0.5 * (Math.sqrt(3) - 1);
-    const G2 = (3 - Math.sqrt(3)) / 6;
-    const s = (x + y) * F2;
-    const i = Math.floor(x + s);
-    const j = Math.floor(y + s);
-    const t = (i + j) * G2;
-    const X0 = i - t, Y0 = j - t;
-    const x0 = x - X0, y0 = y - Y0;
-    const i1 = x0 > y0 ? 1 : 0;
-    const j1 = x0 > y0 ? 0 : 1;
-    const x1 = x0 - i1 + G2, y1 = y0 - j1 + G2;
-    const x2 = x0 - 1 + 2 * G2, y2 = y0 - 1 + 2 * G2;
+  noise(x: number, y: number): number {
+    const F = 0.5 * (Math.sqrt(3) - 1);
+    const G = (3 - Math.sqrt(3)) / 6;
+    const s = (x + y) * F;
+    const i = Math.floor(x + s), j = Math.floor(y + s);
+    const t = (i + j) * G;
+    const x0 = x - (i - t), y0 = y - (j - t);
+    const [i1, j1] = x0 > y0 ? [1, 0] : [0, 1];
+    const x1 = x0 - i1 + G, y1 = y0 - j1 + G;
+    const x2 = x0 - 1 + 2 * G, y2 = y0 - 1 + 2 * G;
     const ii = i & 255, jj = j & 255;
-
-    let n0 = 0, n1 = 0, n2 = 0;
+    const dot = (g: number[], a: number, b: number) => g[0] * a + g[1] * b;
+    let n = 0;
     let t0 = 0.5 - x0 * x0 - y0 * y0;
-    if (t0 >= 0) {
-      t0 *= t0;
-      const gi = this.perm[ii + this.perm[jj]] % 12;
-      n0 = t0 * t0 * (this.grad3[gi][0] * x0 + this.grad3[gi][1] * y0);
-    }
+    if (t0 > 0) { t0 *= t0; n += t0 * t0 * dot(this.G3[this.p[ii + this.p[jj]] % 12], x0, y0); }
     let t1 = 0.5 - x1 * x1 - y1 * y1;
-    if (t1 >= 0) {
-      t1 *= t1;
-      const gi = this.perm[ii + i1 + this.perm[jj + j1]] % 12;
-      n1 = t1 * t1 * (this.grad3[gi][0] * x1 + this.grad3[gi][1] * y1);
-    }
+    if (t1 > 0) { t1 *= t1; n += t1 * t1 * dot(this.G3[this.p[ii + i1 + this.p[jj + j1]] % 12], x1, y1); }
     let t2 = 0.5 - x2 * x2 - y2 * y2;
-    if (t2 >= 0) {
-      t2 *= t2;
-      const gi = this.perm[ii + 1 + this.perm[jj + 1]] % 12;
-      n2 = t2 * t2 * (this.grad3[gi][0] * x2 + this.grad3[gi][1] * y2);
-    }
-    return 70 * (n0 + n1 + n2);
+    if (t2 > 0) { t2 *= t2; n += t2 * t2 * dot(this.G3[this.p[ii + 1 + this.p[jj + 1]] % 12], x2, y2); }
+    return 70 * n;
   }
 }
 
-// ── Flow field particle ──
-interface FlowParticle {
+interface Star {
   x: number;
   y: number;
-  prevX: number;
-  prevY: number;
-  speed: number;
-  hue: number;
-  life: number;
-  maxLife: number;
-  alpha: number;
+  z: number; // parallax depth
+  radius: number;
+  pulse: number;
+  pulseSpeed: number;
 }
 
 const AnimatedBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const trailRef = useRef<HTMLCanvasElement>(null);
-  const animationRef = useRef<number>(0);
-  const mouseRef = useRef({ x: -9999, y: -9999, active: false });
+  const animRef = useRef<number>(0);
+  const mouseRef = useRef({ x: 0.5, y: 0.5, targetX: 0.5, targetY: 0.5 });
   const [isMobile, setIsMobile] = useState(false);
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
-    mouseRef.current = { x: e.clientX, y: e.clientY, active: true };
-  }, []);
-
-  const handleMouseLeave = useCallback(() => {
-    mouseRef.current = { x: -9999, y: -9999, active: false };
+    mouseRef.current.targetX = e.clientX / window.innerWidth;
+    mouseRef.current.targetY = e.clientY / window.innerHeight;
   }, []);
 
   useEffect(() => {
@@ -97,208 +67,213 @@ const AnimatedBackground = () => {
     }
 
     const canvas = canvasRef.current;
-    const trailCanvas = trailRef.current;
-    if (!canvas || !trailCanvas) return;
-    const ctx = canvas.getContext('2d');
-    const trailCtx = trailCanvas.getContext('2d');
-    if (!ctx || !trailCtx) return;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d', { alpha: false });
+    if (!ctx) return;
 
-    let width = window.innerWidth;
-    let height = window.innerHeight;
+    let w = window.innerWidth;
+    let h = window.innerHeight;
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const noise = new SimplexNoise(42);
+    const noise = new Noise();
 
-    // Flow field config
-    const FIELD_SCALE = 0.002;
-    const PARTICLE_COUNT = 300;
-    const VORTEX_RADIUS = 250;
-    const VORTEX_STRENGTH = 3;
+    // Stars for constellation layer
+    let stars: Star[] = [];
+    const STAR_COUNT = 120;
+    const CONNECT_DIST = 120;
 
-    let particles: FlowParticle[] = [];
+    const initStars = () => {
+      stars = [];
+      for (let i = 0; i < STAR_COUNT; i++) {
+        stars.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          z: 0.2 + Math.random() * 0.8, // depth
+          radius: 0.8 + Math.random() * 1.5,
+          pulse: Math.random() * Math.PI * 2,
+          pulseSpeed: 0.01 + Math.random() * 0.02,
+        });
+      }
+    };
 
     const resize = () => {
-      width = window.innerWidth;
-      height = window.innerHeight;
-      for (const c of [canvas, trailCanvas]) {
-        c.width = width * dpr;
-        c.height = height * dpr;
-        c.style.width = `${width}px`;
-        c.style.height = `${height}px`;
-      }
+      w = window.innerWidth;
+      h = window.innerHeight;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      canvas.style.width = `${w}px`;
+      canvas.style.height = `${h}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      trailCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      initParticles();
-    };
-
-    const initParticles = () => {
-      particles = [];
-      for (let i = 0; i < PARTICLE_COUNT; i++) {
-        particles.push(createParticle());
-      }
-    };
-
-    const createParticle = (): FlowParticle => {
-      const x = Math.random() * width;
-      const y = Math.random() * height;
-      return {
-        x, y,
-        prevX: x,
-        prevY: y,
-        speed: 0.5 + Math.random() * 1.5,
-        hue: 250 + Math.random() * 60, // purple to blue range
-        life: 0,
-        maxLife: 200 + Math.random() * 300,
-        alpha: 0,
-      };
+      initStars();
     };
 
     resize();
     window.addEventListener('resize', resize);
     window.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseleave', handleMouseLeave);
 
     let time = 0;
 
-    const getFlowAngle = (x: number, y: number, t: number): number => {
-      // Base flow from noise
-      let angle = noise.noise2D(x * FIELD_SCALE, y * FIELD_SCALE + t) * Math.PI * 2;
-
-      // Cursor vortex distortion
-      const mx = mouseRef.current.x;
-      const my = mouseRef.current.y;
-      if (mouseRef.current.active) {
-        const dx = x - mx;
-        const dy = y - my;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < VORTEX_RADIUS && dist > 1) {
-          const influence = (1 - dist / VORTEX_RADIUS);
-          const vortexAngle = Math.atan2(dy, dx) + Math.PI / 2; // perpendicular = swirl
-          angle += (vortexAngle - angle) * influence * influence * VORTEX_STRENGTH;
-        }
-      }
-
-      return angle;
-    };
+    // Blob centers (normalized 0-1)
+    const blobs = [
+      { cx: 0.2, cy: 0.25, r: 0.35, color: [124, 58, 237], speed: 0.4 },   // purple
+      { cx: 0.75, cy: 0.3, r: 0.3, color: [59, 130, 246], speed: 0.3 },     // blue
+      { cx: 0.5, cy: 0.75, r: 0.3, color: [168, 85, 247], speed: 0.35 },    // violet
+      { cx: 0.3, cy: 0.7, r: 0.25, color: [236, 72, 153], speed: 0.45 },    // pink
+    ];
 
     const animate = () => {
-      time += 0.003;
+      time += 0.004;
 
-      // Fade trail canvas (creates the trail effect)
-      trailCtx.fillStyle = 'rgba(3,0,20,0.025)';
-      trailCtx.fillRect(0, 0, width, height);
+      // Smooth mouse interpolation
+      const m = mouseRef.current;
+      m.x += (m.targetX - m.x) * 0.05;
+      m.y += (m.targetY - m.y) * 0.05;
 
-      // Clear main compositing canvas
-      ctx.clearRect(0, 0, width, height);
-
-      // ── Draw base background ──
+      // ── Layer 1: Black base ──
       ctx.fillStyle = '#030014';
-      ctx.fillRect(0, 0, width, height);
+      ctx.fillRect(0, 0, w, h);
 
-      // ── Draw topographic contour lines ──
-      drawContours(ctx, width, height, time, noise);
+      // ── Layer 2: Morphing gradient blobs with mouse parallax ──
+      for (const blob of blobs) {
+        // Animate center with noise
+        const bx = (blob.cx + noise.noise(time * blob.speed, blob.cy * 10) * 0.08) * w;
+        const by = (blob.cy + noise.noise(blob.cx * 10, time * blob.speed) * 0.08) * h;
 
-      // ── Cursor glow ──
-      if (mouseRef.current.active) {
-        const mx = mouseRef.current.x;
-        const my = mouseRef.current.y;
+        // Mouse parallax offset
+        const parallaxX = (m.x - 0.5) * w * 0.06;
+        const parallaxY = (m.y - 0.5) * h * 0.06;
 
-        // Vortex glow
-        const vGrad = ctx.createRadialGradient(mx, my, 0, mx, my, VORTEX_RADIUS);
-        vGrad.addColorStop(0, 'rgba(139,92,246,0.1)');
-        vGrad.addColorStop(0.3, 'rgba(124,58,237,0.05)');
-        vGrad.addColorStop(1, 'rgba(0,0,0,0)');
-        ctx.fillStyle = vGrad;
-        ctx.fillRect(0, 0, width, height);
+        const finalX = bx + parallaxX;
+        const finalY = by + parallaxY;
+        const r = blob.r * Math.min(w, h);
 
-        // Vortex ring
-        ctx.beginPath();
-        ctx.arc(mx, my, VORTEX_RADIUS * 0.3, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(139,92,246,0.06)';
-        ctx.lineWidth = 1;
-        ctx.stroke();
+        // Morphing radius with noise
+        const morphR = r * (1 + noise.noise(time * 0.8 + blob.cx * 5, blob.cy * 5) * 0.2);
+
+        const grad = ctx.createRadialGradient(finalX, finalY, 0, finalX, finalY, morphR);
+        const [cr, cg, cb] = blob.color;
+        grad.addColorStop(0, `rgba(${cr},${cg},${cb},0.18)`);
+        grad.addColorStop(0.4, `rgba(${cr},${cg},${cb},0.06)`);
+        grad.addColorStop(1, `rgba(${cr},${cg},${cb},0)`);
+
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, w, h);
       }
 
-      // ── Update & draw particles on trail canvas ──
-      for (let i = 0; i < particles.length; i++) {
-        const p = particles[i];
-        p.prevX = p.x;
-        p.prevY = p.y;
-        p.life++;
+      // ── Layer 3: Mouse spotlight ──
+      const spotX = m.x * w;
+      const spotY = m.y * h;
+      const spotGrad = ctx.createRadialGradient(spotX, spotY, 0, spotX, spotY, 300);
+      spotGrad.addColorStop(0, 'rgba(139,92,246,0.08)');
+      spotGrad.addColorStop(0.5, 'rgba(124,58,237,0.03)');
+      spotGrad.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = spotGrad;
+      ctx.fillRect(0, 0, w, h);
 
-        // Fade in/out
-        const lifeRatio = p.life / p.maxLife;
-        if (lifeRatio < 0.1) {
-          p.alpha = lifeRatio / 0.1;
-        } else if (lifeRatio > 0.85) {
-          p.alpha = (1 - lifeRatio) / 0.15;
-        } else {
-          p.alpha = 1;
+      // ── Layer 4: Constellation with parallax ──
+      const mouseWX = m.x * w;
+      const mouseWY = m.y * h;
+
+      // Update & draw connections
+      ctx.lineCap = 'round';
+      for (let i = 0; i < stars.length; i++) {
+        const a = stars[i];
+        a.pulse += a.pulseSpeed;
+
+        // Parallax position for this star based on depth
+        const ax = a.x + (m.x - 0.5) * 40 * a.z;
+        const ay = a.y + (m.y - 0.5) * 40 * a.z;
+
+        for (let j = i + 1; j < stars.length; j++) {
+          const b = stars[j];
+          const bx = b.x + (m.x - 0.5) * 40 * b.z;
+          const by = b.y + (m.y - 0.5) * 40 * b.z;
+
+          const dx = ax - bx;
+          const dy = ay - by;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < CONNECT_DIST) {
+            // Connection line — glow near mouse
+            const midX = (ax + bx) / 2;
+            const midY = (ay + by) / 2;
+            const mouseDist = Math.sqrt((mouseWX - midX) ** 2 + (mouseWY - midY) ** 2);
+            const mouseGlow = Math.max(0, 1 - mouseDist / 250);
+            const alpha = (1 - dist / CONNECT_DIST) * (0.04 + mouseGlow * 0.2);
+
+            ctx.beginPath();
+            ctx.moveTo(ax, ay);
+            ctx.lineTo(bx, by);
+            ctx.strokeStyle = `rgba(139,92,246,${alpha})`;
+            ctx.lineWidth = 0.5 + mouseGlow * 1.5;
+            ctx.stroke();
+          }
         }
+      }
 
-        // Get flow direction
-        const angle = getFlowAngle(p.x, p.y, time);
-        p.x += Math.cos(angle) * p.speed;
-        p.y += Math.sin(angle) * p.speed;
+      // Draw star dots
+      for (const star of stars) {
+        const sx = star.x + (m.x - 0.5) * 40 * star.z;
+        const sy = star.y + (m.y - 0.5) * 40 * star.z;
 
-        // Near-cursor speed boost + color shift
-        const dx = mouseRef.current.x - p.x;
-        const dy = mouseRef.current.y - p.y;
+        // Mouse proximity
+        const dx = mouseWX - sx;
+        const dy = mouseWY - sy;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        const mouseProximity = mouseRef.current.active ? Math.max(0, 1 - dist / VORTEX_RADIUS) : 0;
+        const mouseProx = Math.max(0, 1 - dist / 200);
 
-        // Draw trail line on trail canvas
-        const trailAlpha = p.alpha * (0.15 + mouseProximity * 0.6);
-        const saturation = 70 + mouseProximity * 30;
-        const lightness = 60 + mouseProximity * 25;
-        trailCtx.beginPath();
-        trailCtx.moveTo(p.prevX, p.prevY);
-        trailCtx.lineTo(p.x, p.y);
-        trailCtx.strokeStyle = `hsla(${p.hue + mouseProximity * 30}, ${saturation}%, ${lightness}%, ${trailAlpha})`;
-        trailCtx.lineWidth = 1 + mouseProximity * 2;
-        trailCtx.lineCap = 'round';
-        trailCtx.stroke();
+        // Pulse
+        const pulse = Math.sin(star.pulse) * 0.3 + 0.7;
+        const r = star.radius * pulse + mouseProx * 2;
+        const alpha = (0.3 + mouseProx * 0.7) * pulse;
 
-        // Glow dot at head
-        if (mouseProximity > 0.3) {
-          trailCtx.beginPath();
-          trailCtx.arc(p.x, p.y, 2 + mouseProximity * 3, 0, Math.PI * 2);
-          trailCtx.fillStyle = `hsla(${p.hue + 20}, 90%, 75%, ${mouseProximity * 0.5})`;
-          trailCtx.fill();
+        // Glow
+        if (mouseProx > 0.1) {
+          const glowR = r * 5;
+          const glow = ctx.createRadialGradient(sx, sy, 0, sx, sy, glowR);
+          glow.addColorStop(0, `rgba(139,92,246,${mouseProx * 0.3})`);
+          glow.addColorStop(1, 'rgba(139,92,246,0)');
+          ctx.beginPath();
+          ctx.arc(sx, sy, glowR, 0, Math.PI * 2);
+          ctx.fillStyle = glow;
+          ctx.fill();
         }
 
-        // Respawn dead or OOB particles
-        if (p.life >= p.maxLife || p.x < -20 || p.x > width + 20 || p.y < -20 || p.y > height + 20) {
-          particles[i] = createParticle();
+        // Core
+        ctx.beginPath();
+        ctx.arc(sx, sy, r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(200,180,255,${alpha})`;
+        ctx.fill();
+      }
+
+      // ── Layer 5: Subtle dot grid ──
+      const gridStep = 60;
+      const dotR = 0.6;
+      for (let gx = gridStep; gx < w; gx += gridStep) {
+        for (let gy = gridStep; gy < h; gy += gridStep) {
+          const dx = mouseWX - gx;
+          const dy = mouseWY - gy;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          const proximity = Math.max(0, 1 - dist / 200);
+          const dotAlpha = 0.03 + proximity * 0.12;
+
+          ctx.beginPath();
+          ctx.arc(gx, gy, dotR + proximity * 1.5, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(139,92,246,${dotAlpha})`;
+          ctx.fill();
         }
       }
 
-      // ── Composite: background + trails overlay ──
-      ctx.globalAlpha = 1;
-      ctx.drawImage(trailCanvas, 0, 0, width, height);
-
-      // ── Subtle grid ──
-      ctx.strokeStyle = 'rgba(255,255,255,0.008)';
-      ctx.lineWidth = 0.5;
-      const gridSize = 80;
-      for (let x = 0; x < width; x += gridSize) {
-        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, height); ctx.stroke();
-      }
-      for (let y = 0; y < height; y += gridSize) {
-        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(width, y); ctx.stroke();
-      }
-
-      animationRef.current = requestAnimationFrame(animate);
+      animRef.current = requestAnimationFrame(animate);
     };
 
     animate();
 
     return () => {
-      cancelAnimationFrame(animationRef.current);
+      cancelAnimationFrame(animRef.current);
       window.removeEventListener('resize', resize);
       window.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseleave', handleMouseLeave);
     };
-  }, [handleMouseMove, handleMouseLeave]);
+  }, [handleMouseMove]);
 
   if (isMobile) {
     return (
@@ -306,9 +281,9 @@ const AnimatedBackground = () => {
         <div className="absolute inset-0 bg-[#030014]" />
         <div className="absolute inset-0" style={{
           background: `
-            radial-gradient(ellipse at 25% 25%, rgba(124,58,237,0.2) 0%, transparent 50%),
-            radial-gradient(ellipse at 75% 60%, rgba(59,130,246,0.15) 0%, transparent 50%),
-            radial-gradient(ellipse at 50% 80%, rgba(236,72,153,0.1) 0%, transparent 50%)
+            radial-gradient(ellipse at 20% 25%, rgba(124,58,237,0.18) 0%, transparent 50%),
+            radial-gradient(ellipse at 75% 30%, rgba(59,130,246,0.14) 0%, transparent 50%),
+            radial-gradient(ellipse at 50% 75%, rgba(168,85,247,0.1) 0%, transparent 50%)
           `,
         }} />
       </div>
@@ -316,53 +291,12 @@ const AnimatedBackground = () => {
   }
 
   return (
-    <div className="fixed inset-0 z-0 pointer-events-none" aria-hidden="true">
-      {/* Trail canvas — persistent, slowly fading */}
-      <canvas
-        ref={trailRef}
-        className="absolute inset-0"
-        style={{ width: '100%', height: '100%' }}
-      />
-      {/* Main compositing canvas */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0"
-        style={{ width: '100%', height: '100%' }}
-      />
-    </div>
+    <canvas
+      ref={canvasRef}
+      className="fixed inset-0 z-0 pointer-events-none"
+      aria-hidden="true"
+    />
   );
 };
-
-// ── Topographic contour lines — morphing terrain map ──
-function drawContours(ctx: CanvasRenderingContext2D, width: number, height: number, time: number, noise: SimplexNoise) {
-  ctx.save();
-  ctx.strokeStyle = 'rgba(124,58,237,0.03)';
-  ctx.lineWidth = 0.8;
-
-  const step = 30;
-  const levels = 8;
-
-  for (let level = 0; level < levels; level++) {
-    const threshold = level / levels;
-    ctx.beginPath();
-    let hasPoints = false;
-
-    for (let x = 0; x < width; x += step) {
-      for (let y = 0; y < height; y += step) {
-        const n = (noise.noise2D(x * 0.003 + time * 0.5, y * 0.003 + time * 0.3) + 1) / 2;
-        if (Math.abs(n - threshold) < 0.03) {
-          if (!hasPoints) {
-            ctx.moveTo(x, y);
-            hasPoints = true;
-          } else {
-            ctx.lineTo(x, y);
-          }
-        }
-      }
-    }
-    if (hasPoints) ctx.stroke();
-  }
-  ctx.restore();
-}
 
 export default AnimatedBackground;
