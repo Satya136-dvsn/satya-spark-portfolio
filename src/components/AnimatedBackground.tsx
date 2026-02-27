@@ -1,136 +1,214 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const AnimatedBackground = () => {
-  const [mounted, setMounted] = useState(false);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const animationRef = useRef<number>(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    if (typeof window !== 'undefined' && window.innerWidth < 768) {
+      setIsMobile(true);
+      return;
+    }
+
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    const resize = () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+      ctx.scale(dpr, dpr);
+    };
+    resize();
+    window.addEventListener('resize', resize);
+
+    // Aurora ribbon configuration
+    const ribbons: Ribbon[] = [];
+    const ribbonCount = 5;
+
+    interface RibbonPoint {
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+    }
+
+    interface Ribbon {
+      points: RibbonPoint[];
+      color1: string;
+      color2: string;
+      width: number;
+      speed: number;
+      offset: number;
+    }
+
+    const colors = [
+      { c1: 'rgba(124,58,237,', c2: 'rgba(99,102,241,' },   // purple → indigo
+      { c1: 'rgba(59,130,246,', c2: 'rgba(124,58,237,' },    // blue → purple
+      { c1: 'rgba(168,85,247,', c2: 'rgba(236,72,153,' },    // violet → pink
+      { c1: 'rgba(99,102,241,', c2: 'rgba(59,130,246,' },    // indigo → blue
+      { c1: 'rgba(236,72,153,', c2: 'rgba(168,85,247,' },    // pink → violet
+    ];
+
+    for (let i = 0; i < ribbonCount; i++) {
+      const pointCount = 6;
+      const points: RibbonPoint[] = [];
+      const yBase = height * (0.15 + Math.random() * 0.7);
+
+      for (let j = 0; j < pointCount; j++) {
+        points.push({
+          x: (width / (pointCount - 1)) * j,
+          y: yBase + (Math.random() - 0.5) * height * 0.3,
+          vx: (Math.random() - 0.5) * 0.3,
+          vy: (Math.random() - 0.5) * 0.15,
+        });
+      }
+
+      const colorPair = colors[i % colors.length];
+      ribbons.push({
+        points,
+        color1: colorPair.c1,
+        color2: colorPair.c2,
+        width: 120 + Math.random() * 200,
+        speed: 0.3 + Math.random() * 0.4,
+        offset: Math.random() * Math.PI * 2,
+      });
+    }
+
+    let time = 0;
+
+    const drawRibbon = (ribbon: Ribbon) => {
+      const { points, color1, color2, width: ribbonWidth } = ribbon;
+
+      // Update points with smooth organic motion
+      for (let i = 0; i < points.length; i++) {
+        const p = points[i];
+        p.x += Math.sin(time * ribbon.speed + i * 0.8 + ribbon.offset) * 0.4;
+        p.y += Math.cos(time * ribbon.speed * 0.7 + i * 1.2 + ribbon.offset) * 0.3;
+
+        // Soft boundary bounce
+        if (p.y < height * 0.05) p.vy += 0.02;
+        if (p.y > height * 0.95) p.vy -= 0.02;
+        p.y += p.vy;
+        p.vy *= 0.99;
+      }
+
+      // Draw the ribbon as a filled bezier path with gradient
+      ctx.save();
+
+      // Create gradient along the ribbon
+      const gradient = ctx.createLinearGradient(0, 0, width, 0);
+      gradient.addColorStop(0, color1 + '0)');
+      gradient.addColorStop(0.2, color1 + '0.06)');
+      gradient.addColorStop(0.5, color2 + '0.09)');
+      gradient.addColorStop(0.8, color1 + '0.06)');
+      gradient.addColorStop(1, color2 + '0)');
+
+      // Top edge
+      ctx.beginPath();
+      ctx.moveTo(points[0].x, points[0].y - ribbonWidth / 2);
+      for (let i = 1; i < points.length; i++) {
+        const prev = points[i - 1];
+        const curr = points[i];
+        const cpx = (prev.x + curr.x) / 2;
+        const cpy1 = prev.y - ribbonWidth / 2;
+        const cpy2 = curr.y - ribbonWidth / 2;
+        ctx.quadraticCurveTo(cpx, (cpy1 + cpy2) / 2, curr.x, cpy2);
+      }
+
+      // Bottom edge (reverse)
+      for (let i = points.length - 1; i >= 0; i--) {
+        const curr = points[i];
+        if (i === points.length - 1) {
+          ctx.lineTo(curr.x, curr.y + ribbonWidth / 2);
+        } else {
+          const next = points[i + 1];
+          const cpx = (next.x + curr.x) / 2;
+          const cpy1 = next.y + ribbonWidth / 2;
+          const cpy2 = curr.y + ribbonWidth / 2;
+          ctx.quadraticCurveTo(cpx, (cpy1 + cpy2) / 2, curr.x, cpy2);
+        }
+      }
+
+      ctx.closePath();
+      ctx.fillStyle = gradient;
+      ctx.filter = `blur(${ribbonWidth * 0.4}px)`;
+      ctx.fill();
+      ctx.filter = 'none';
+      ctx.restore();
+    };
+
+    const animate = () => {
+      time += 0.008;
+      ctx.clearRect(0, 0, width, height);
+
+      // Background
+      ctx.fillStyle = '#030014';
+      ctx.fillRect(0, 0, width, height);
+
+      // Draw each ribbon
+      for (const ribbon of ribbons) {
+        drawRibbon(ribbon);
+      }
+
+      // Overlay: subtle grid
+      ctx.strokeStyle = 'rgba(255,255,255,0.012)';
+      ctx.lineWidth = 1;
+      const gridSize = 80;
+      for (let x = 0; x < width; x += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, height);
+        ctx.stroke();
+      }
+      for (let y = 0; y < height; y += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+        ctx.stroke();
+      }
+
+      animationRef.current = requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    return () => {
+      cancelAnimationFrame(animationRef.current);
+      window.removeEventListener('resize', resize);
+    };
   }, []);
 
-  // Skip on mobile for performance
-  if (typeof window !== 'undefined' && window.innerWidth < 768) {
+  // Mobile: static gradient fallback
+  if (isMobile) {
     return (
       <div className="fixed inset-0 z-0 pointer-events-none" aria-hidden="true">
         <div className="absolute inset-0 bg-[#030014]" />
-        <div className="absolute top-0 left-0 w-full h-[60%]" style={{
-          background: 'radial-gradient(ellipse at 30% 20%, rgba(124,58,237,0.2) 0%, transparent 60%)',
+        <div className="absolute inset-0" style={{
+          background: 'radial-gradient(ellipse at 30% 30%, rgba(124,58,237,0.2) 0%, transparent 50%), radial-gradient(ellipse at 70% 70%, rgba(59,130,246,0.15) 0%, transparent 50%)',
         }} />
       </div>
     );
   }
 
   return (
-    <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden="true">
-      {/* Deep dark base */}
-      <div className="absolute inset-0 bg-[#030014]" />
-
-      {/* Primary gradient orbs — VIVID */}
-      <div
-        className={`absolute transition-opacity duration-[3000ms] ${mounted ? 'opacity-100' : 'opacity-0'}`}
-        style={{
-          top: '-15%',
-          left: '-10%',
-          width: '60vw',
-          height: '60vw',
-          maxWidth: '1000px',
-          maxHeight: '1000px',
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(124,58,237,0.35) 0%, rgba(124,58,237,0.1) 35%, transparent 65%)',
-          animation: 'drift1 20s ease-in-out infinite',
-        }}
-      />
-      <div
-        className={`absolute transition-opacity duration-[3000ms] ${mounted ? 'opacity-100' : 'opacity-0'}`}
-        style={{
-          top: '10%',
-          right: '-15%',
-          width: '55vw',
-          height: '55vw',
-          maxWidth: '900px',
-          maxHeight: '900px',
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(59,130,246,0.3) 0%, rgba(59,130,246,0.08) 35%, transparent 65%)',
-          animation: 'drift2 25s ease-in-out infinite',
-        }}
-      />
-      <div
-        className={`absolute transition-opacity duration-[3000ms] ${mounted ? 'opacity-100' : 'opacity-0'}`}
-        style={{
-          bottom: '-20%',
-          left: '15%',
-          width: '50vw',
-          height: '50vw',
-          maxWidth: '800px',
-          maxHeight: '800px',
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(236,72,153,0.25) 0%, rgba(236,72,153,0.06) 35%, transparent 65%)',
-          animation: 'drift3 18s ease-in-out infinite',
-        }}
-      />
-      {/* Secondary center glow — ties sections together */}
-      <div
-        className={`absolute transition-opacity duration-[3000ms] ${mounted ? 'opacity-100' : 'opacity-0'}`}
-        style={{
-          top: '40%',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: '70vw',
-          height: '50vw',
-          maxWidth: '1200px',
-          maxHeight: '800px',
-          borderRadius: '50%',
-          background: 'radial-gradient(ellipse, rgba(168,85,247,0.12) 0%, transparent 60%)',
-          animation: 'drift1 30s ease-in-out infinite reverse',
-        }}
-      />
-      {/* Bottom-right accent */}
-      <div
-        className={`absolute transition-opacity duration-[3000ms] ${mounted ? 'opacity-100' : 'opacity-0'}`}
-        style={{
-          bottom: '10%',
-          right: '-10%',
-          width: '40vw',
-          height: '40vw',
-          maxWidth: '700px',
-          maxHeight: '700px',
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(99,102,241,0.2) 0%, transparent 55%)',
-          animation: 'drift2 22s ease-in-out infinite reverse',
-        }}
-      />
-
-      {/* Subtle grid pattern */}
-      <div className="absolute inset-0 opacity-[0.015]" style={{
-        backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
-        backgroundSize: '80px 80px',
-      }} />
-
-      {/* Grain texture for depth */}
-      <div className="absolute inset-0 opacity-[0.03]" style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-      }} />
-
-      {/* Keyframes */}
-      <style>{`
-        @keyframes drift1 {
-          0%, 100% { transform: translate(0, 0) scale(1); }
-          25% { transform: translate(80px, 40px) scale(1.1); }
-          50% { transform: translate(30px, 80px) scale(0.95); }
-          75% { transform: translate(-40px, 50px) scale(1.05); }
-        }
-        @keyframes drift2 {
-          0%, 100% { transform: translate(0, 0) scale(1); }
-          25% { transform: translate(-60px, 30px) scale(1.08); }
-          50% { transform: translate(-30px, -50px) scale(1.12); }
-          75% { transform: translate(40px, -20px) scale(0.95); }
-        }
-        @keyframes drift3 {
-          0%, 100% { transform: translate(0, 0) scale(1); }
-          33% { transform: translate(50px, -40px) scale(1.1); }
-          66% { transform: translate(-40px, -20px) scale(0.9); }
-        }
-      `}</style>
-    </div>
+    <canvas
+      ref={canvasRef}
+      className="fixed inset-0 z-0 pointer-events-none"
+      aria-hidden="true"
+      style={{ width: '100%', height: '100%' }}
+    />
   );
 };
 
