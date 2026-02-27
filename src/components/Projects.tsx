@@ -89,30 +89,30 @@ const Projects = () => {
     : projects.filter(p => p.category === activeFilter);
 
   return (
-    <section id="projects" className="py-24 px-6 relative z-10">
-      <div className="container mx-auto max-w-7xl">
-        <div className="text-center mb-12">
-          <p className="text-purple-400 text-sm font-semibold tracking-[0.2em] uppercase mb-3">What I've built</p>
-          <h2 className="text-4xl md:text-5xl font-bold text-white">
+    <section id="projects" className="py-16 px-6 relative z-10">
+      <div className="container mx-auto max-w-6xl">
+        <div className="text-center mb-10">
+          <p className="text-purple-400 text-xs font-semibold tracking-[0.2em] uppercase mb-2">What I've built</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-white">
             Projects
           </h2>
-          <div className="mt-4 mx-auto w-16 h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full" />
+          <div className="mt-3 mx-auto w-12 h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full" />
         </div>
 
         {/* Filter Buttons */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
+        <div className="flex flex-wrap justify-center gap-2.5 mb-10">
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => setActiveFilter(category)}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeFilter === category
-                ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg shadow-purple-500/25'
-                : 'bg-white/10 text-gray-300 border border-white/20 hover:bg-white/20 hover:text-white'
+              className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-300 ${activeFilter === category
+                ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-md shadow-purple-500/20'
+                : 'bg-white/5 text-gray-300 border border-white/10 hover:bg-white/10 hover:text-white'
                 }`}
             >
               {category}
               {activeFilter !== category && (
-                <span className="ml-2 text-xs opacity-60">
+                <span className="ml-1.5 opacity-50">
                   ({category === 'All' ? projects.length : projects.filter(p => p.category === category).length})
                 </span>
               )}
@@ -120,53 +120,53 @@ const Projects = () => {
           ))}
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {filteredProjects.map((project, index) => (
             <div key={index} onClick={() => setSelectedProject(project)}>
               {/* Wrapped in a button-like div to handle interaction, but using State driven Dialog below */}
               <div
-                className="bg-white/[0.03] backdrop-blur-sm rounded-2xl p-6 border border-white/[0.06] hover:-translate-y-1 hover:border-purple-500/20 hover:shadow-xl hover:shadow-purple-500/5 transition-all duration-300 group cursor-pointer flex flex-col h-full"
+                className="bg-white/[0.02] backdrop-blur-sm rounded-xl p-5 border border-white/[0.05] hover:-translate-y-0.5 hover:border-purple-500/30 hover:shadow-lg hover:shadow-purple-500/5 transition-all duration-300 group cursor-pointer flex flex-col h-full"
               >
-                <div className="flex justify-between items-start mb-4">
-                  <h3 className="text-xl font-bold text-white group-hover:text-purple-400 transition-colors duration-300 line-clamp-2">
+                <div className="flex justify-between items-start mb-3">
+                  <h3 className="text-base font-bold text-white group-hover:text-purple-400 transition-colors duration-300 line-clamp-2 pr-2">
                     {project.title}
                   </h3>
-                  <span className={`shrink-0 px-3 py-1 rounded-full text-xs font-semibold ${project.status === 'Completed'
-                    ? 'bg-green-500/20 text-green-400 border border-green-500/30'
-                    : 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30'
+                  <span className={`shrink-0 px-2 py-0.5 rounded-full text-[10px] uppercase tracking-wider font-semibold ${project.status === 'Completed'
+                    ? 'bg-green-500/10 text-green-400 border border-green-500/20'
+                    : 'bg-yellow-500/10 text-yellow-400 border border-yellow-500/20'
                     }`}>
                     {project.status}
                   </span>
                 </div>
 
-                <p className="text-sm text-gray-400 mb-3">{project.period}</p>
-                <p className="text-gray-300 mb-3 leading-relaxed text-sm flex-grow line-clamp-3">{project.description}</p>
+                <p className="text-[11px] text-gray-400 mb-2.5">{project.period}</p>
+                <p className="text-gray-300 mb-3 leading-[1.6] text-[12px] flex-grow line-clamp-3">{project.description}</p>
 
                 {/* Impact metrics */}
                 {project.impact && (
-                  <div className="mb-3 p-2 bg-green-500/10 border border-green-500/20 rounded-lg">
-                    <p className="text-xs text-green-400 font-medium line-clamp-1">✓ {project.impact}</p>
+                  <div className="mb-3 p-2 bg-emerald-500/[0.03] border border-emerald-500/10 rounded-md">
+                    <p className="text-[11px] text-emerald-400/90 font-medium line-clamp-1">✓ {project.impact}</p>
                   </div>
                 )}
 
-                <div className="flex flex-wrap gap-2 mb-4">
+                <div className="flex flex-wrap gap-1.5 mb-3">
                   {project.tech.slice(0, 3).map((tech, techIndex) => (
                     <span
                       key={techIndex}
-                      className="px-2 py-1 bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-400/30 rounded-lg text-xs text-purple-300"
+                      className="px-2 py-0.5 bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-400/20 rounded-md text-[10px] font-medium text-purple-300"
                     >
                       {tech}
                     </span>
                   ))}
                   {project.tech.length > 3 && (
-                    <span className="px-2 py-1 bg-white/5 border border-white/10 rounded-lg text-xs text-gray-400">
+                    <span className="px-2 py-0.5 bg-white/5 border border-white/10 rounded-md text-[10px] text-gray-400">
                       +{project.tech.length - 3}
                     </span>
                   )}
                 </div>
 
-                <div className="mt-auto pt-4 border-t border-white/10 flex justify-center">
-                  <span className="text-purple-300 text-sm group-hover:text-white transition-colors">Click for details</span>
+                <div className="mt-auto pt-3 border-t border-white/5 flex justify-center">
+                  <span className="text-purple-300 text-[11px] font-medium group-hover:text-white transition-colors">Click for details</span>
                 </div>
               </div>
             </div>
