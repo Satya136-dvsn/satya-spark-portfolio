@@ -1,9 +1,31 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
+
+interface Particle {
+  x: number;
+  y: number;
+  baseX: number;
+  baseY: number;
+  vx: number;
+  vy: number;
+  radius: number;
+  color: string;
+  alpha: number;
+}
 
 const AnimatedBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>(0);
+  const mouseRef = useRef({ x: -1000, y: -1000 });
+  const particlesRef = useRef<Particle[]>([]);
   const [isMobile, setIsMobile] = useState(false);
+
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    mouseRef.current = { x: e.clientX, y: e.clientY };
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    mouseRef.current = { x: -1000, y: -1000 };
+  }, []);
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.innerWidth < 768) {
@@ -13,7 +35,6 @@ const AnimatedBackground = () => {
 
     const canvas = canvasRef.current;
     if (!canvas) return;
-
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
@@ -28,143 +49,166 @@ const AnimatedBackground = () => {
       canvas.height = height * dpr;
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
-      ctx.scale(dpr, dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      initParticles();
     };
-    resize();
-    window.addEventListener('resize', resize);
 
-    // Aurora ribbon configuration
-    const ribbons: Ribbon[] = [];
-    const ribbonCount = 5;
+    // Particle system
+    const PARTICLE_COUNT = 80;
+    const CONNECTION_DISTANCE = 150;
+    const MOUSE_RADIUS = 200;
+    const MOUSE_FORCE = 0.08;
 
-    interface RibbonPoint {
-      x: number;
-      y: number;
-      vx: number;
-      vy: number;
-    }
-
-    interface Ribbon {
-      points: RibbonPoint[];
-      color1: string;
-      color2: string;
-      width: number;
-      speed: number;
-      offset: number;
-    }
-
-    const colors = [
-      { c1: 'rgba(124,58,237,', c2: 'rgba(99,102,241,' },   // purple → indigo
-      { c1: 'rgba(59,130,246,', c2: 'rgba(124,58,237,' },    // blue → purple
-      { c1: 'rgba(168,85,247,', c2: 'rgba(236,72,153,' },    // violet → pink
-      { c1: 'rgba(99,102,241,', c2: 'rgba(59,130,246,' },    // indigo → blue
-      { c1: 'rgba(236,72,153,', c2: 'rgba(168,85,247,' },    // pink → violet
+    const particleColors = [
+      'rgba(124,58,237,',   // purple
+      'rgba(99,102,241,',   // indigo
+      'rgba(59,130,246,',   // blue
+      'rgba(168,85,247,',   // violet
+      'rgba(139,92,246,',   // purple-400
     ];
 
-    for (let i = 0; i < ribbonCount; i++) {
-      const pointCount = 6;
-      const points: RibbonPoint[] = [];
-      const yBase = height * (0.15 + Math.random() * 0.7);
-
-      for (let j = 0; j < pointCount; j++) {
-        points.push({
-          x: (width / (pointCount - 1)) * j,
-          y: yBase + (Math.random() - 0.5) * height * 0.3,
+    const initParticles = () => {
+      const particles: Particle[] = [];
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
+        const x = Math.random() * width;
+        const y = Math.random() * height;
+        particles.push({
+          x,
+          y,
+          baseX: x,
+          baseY: y,
           vx: (Math.random() - 0.5) * 0.3,
-          vy: (Math.random() - 0.5) * 0.15,
+          vy: (Math.random() - 0.5) * 0.3,
+          radius: 1.5 + Math.random() * 2,
+          color: particleColors[Math.floor(Math.random() * particleColors.length)],
+          alpha: 0.3 + Math.random() * 0.5,
         });
       }
+      particlesRef.current = particles;
+    };
 
-      const colorPair = colors[i % colors.length];
-      ribbons.push({
-        points,
-        color1: colorPair.c1,
-        color2: colorPair.c2,
-        width: 120 + Math.random() * 200,
-        speed: 0.3 + Math.random() * 0.4,
-        offset: Math.random() * Math.PI * 2,
-      });
-    }
+    resize();
+    window.addEventListener('resize', resize);
+    window.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseleave', handleMouseLeave);
 
     let time = 0;
 
-    const drawRibbon = (ribbon: Ribbon) => {
-      const { points, color1, color2, width: ribbonWidth } = ribbon;
-
-      // Update points with smooth organic motion
-      for (let i = 0; i < points.length; i++) {
-        const p = points[i];
-        p.x += Math.sin(time * ribbon.speed + i * 0.8 + ribbon.offset) * 0.4;
-        p.y += Math.cos(time * ribbon.speed * 0.7 + i * 1.2 + ribbon.offset) * 0.3;
-
-        // Soft boundary bounce
-        if (p.y < height * 0.05) p.vy += 0.02;
-        if (p.y > height * 0.95) p.vy -= 0.02;
-        p.y += p.vy;
-        p.vy *= 0.99;
-      }
-
-      // Draw the ribbon as a filled bezier path with gradient
-      ctx.save();
-
-      // Create gradient along the ribbon
-      const gradient = ctx.createLinearGradient(0, 0, width, 0);
-      gradient.addColorStop(0, color1 + '0)');
-      gradient.addColorStop(0.2, color1 + '0.06)');
-      gradient.addColorStop(0.5, color2 + '0.09)');
-      gradient.addColorStop(0.8, color1 + '0.06)');
-      gradient.addColorStop(1, color2 + '0)');
-
-      // Top edge
-      ctx.beginPath();
-      ctx.moveTo(points[0].x, points[0].y - ribbonWidth / 2);
-      for (let i = 1; i < points.length; i++) {
-        const prev = points[i - 1];
-        const curr = points[i];
-        const cpx = (prev.x + curr.x) / 2;
-        const cpy1 = prev.y - ribbonWidth / 2;
-        const cpy2 = curr.y - ribbonWidth / 2;
-        ctx.quadraticCurveTo(cpx, (cpy1 + cpy2) / 2, curr.x, cpy2);
-      }
-
-      // Bottom edge (reverse)
-      for (let i = points.length - 1; i >= 0; i--) {
-        const curr = points[i];
-        if (i === points.length - 1) {
-          ctx.lineTo(curr.x, curr.y + ribbonWidth / 2);
-        } else {
-          const next = points[i + 1];
-          const cpx = (next.x + curr.x) / 2;
-          const cpy1 = next.y + ribbonWidth / 2;
-          const cpy2 = curr.y + ribbonWidth / 2;
-          ctx.quadraticCurveTo(cpx, (cpy1 + cpy2) / 2, curr.x, cpy2);
-        }
-      }
-
-      ctx.closePath();
-      ctx.fillStyle = gradient;
-      ctx.filter = `blur(${ribbonWidth * 0.4}px)`;
-      ctx.fill();
-      ctx.filter = 'none';
-      ctx.restore();
-    };
-
     const animate = () => {
-      time += 0.008;
+      time += 0.005;
       ctx.clearRect(0, 0, width, height);
 
-      // Background
+      // ── Layer 1: Deep dark base ──
       ctx.fillStyle = '#030014';
       ctx.fillRect(0, 0, width, height);
 
-      // Draw each ribbon
-      for (const ribbon of ribbons) {
-        drawRibbon(ribbon);
+      // ── Layer 2: Aurora glow ribbons (subtle) ──
+      drawAurora(ctx, width, height, time);
+
+      // ── Layer 3: Mouse-following spotlight ──
+      const mx = mouseRef.current.x;
+      const my = mouseRef.current.y;
+      if (mx > 0 && my > 0) {
+        const spotGrad = ctx.createRadialGradient(mx, my, 0, mx, my, 350);
+        spotGrad.addColorStop(0, 'rgba(124,58,237,0.08)');
+        spotGrad.addColorStop(0.4, 'rgba(99,102,241,0.04)');
+        spotGrad.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = spotGrad;
+        ctx.fillRect(0, 0, width, height);
       }
 
-      // Overlay: subtle grid
+      // ── Layer 4: Interactive particles & connections ──
+      const particles = particlesRef.current;
+
+      // Update particles
+      for (const p of particles) {
+        // Gentle autonomous drift
+        p.x += p.vx + Math.sin(time * 2 + p.baseX * 0.01) * 0.15;
+        p.y += p.vy + Math.cos(time * 2 + p.baseY * 0.01) * 0.15;
+
+        // Mouse interaction — push away
+        const dx = mx - p.x;
+        const dy = my - p.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < MOUSE_RADIUS && dist > 0) {
+          const force = (MOUSE_RADIUS - dist) / MOUSE_RADIUS * MOUSE_FORCE;
+          p.vx -= (dx / dist) * force;
+          p.vy -= (dy / dist) * force;
+        }
+
+        // Gentle pull back to base position
+        p.vx += (p.baseX - p.x) * 0.001;
+        p.vy += (p.baseY - p.y) * 0.001;
+
+        // Friction
+        p.vx *= 0.98;
+        p.vy *= 0.98;
+
+        // Wrap around edges
+        if (p.x < -50) p.x = width + 50;
+        if (p.x > width + 50) p.x = -50;
+        if (p.y < -50) p.y = height + 50;
+        if (p.y > height + 50) p.y = -50;
+      }
+
+      // Draw connections
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const a = particles[i];
+          const b = particles[j];
+          const dx = a.x - b.x;
+          const dy = a.y - b.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < CONNECTION_DISTANCE) {
+            // Lines glow brighter near mouse
+            const midX = (a.x + b.x) / 2;
+            const midY = (a.y + b.y) / 2;
+            const mouseDist = Math.sqrt((mx - midX) ** 2 + (my - midY) ** 2);
+            const mouseInfluence = Math.max(0, 1 - mouseDist / 300);
+            const baseAlpha = (1 - dist / CONNECTION_DISTANCE) * 0.08;
+            const alpha = baseAlpha + mouseInfluence * 0.15;
+
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.strokeStyle = `rgba(124,58,237,${alpha})`;
+            ctx.lineWidth = 0.5 + mouseInfluence * 1;
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Draw particles
+      for (const p of particles) {
+        // Glow when near mouse
+        const dx = mx - p.x;
+        const dy = my - p.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const mouseProximity = Math.max(0, 1 - dist / MOUSE_RADIUS);
+
+        // Outer glow
+        if (mouseProximity > 0) {
+          const glowRadius = p.radius * (3 + mouseProximity * 6);
+          const glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, glowRadius);
+          glow.addColorStop(0, p.color + (0.15 + mouseProximity * 0.3) + ')');
+          glow.addColorStop(1, p.color + '0)');
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, glowRadius, 0, Math.PI * 2);
+          ctx.fillStyle = glow;
+          ctx.fill();
+        }
+
+        // Core dot
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius + mouseProximity * 1.5, 0, Math.PI * 2);
+        ctx.fillStyle = p.color + (p.alpha + mouseProximity * 0.5) + ')';
+        ctx.fill();
+      }
+
+      // ── Layer 5: Very subtle grid ──
       ctx.strokeStyle = 'rgba(255,255,255,0.012)';
-      ctx.lineWidth = 1;
+      ctx.lineWidth = 0.5;
       const gridSize = 80;
       for (let x = 0; x < width; x += gridSize) {
         ctx.beginPath();
@@ -187,10 +231,11 @@ const AnimatedBackground = () => {
     return () => {
       cancelAnimationFrame(animationRef.current);
       window.removeEventListener('resize', resize);
+      window.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseleave', handleMouseLeave);
     };
-  }, []);
+  }, [handleMouseMove, handleMouseLeave]);
 
-  // Mobile: static gradient fallback
   if (isMobile) {
     return (
       <div className="fixed inset-0 z-0 pointer-events-none" aria-hidden="true">
@@ -205,11 +250,62 @@ const AnimatedBackground = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 z-0 pointer-events-none"
+      className="fixed inset-0 z-0"
       aria-hidden="true"
-      style={{ width: '100%', height: '100%' }}
+      style={{ width: '100%', height: '100%', pointerEvents: 'none' }}
     />
   );
 };
+
+// Aurora glow helper — soft flowing ribbons behind particles
+function drawAurora(ctx: CanvasRenderingContext2D, width: number, height: number, time: number) {
+  const ribbons = [
+    { yBase: 0.25, color: 'rgba(124,58,237,', opacity: 0.07, speed: 0.8, amplitude: 0.15 },
+    { yBase: 0.5, color: 'rgba(59,130,246,', opacity: 0.05, speed: 0.6, amplitude: 0.12 },
+    { yBase: 0.7, color: 'rgba(236,72,153,', opacity: 0.04, speed: 0.9, amplitude: 0.1 },
+  ];
+
+  for (const ribbon of ribbons) {
+    const points = 8;
+    const ribbonWidth = height * 0.25;
+
+    ctx.save();
+    ctx.beginPath();
+
+    // Top edge
+    const startY = height * ribbon.yBase;
+    ctx.moveTo(-50, startY + Math.sin(time * ribbon.speed) * height * ribbon.amplitude);
+    for (let i = 1; i <= points; i++) {
+      const x = (width / points) * i + 50;
+      const y = startY + Math.sin(time * ribbon.speed + i * 0.8) * height * ribbon.amplitude;
+      const cpx = (width / points) * (i - 0.5);
+      const cpy = startY + Math.sin(time * ribbon.speed + (i - 0.5) * 0.8) * height * ribbon.amplitude * 1.2;
+      ctx.quadraticCurveTo(cpx, cpy, x, y);
+    }
+
+    // Bottom edge (reverse with offset)
+    for (let i = points; i >= 0; i--) {
+      const x = (width / points) * i - 50;
+      const y = startY + ribbonWidth + Math.sin(time * ribbon.speed * 0.7 + i * 0.6) * height * ribbon.amplitude * 0.8;
+      const cpx = (width / points) * (i + 0.5);
+      const cpy = startY + ribbonWidth + Math.sin(time * ribbon.speed * 0.7 + (i + 0.5) * 0.6) * height * ribbon.amplitude;
+      ctx.quadraticCurveTo(cpx, cpy, x, y);
+    }
+
+    ctx.closePath();
+
+    const gradient = ctx.createLinearGradient(0, 0, width, 0);
+    gradient.addColorStop(0, ribbon.color + '0)');
+    gradient.addColorStop(0.3, ribbon.color + ribbon.opacity + ')');
+    gradient.addColorStop(0.7, ribbon.color + ribbon.opacity + ')');
+    gradient.addColorStop(1, ribbon.color + '0)');
+
+    ctx.fillStyle = gradient;
+    ctx.filter = 'blur(60px)';
+    ctx.fill();
+    ctx.filter = 'none';
+    ctx.restore();
+  }
+}
 
 export default AnimatedBackground;
