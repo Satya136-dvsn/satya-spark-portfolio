@@ -19,12 +19,12 @@ const projects = [
     github: "https://github.com/Satya136-dvsn/budgetwise_tracker_ai_driven",
     demo: "",
     category: "Backend Systems",
-    fullDescription: "Aerofisc is a comprehensive backend architecture designed to handle real-time financial tracking for multiple concurrent users. It prioritizes data integrity and high availability.",
+    fullDescription: "Aerofisc is a comprehensive personal finance command center designed to handle real-time tracking for multiple concurrent users. It integrates AI-powered insights, predictive analytics, and enterprise-grade security.",
     features: [
-      "Role-Based Access Control (RBAC) implementation",
-      "Real-time transaction processing and ledger updates",
-      "Automated financial report generation via scheduled cron jobs",
-      "Optimized query performance for historical data retrieval"
+      "Predictive Analytics: Forecasts future expenses using historical data and linear regression",
+      "Smart Categorization: Automatically categorizes transactions using ML logic",
+      "Voice Commands: Integrated voice-to-action engine for hands-free management",
+      "Enterprise Security: JWT authentication, RBAC, and data encryption at rest/transit"
     ]
   },
   {
@@ -38,12 +38,12 @@ const projects = [
     github: "https://github.com/Satya136-dvsn/biz-stratosphere",
     demo: "",
     category: "Full Stack applications",
-    fullDescription: "An advanced Business Intelligence platform integrating Google's Gemini AI to provide actionable business insights from raw data without the overhead of maintaining dedicated AI infrastructure.",
+    fullDescription: "An advanced Business Intelligence platform integrating Google's Gemini AI to provide actionable business insights from raw data. Features a zero-knowledge architecture processing sensitive data in isolated environments.",
     features: [
-      "Serverless architecture leveraging Supabase Edge Functions",
-      "Direct integration with Gemini API for natural language queries",
-      "Dynamic dashboard generation based on AI insights",
-      "Strict context constraints to prevent AI hallucination"
+      "Predictive Analytics: Forecasting modules for Churn, CLV, and Demand",
+      "Explainable AI (XAI): Real-time SHAP value generation for prediction transparency",
+      "LLM-Powered Insights: Integrated RAG chat for conversational data analysis",
+      "Security & Governance: Zero-Knowledge Architecture, RBAC, and comprehensive Audit Logging"
     ]
   },
   {
@@ -57,12 +57,12 @@ const projects = [
     github: "https://github.com/Satya136-dvsn/32-Bit-Hybrid-Multiplier-using-FPGA",
     demo: "",
     category: "Hardware Engineering",
-    fullDescription: "A hardware-level optimization project that significantly accelerates 32-bit multiplication operations by combining the speed of Vedic mathematics with the divide-and-conquer efficiency of the Karatsuba algorithm.",
+    fullDescription: "A custom FPGA hardware architecture that significantly accelerates 32-bit multiplication operations. It intelligently balances the processing speed of Vedic mathematics with the area efficiency of the Karatsuba algorithm.",
     features: [
-      "Custom Verilog RTL implementation",
-      "Integration of Urdhva Tiryagbhyam sutra from Vedic math",
-      "Gate-level synthesis mapping and simulation",
-      "Achieved 40% reduction in critical path delay vs array multipliers"
+      "Decomposes 32-bit multiplication into four 16x16 partial products",
+      "Lower-Lower & Lower-Upper partial products computed using Karatsuba 16x16",
+      "Upper-Lower & Upper-Upper partial products computed using Vedic 16x16",
+      "Achieved substantial reduction in critical path delay compared to standard array multipliers"
     ]
   },
   {
@@ -78,10 +78,10 @@ const projects = [
     category: "Data & Analytics",
     fullDescription: "A quantitative finance project utilizing mathematical optimization techniques to construct optimal stock portfolios, balancing expected returns against market risk.",
     features: [
-      "Time-series data aggregation and cleaning using Pandas",
-      "Computation of covariance matrices and expected returns",
-      "Implementation of Markowitz Modern Portfolio Theory (MPT)",
-      "SciPy-driven optimization to locate the efficient frontier"
+      "Portfolio optimization using Mean-Variance and Efficient Frontier strategies",
+      "In-depth risk and return analysis",
+      "Advanced data visualization of portfolio performance metrics",
+      "Direct integration with live financial data sources for real-world analysis"
     ]
   }
 ];
@@ -156,6 +156,14 @@ const Projects = () => {
                               {tech}
                             </span>
                           ))}
+                        </div>
+                      </div>
+
+                      {/* Interaction Hint */}
+                      <div className="pt-4 flex items-center justify-end md:justify-start">
+                        <div className="inline-flex items-center gap-2 text-primary font-medium text-sm px-4 py-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-all border border-primary/20 group-hover:border-primary/40 shadow-sm">
+                          <span>Click for Details</span>
+                          <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform stroke-[2.5]" />
                         </div>
                       </div>
                     </div>
