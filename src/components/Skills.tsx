@@ -1,106 +1,75 @@
-import { Badge } from "@/components/ui/badge";
-import { Code2, Wrench, Lightbulb, Users } from "lucide-react";
+import { Terminal, Server, Database, Cloud, LineChart, Cpu } from 'lucide-react';
+
+const skillGroups = [
+  {
+    title: "Languages",
+    icon: <Terminal className="w-5 h-5 text-primary" />,
+    items: ["Java", "Python", "JavaScript / TypeScript", "SQL", "Verilog", "HTML / CSS"]
+  },
+  {
+    title: "Backend & APIs",
+    icon: <Server className="w-5 h-5 text-primary" />,
+    items: ["Spring Boot", "Express.js", "RESTful Architecture", "Microservices", "JWT Auth"]
+  },
+  {
+    title: "Databases",
+    icon: <Database className="w-5 h-5 text-primary" />,
+    items: ["PostgreSQL", "MySQL", "Supabase", "Data Modeling", "Query Optimization"]
+  },
+  {
+    title: "Cloud & DevOps",
+    icon: <Cloud className="w-5 h-5 text-primary" />,
+    items: ["AWS (Basics)", "Vercel", "Git / GitHub", "CI/CD Concepts", "Serverless"]
+  },
+  {
+    title: "Data & Analytics",
+    icon: <LineChart className="w-5 h-5 text-primary" />,
+    items: ["Pandas", "NumPy", "TensorFlow.js", "Power BI", "Tableau"]
+  },
+  {
+    title: "Engineering Practices",
+    icon: <Cpu className="w-5 h-5 text-primary" />,
+    items: ["System Design", "Test-Driven Dev", "FPGA Design", "Secure Coding"]
+  }
+];
 
 const Skills = () => {
-  const skillCategories = [
-    {
-      title: "Programming & Frameworks",
-      icon: Code2,
-      skills: ["Java", "Python", "SQL", "JavaScript", "React", "HTML5", "CSS3", "Verilog"],
-      color: "from-blue-500 to-cyan-500"
-    },
-    {
-      title: "Technical Skills",
-      icon: Wrench,
-      skills: ["Data Analysis", "REST API", "Full Stack Development", "FPGA Design", "MySQL", "AWS Cloud Basics", "Power BI"],
-      color: "from-purple-500 to-pink-500"
-    },
-    {
-      title: "Tools & Technologies",
-      icon: Lightbulb,
-      skills: ["Git/GitHub", "VS Code", "Matlab", "Xilinx Vivado", "Tableau", "Streamlit"],
-      color: "from-orange-500 to-red-500"
-    },
-    {
-      title: "Soft Skills",
-      icon: Users,
-      skills: ["Leadership", "Problem Solving", "Team Collaboration", "Communication", "Event Management"],
-      color: "from-green-500 to-emerald-500"
-    }
-  ];
-
   return (
-    <section id="skills" className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 relative z-10">
-      <div className="container mx-auto max-w-6xl">
-        {/* Section Header */}
-        <div className="text-center mb-12 sm:mb-16">
-          <p className="text-purple-400 text-sm font-semibold tracking-[0.2em] uppercase mb-3">What I work with</p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">
-            Technical Competencies
+    <section id="skills" className="py-24 relative z-10 bg-background/50 border-y border-border/50">
+      <div className="container mx-auto max-w-6xl px-6">
+
+        <div className="mb-16">
+          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4 tracking-tight glow-text">
+            Technical Arsenal
           </h2>
-          <div className="mt-4 mx-auto w-16 h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full" />
-          <p className="text-gray-500 text-sm mt-4 max-w-2xl mx-auto">
-            A comprehensive toolkit built through hands-on experience and continuous learning
+          <p className="text-muted-foreground max-w-2xl text-lg">
+            A structured breakdown of my engineering capabilities and toolchain.
           </p>
+          <div className="w-24 h-1 bg-primary mt-6 rounded-full shadow-[0_0_10px_rgba(0,240,255,0.5)]"></div>
         </div>
 
-        {/* Skills Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
-          {skillCategories.map((category, categoryIndex) => {
-            const Icon = category.icon;
-            return (
-              <div
-                key={categoryIndex}
-                className="group bg-white/[0.03] backdrop-blur-sm rounded-xl p-5 border border-white/[0.06] hover:border-purple-500/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-purple-500/5"
-              >
-                {/* Category Header */}
-                <div className="flex items-center gap-3 mb-4 border-b border-white/10 pb-3">
-                  <div className={`p-2 rounded-lg bg-gradient-to-br ${category.color} bg-opacity-20`}>
-                    <Icon className="w-5 h-5 text-white" />
-                  </div>
-                  <h3 className="text-lg font-bold text-white tracking-wide">
-                    {category.title}
-                  </h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {skillGroups.map((group, groupIdx) => (
+            <div key={groupIdx} className="bg-card border border-border p-6 rounded-xl hover:border-primary/50 transition-colors">
+              <div className="flex items-center gap-3 mb-6 border-b border-border/50 pb-4">
+                <div className="p-2 bg-primary/10 rounded-lg">
+                  {group.icon}
                 </div>
-
-                {/* Skills */}
-                <div className="flex flex-wrap gap-2">
-                  {category.skills.map((skill, skillIndex) => (
-                    <Badge
-                      key={skillIndex}
-                      className="bg-white/5 hover:bg-white/10 text-gray-200 border border-white/10 px-2.5 py-1 text-xs font-medium transition-colors duration-200 cursor-default"
-                    >
-                      {skill}
-                    </Badge>
-                  ))}
-                </div>
+                <h3 className="text-xl font-bold text-foreground">{group.title}</h3>
               </div>
-            );
-          })}
+
+              <ul className="space-y-3">
+                {group.items.map((item, itemIdx) => (
+                  <li key={itemIdx} className="flex items-center gap-3 text-sm text-foreground/80 font-mono">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary/50"></span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
-        {/* Core Strengths */}
-        <div className="bg-gradient-to-r from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-white/10">
-          <h3 className="text-xl sm:text-2xl font-bold text-center mb-6 text-white">
-            Core Strengths
-          </h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              { title: "Problem Solving", icon: "🧠" },
-              { title: "Fast Learner", icon: "⚡" },
-              { title: "Team Leadership", icon: "👥" },
-              { title: "Innovation", icon: "💡" }
-            ].map((item, index) => (
-              <div
-                key={index}
-                className="text-center p-4 bg-white/5 rounded-xl border border-white/10 hover:border-purple-400/30 transition-all duration-300"
-              >
-                <div className="text-2xl mb-2">{item.icon}</div>
-                <h4 className="text-sm font-semibold text-white">{item.title}</h4>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );

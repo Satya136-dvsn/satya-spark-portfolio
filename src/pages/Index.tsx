@@ -1,44 +1,24 @@
 import { useEffect, useState, lazy, Suspense } from 'react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
+import CustomCursor from '../components/CustomCursor';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
 // Lazy load below-the-fold components
 const IntroAnimation = lazy(() => import('../components/IntroAnimation'));
-const About = lazy(() => import('../components/About'));
-const AnimatedBackground = lazy(() => import('../components/AnimatedBackground')); // Heavy Canvas
-const Experience = lazy(() => import('../components/Experience'));
+const AnimatedBackground = lazy(() => import('../components/AnimatedBackground'));
+const EngineeringDomains = lazy(() => import('../components/EngineeringDomains'));
+const SystemArchitecture = lazy(() => import('../components/SystemArchitecture'));
 const Projects = lazy(() => import('../components/Projects'));
+const Experience = lazy(() => import('../components/Experience'));
+const DataIntelligence = lazy(() => import('../components/DataIntelligence'));
+const Philosophy = lazy(() => import('../components/Philosophy'));
 const Skills = lazy(() => import('../components/Skills'));
-const Certifications = lazy(() => import('../components/Certifications'));
-const Publications = lazy(() => import('../components/Publications'));
-const SkillBadges = lazy(() => import('../components/SkillBadges'));
-const Awards = lazy(() => import('../components/Awards'));
-const Contact = lazy(() => import('../components/Contact'));
+const Credentials = lazy(() => import('../components/Credentials'));
 const Footer = lazy(() => import('../components/Footer'));
 
 const Index = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-  // Synchronous initialization to prevent flash and ensure correct initial state
-  const [showIntro, setShowIntro] = useState(() => {
-    const hasVisited = sessionStorage.getItem('portfolio-session-visited');
-    const isMobile = window.innerWidth < 768;
-
-    if (!hasVisited && !isMobile) {
-      sessionStorage.setItem('portfolio-session-visited', 'true');
-      return true;
-    }
-    return false;
-  });
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  // Always show the quick 2.5s intro boot sequence on initial load
+  const [showIntro, setShowIntro] = useState(true);
 
   const handleIntroComplete = () => {
     setShowIntro(false);
@@ -62,15 +42,8 @@ const Index = () => {
 
       {/* Main Content - Dark theme only */}
       <div className="min-h-screen bg-transparent text-white relative overflow-x-hidden animate-fade-in">
-        {/* Custom cursor - hidden on mobile */}
-        <div
-          className="hidden md:block fixed w-4 h-4 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full pointer-events-none z-40 mix-blend-difference transition-transform duration-100 ease-out"
-          style={{
-            left: mousePosition.x - 8,
-            top: mousePosition.y - 8,
-            transform: 'scale(1)',
-          }}
-        />
+
+        <CustomCursor />
 
         {/* Render AnimatedBackground in parallel (Lazy loaded) */}
         <Suspense fallback={null}>
@@ -81,16 +54,15 @@ const Index = () => {
         <Hero delayAnimation={showIntro} />
 
 
-        <Suspense fallback={<div className="min-h-screen" />}>
-          <About />
-          <Experience />
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-primary animate-pulse">Loading core systems...</div>}>
+          <EngineeringDomains />
+          <SystemArchitecture />
           <Projects />
+          <Experience />
+          <DataIntelligence />
+          <Philosophy />
           <Skills />
-          <Publications />
-          <Certifications />
-          <SkillBadges />
-          <Awards />
-          <Contact />
+          <Credentials />
           <Footer />
         </Suspense>
       </div>

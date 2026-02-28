@@ -24,14 +24,11 @@ const Header = () => {
 
   const navItems = [
     { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Experience', href: '#experience' },
     { name: 'Projects', href: '#projects' },
+    { name: 'Experience', href: '#experience' },
+    { name: 'Philosophy', href: '#philosophy' },
     { name: 'Skills', href: '#skills' },
-    { name: 'Publications', href: '#publications' },
-    { name: 'Certifications', href: '#certifications' },
-    { name: 'Badges', href: '#skill-badges' },
-    { name: 'Awards', href: '#awards' },
+    { name: 'Credentials', href: '#credentials' },
     { name: 'Contact', href: '#contact' }
   ];
 
