@@ -16,7 +16,7 @@ const Hero = ({ delayAnimation = false }: HeroProps) => {
   };
 
   return (
-    <section id="home" className="min-h-[90vh] flex flex-col items-center justify-center relative z-10 px-6 pt-24 pb-12 overflow-hidden bg-transparent">
+    <section id="home" className="min-h-[90vh] flex flex-col items-center justify-center relative z-10 px-6 pt-32 pb-20 overflow-hidden bg-transparent">
       <div className="container mx-auto max-w-5xl flex flex-col items-center text-center">
 
         {/* Top Status Badge */}
@@ -46,7 +46,7 @@ const Hero = ({ delayAnimation = false }: HeroProps) => {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-slide-up w-full sm:w-auto" style={{ animationDelay: '250ms', animationFillMode: 'both' }}>
           <a
             href="#projects"
-            className="w-full sm:w-auto px-8 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-[0_0_20px_rgba(0,240,255,0.4)]"
+            className="w-full sm:w-auto px-8 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-[0_0_20px_rgba(0,240,255,0.3)]"
           >
             View Projects
             <ArrowRight className="w-4 h-4" />

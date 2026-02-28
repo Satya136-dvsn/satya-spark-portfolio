@@ -146,21 +146,21 @@ const credentials = [
 
 const Credentials = () => {
     return (
-        <section id="credentials" className="py-20 relative z-10 bg-background/50 border-y border-border/50">
+        <section id="credentials" className="py-32 relative z-10 bg-background/50 border-y border-border/50">
             <div className="container mx-auto max-w-5xl px-6">
 
                 <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4 tracking-tight glow-text">
                         Credentials & Recognition
                     </h2>
-                    <div className="w-24 h-1 bg-primary mx-auto mt-6 rounded-full shadow-[0_0_10px_rgba(0,240,255,0.5)]"></div>
+                    <div className="w-24 h-1 bg-primary mx-auto mt-6 rounded-full shadow-[0_0_15px_rgba(0,240,255,0.3)]"></div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {credentials.map((section, idx) => (
                         <Dialog key={idx}>
                             <DialogTrigger asChild>
-                                <div className="bg-card p-6 rounded-xl border border-border/50 shadow-sm cursor-pointer hover:border-primary/50 hover:shadow-[0_0_15px_rgba(0,240,255,0.1)] transition-all group flex flex-col h-full text-left">
+                                <div className="bg-card p-6 rounded-xl border border-border/50 shadow-sm cursor-pointer hover:border-primary/50 hover:shadow-[0_0_15px_rgba(0,240,255,0.05)] transition-all group flex flex-col h-full text-left">
                                     <div className="flex items-center gap-3 mb-4">
                                         <div className="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">
                                             {section.icon}

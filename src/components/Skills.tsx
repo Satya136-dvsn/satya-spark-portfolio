@@ -35,7 +35,7 @@ const skillGroups = [
 
 const Skills = () => {
   return (
-    <section id="skills" className="py-24 relative z-10 bg-background/50 border-y border-border/50">
+    <section id="skills" className="py-32 relative z-10 bg-background/50 border-y border-border/50">
       <div className="container mx-auto max-w-6xl px-6">
 
         <div className="mb-16">
@@ -45,7 +45,7 @@ const Skills = () => {
           <p className="text-muted-foreground max-w-2xl text-lg">
             A structured breakdown of my engineering capabilities and toolchain.
           </p>
-          <div className="w-24 h-1 bg-primary mt-6 rounded-full shadow-[0_0_10px_rgba(0,240,255,0.5)]"></div>
+          <div className="w-24 h-1 bg-primary mt-6 rounded-full shadow-[0_0_15px_rgba(0,240,255,0.3)]"></div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

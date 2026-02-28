@@ -34,7 +34,7 @@
     --border: 223 39% 15%;
     --input: 223 39% 15%;
     --ring: 183 100% 50%;
-    
+
     --radius: 0.5rem;
 
     --sidebar-background: 223 39% 7%;
@@ -61,16 +61,17 @@
 /* Base futuristic animations and utilities */
 @layer utilities {
   .glow-border {
-    box-shadow: 0 0 10px 0 rgba(0, 240, 255, 0.2), inset 0 0 10px 0 rgba(0, 240, 255, 0.1);
+    box-shadow: 0 0 10px 0 rgba(0, 240, 255, 0.15), inset 0 0 10px 0 rgba(0, 240, 255, 0.05);
   }
+
   .glow-text {
-    text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.35);
   }
 }
 
 /* Matrix/Grid Background */
 .bg-grid-pattern {
-  background-image: 
+  background-image:
     linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
   background-size: 50px 50px;

@@ -10,7 +10,7 @@ const pipelineSteps = [
 
 const DataIntelligence = () => {
     return (
-        <section className="py-24 relative z-10 bg-background overflow-hidden">
+        <section className="py-32 relative z-10 bg-background overflow-hidden">
             <div className="container mx-auto max-w-6xl px-6">
 
                 <div className="text-center mb-16">
@@ -20,7 +20,7 @@ const DataIntelligence = () => {
                     <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
                         My approach to extracting high-value signals from complex, noisy datasets.
                     </p>
-                    <div className="w-24 h-1 bg-primary mx-auto mt-6 rounded-full shadow-[0_0_10px_rgba(0,240,255,0.5)]"></div>
+                    <div className="w-24 h-1 bg-primary mx-auto mt-6 rounded-full shadow-[0_0_15px_rgba(0,240,255,0.3)]"></div>
                 </div>
 
                 <div className="relative max-w-5xl mx-auto">
@@ -43,7 +43,7 @@ const DataIntelligence = () => {
                                 {/* Visual Node */}
                                 <div className={`w-20 h-20 rounded-xl flex items-center justify-center border-2 bg-card relative z-10 transition-all duration-300 shadow-lg
                   ${index === pipelineSteps.length - 1
-                                        ? 'border-primary shadow-[0_0_20px_rgba(0,240,255,0.3)]'
+                                        ? 'border-primary shadow-[0_0_20px_rgba(0,240,255,0.15)]'
                                         : 'border-border group-hover:border-primary/50'}`}
                                 >
                                     <div className="text-foreground/80">{step.icon}</div>

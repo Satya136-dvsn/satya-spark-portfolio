@@ -23,14 +23,14 @@ const domains = [
 
 const EngineeringDomains = () => {
     return (
-        <section id="domains" className="py-24 relative z-10 bg-background/50 border-y border-border/50">
+        <section id="domains" className="py-32 relative z-10 bg-background/50 border-y border-border/50">
             <div className="container mx-auto max-w-6xl px-6">
 
                 <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4 tracking-tight glow-text">
                         Core Engineering Domains
                     </h2>
-                    <div className="w-24 h-1 bg-primary mx-auto rounded-full shadow-[0_0_10px_rgba(0,240,255,0.5)]"></div>
+                    <div className="w-24 h-1 bg-primary mx-auto rounded-full shadow-[0_0_15px_rgba(0,240,255,0.3)]"></div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -50,8 +50,8 @@ const EngineeringDomains = () => {
 
                                 <div className="space-y-2">
                                     {domain.skills.map((skill, sIdx) => (
-                                        <div key={sIdx} className="flex items-center gap-2 text-sm text-foreground/80 font-medium">
-                                            <div className="w-1.5 h-1.5 rounded-full bg-primary/80 shadow-[0_0_5px_rgba(0,240,255,0.5)]"></div>
+                                        <div key={sIdx} className="flex items-center gap-2 text-sm text-foreground/80 font-medium leading-snug">
+                                            <div className="w-1.5 h-1.5 rounded-full bg-primary/80 shadow-[0_0_5px_rgba(0,240,255,0.3)]"></div>
                                             {skill}
                                         </div>
                                     ))}

@@ -35,7 +35,7 @@ const architectureFlow = [
 
 const SystemArchitecture = () => {
     return (
-        <section className="py-24 relative z-10 bg-background overflow-hidden">
+        <section className="py-32 relative z-10 bg-background overflow-hidden">
             <div className="container mx-auto max-w-6xl px-6">
 
                 <div className="mb-16">
@@ -45,7 +45,7 @@ const SystemArchitecture = () => {
                     <p className="text-muted-foreground max-w-2xl text-lg">
                         A structured, layer-by-layer methodology to building robust, production-ready software systems.
                     </p>
-                    <div className="w-24 h-1 bg-primary mt-6 rounded-full shadow-[0_0_10px_rgba(0,240,255,0.5)]"></div>
+                    <div className="w-24 h-1 bg-primary mt-6 rounded-full shadow-[0_0_15px_rgba(0,240,255,0.3)]"></div>
                 </div>
 
                 <div className="relative">
@@ -66,7 +66,7 @@ const SystemArchitecture = () => {
                                 )}
 
                                 {/* Icon Block */}
-                                <div className="w-20 h-20 shrink-0 rounded-2xl bg-card border border-border flex items-center justify-center mb-0 lg:mb-6 shadow-lg group-hover:border-primary group-hover:shadow-[0_0_20px_rgba(0,240,255,0.2)] transition-all duration-300 relative z-10">
+                                <div className="w-20 h-20 shrink-0 rounded-2xl bg-card border border-border flex items-center justify-center mb-0 lg:mb-6 shadow-lg group-hover:border-primary group-hover:shadow-[0_0_20px_rgba(0,240,255,0.15)] transition-all duration-300 relative z-10">
                                     <div className="absolute inset-0 bg-primary/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                     {node.icon}
 

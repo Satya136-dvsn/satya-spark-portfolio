@@ -53,7 +53,7 @@ const projects = [
 
 const Projects = () => {
   return (
-    <section id="projects" className="py-24 px-6 relative z-10 bg-background/50 border-y border-border/50">
+    <section id="projects" className="py-32 px-6 relative z-10 bg-background/50 border-y border-border/50">
       <div className="container mx-auto max-w-6xl">
         <div className="mb-16">
           <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4 tracking-tight glow-text">
@@ -62,14 +62,14 @@ const Projects = () => {
           <p className="text-muted-foreground max-w-2xl text-lg">
             Production-grade systems demonstrating architectural depth and engineering correctness.
           </p>
-          <div className="w-24 h-1 bg-primary mt-6 rounded-full shadow-[0_0_10px_rgba(0,240,255,0.5)]"></div>
+          <div className="w-24 h-1 bg-primary mt-6 rounded-full shadow-[0_0_15px_rgba(0,240,255,0.3)]"></div>
         </div>
 
         <div className="space-y-8">
           {projects.map((project, index) => (
             <div
               key={index}
-              className="group relative bg-card border border-border/50 rounded-xl overflow-hidden hover:border-primary/50 transition-all duration-300 shadow-sm hover:shadow-[0_0_20px_rgba(0,240,255,0.1)]"
+              className="group relative bg-card border border-border/50 rounded-xl overflow-hidden hover:border-primary/50 transition-all duration-300 shadow-sm hover:shadow-[0_0_15px_rgba(0,240,255,0.05)]"
             >
               <div className="p-6 md:p-8 flex flex-col lg:flex-row gap-8">
 
@@ -91,10 +91,10 @@ const Projects = () => {
 
                   {/* Impact & Focus */}
                   <div className="pt-2">
-                    <p className="text-base text-foreground/90 leading-relaxed mb-3">
+                    <p className="text-base text-foreground/90 leading-snug mb-3">
                       <strong>Impact:</strong> {project.impact}
                     </p>
-                    <div className="flex items-start gap-2 text-sm text-muted-foreground bg-secondary/30 p-3 rounded-lg border border-border/50">
+                    <div className="flex items-start gap-2 text-sm text-muted-foreground bg-secondary/30 p-3 rounded-lg border border-border/50 leading-snug">
                       <Activity className="w-4 h-4 text-primary mt-0.5 shrink-0" />
                       <span><strong>Engineering Focus:</strong> {project.engineeringFocus}</span>
                     </div>

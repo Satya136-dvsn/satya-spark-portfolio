@@ -19,7 +19,7 @@ const experiences = [
 
 const Experience = () => {
   return (
-    <section id="experience" className="py-20 relative z-10 bg-background">
+    <section id="experience" className="py-32 relative z-10 bg-background">
       <div className="container mx-auto max-w-4xl px-6">
 
         <div className="flex items-center gap-4 mb-12">
@@ -39,7 +39,7 @@ const Experience = () => {
 
               <div className="md:w-2/3">
                 <h4 className="text-xl font-semibold text-primary mb-3">{exp.title}</h4>
-                <p className="text-sm text-foreground/80 mb-4 leading-relaxed">
+                <p className="text-sm text-foreground/80 mb-4 leading-snug">
                   {exp.description}
                 </p>
                 <div className="flex flex-wrap gap-2">
