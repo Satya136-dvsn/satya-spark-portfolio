@@ -19,6 +19,16 @@ const Footer = lazy(() => import('../components/Footer'));
 const Index = () => {
   // Always show the quick 2.5s intro boot sequence on initial load
   const [showIntro, setShowIntro] = useState(true);
+  const [loadHeavy, setLoadHeavy] = useState(false);
+
+  useEffect(() => {
+    // Defer below-the-fold components to reduce initial JS execution and network requests
+    // This dramatically improves FCP and LCP on mobile devices
+    const timer = setTimeout(() => {
+      setLoadHeavy(true);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleIntroComplete = () => {
     setShowIntro(false);
@@ -54,17 +64,19 @@ const Index = () => {
         <Hero delayAnimation={showIntro} />
 
 
-        <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-primary animate-pulse">Loading core systems...</div>}>
-          <EngineeringDomains />
-          <SystemArchitecture />
-          <Projects />
-          <Experience />
-          <DataIntelligence />
-          <Philosophy />
-          <Skills />
-          <Credentials />
-          <Footer />
-        </Suspense>
+        {loadHeavy && (
+          <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-primary animate-pulse">Loading core systems...</div>}>
+            <EngineeringDomains />
+            <SystemArchitecture />
+            <Projects />
+            <Experience />
+            <DataIntelligence />
+            <Philosophy />
+            <Skills />
+            <Credentials />
+            <Footer />
+          </Suspense>
+        )}
       </div>
       <SpeedInsights />
     </>
