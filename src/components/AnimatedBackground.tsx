@@ -62,7 +62,7 @@ const AnimatedBackground = () => {
     // Arrays
     let bgStars: Star[] = [];
     let nodes: ConstellationNode[] = [];
-    let shootingStar: ShootingStar = { x: 0, y: 0, len: 0, speed: 0, angle: 0, active: false, opacity: 0 };
+    const shootingStar: ShootingStar = { x: 0, y: 0, len: 0, speed: 0, angle: 0, active: false, opacity: 0 };
 
     const INIT_BG_STARS = 400;
     const INIT_NODES = 80;
