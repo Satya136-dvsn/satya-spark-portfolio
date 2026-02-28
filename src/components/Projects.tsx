@@ -2,7 +2,7 @@ import { Github, ExternalLink, Activity, Network } from 'lucide-react';
 
 const projects = [
   {
-    title: "aerofisc",
+    title: "Aerofisc",
     period: "Sep 2025 – Dec 2025",
     impact: "Built scalable architecture for multi-user real-time financial management.",
     engineeringFocus: "Secure multi-user data persistence and automated tracking",

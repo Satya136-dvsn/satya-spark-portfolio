@@ -43,31 +43,32 @@ const AnimatedBackground = () => {
 
       <style>{`
         @keyframes scanline {
-          0% { transform: translateY(-10vh); opacity: 0; }
+          0% { transform: translateY(-10vh) translateZ(0); opacity: 0; }
           10% { opacity: 1; }
           90% { opacity: 1; }
-          100% { transform: translateY(110vh); opacity: 0; }
+          100% { transform: translateY(110vh) translateZ(0); opacity: 0; }
         }
         .animate-scanline {
           animation: scanline 8s linear infinite;
+          will-change: transform, opacity;
         }
         
         @keyframes customFloat1 {
-          0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
-          50% { transform: translate(30px, -50px) scale(1.5); opacity: 0.8; }
+          0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.3; }
+          50% { transform: translate3d(30px, -50px, 0) scale(1.5); opacity: 0.8; }
         }
         @keyframes customFloat2 {
-          0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.2; }
-          50% { transform: translate(-40px, -30px) scale(1.2); opacity: 0.6; }
+          0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.2; }
+          50% { transform: translate3d(-40px, -30px, 0) scale(1.2); opacity: 0.6; }
         }
         @keyframes customFloat3 {
-          0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.4; }
-          50% { transform: translate(20px, -60px) scale(1.8); opacity: 0.9; }
+          0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.4; }
+          50% { transform: translate3d(20px, -60px, 0) scale(1.8); opacity: 0.9; }
         }
         
-        .animate-float-particle-1 { animation: customFloat1 15s ease-in-out infinite; }
-        .animate-float-particle-2 { animation: customFloat2 20s ease-in-out infinite; }
-        .animate-float-particle-3 { animation: customFloat3 12s ease-in-out infinite; }
+        .animate-float-particle-1 { animation: customFloat1 15s ease-in-out infinite; will-change: transform, opacity; }
+        .animate-float-particle-2 { animation: customFloat2 20s ease-in-out infinite; will-change: transform, opacity; }
+        .animate-float-particle-3 { animation: customFloat3 12s ease-in-out infinite; will-change: transform, opacity; }
       `}</style>
     </div>
   );
