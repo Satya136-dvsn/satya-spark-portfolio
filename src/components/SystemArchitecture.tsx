@@ -3,31 +3,31 @@ import { MonitorSmartphone, Cpu, Blocks, Database, Cloud } from 'lucide-react';
 const architectureFlow = [
     {
         step: "Client",
-        icon: <MonitorSmartphone className="w-6 h-6 text-foreground" />,
+        icon: <MonitorSmartphone className="w-6 h-6 text-primary" />,
         description: "Responsive web & mobile interfaces.",
         tech: "React / Vite / Tailwind"
     },
     {
         step: "API Layer",
-        icon: <Blocks className="w-6 h-6 text-foreground" />,
+        icon: <Blocks className="w-6 h-6 text-primary" />,
         description: "Secure, rate-limited REST endpoints.",
         tech: "Spring Boot / Express"
     },
     {
         step: "Service Logic",
-        icon: <Cpu className="w-6 h-6 text-foreground" />,
+        icon: <Cpu className="w-6 h-6 text-primary" />,
         description: "Business rules and data validation.",
         tech: "Java / Python"
     },
     {
         step: "Database",
-        icon: <Database className="w-6 h-6 text-foreground" />,
+        icon: <Database className="w-6 h-6 text-primary" />,
         description: "ACID-compliant relational storage.",
         tech: "PostgreSQL / MySQL"
     },
     {
         step: "Cloud",
-        icon: <Cloud className="w-6 h-6 text-foreground" />,
+        icon: <Cloud className="w-6 h-6 text-primary" />,
         description: "Scalable global deployment.",
         tech: "AWS / Vercel"
     }
@@ -49,34 +49,34 @@ const SystemArchitecture = () => {
                 </div>
 
                 <div className="relative">
-                    {/* Connecting Line (Desktop) */}
-                    <div className="hidden lg:block absolute top-[4.5rem] left-0 w-full h-[2px] bg-border z-0">
-                        <div className="h-full bg-primary/50 w-full animate-pulse shadow-[0_0_15px_rgba(0,240,255,0.3)]"></div>
+                    {/* Connecting Line (Desktop) - Thin Red Highlight */}
+                    <div className="hidden lg:block absolute top-[4.5rem] left-0 w-full h-[1px] bg-border z-0">
+                        <div className="h-full bg-accent/50 w-full"></div>
                     </div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-4 relative z-10">
                         {architectureFlow.map((node, index) => (
                             <div key={index} className="flex flex-row lg:flex-col items-start lg:items-center relative group">
 
-                                {/* Connecting Line (Mobile) */}
+                                {/* Connecting Line (Mobile) - Thin Red Highlight */}
                                 {index !== architectureFlow.length - 1 && (
-                                    <div className="lg:hidden absolute left-[2.25rem] top-[4.5rem] w-[2px] h-[calc(100%+1.5rem)] bg-border z-0">
-                                        <div className="w-full h-full bg-primary/50 animate-pulse shadow-[0_0_10px_rgba(0,240,255,0.3)]"></div>
+                                    <div className="lg:hidden absolute left-[2.25rem] top-[4.5rem] w-[1px] h-[calc(100%+1.5rem)] bg-border z-0">
+                                        <div className="w-full h-full bg-accent/50"></div>
                                     </div>
                                 )}
 
                                 {/* Icon Block */}
-                                <div className="w-20 h-20 shrink-0 rounded-2xl bg-card border border-border flex items-center justify-center mb-0 lg:mb-6 shadow-lg group-hover:border-primary group-hover:shadow-[0_0_20px_rgba(0,240,255,0.15)] transition-all duration-300 relative z-10">
-                                    <div className="absolute inset-0 bg-primary/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                <div className="w-20 h-20 shrink-0 rounded-sm bg-card border border-border flex items-center justify-center mb-0 lg:mb-6 shadow-sm group-hover:border-primary group-hover:shadow-[0_0_15px_rgba(0,229,255,0.15)] transition-all duration-300 relative z-10">
+                                    <div className="absolute inset-0 bg-primary/5 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                     {node.icon}
 
                                     {/* Arrow Indicator (Desktop) */}
                                     {index !== architectureFlow.length - 1 && (
-                                        <div className="hidden lg:block absolute -right-[calc(50%+1.5rem)] top-1/2 -translate-y-1/2 text-primary">
-                                            {/* Arrow SVG */}
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="opacity-50 animate-pulse">
-                                                <path d="M5 12H19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                                <path d="M12 5L19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                        <div className="hidden lg:block absolute -right-[calc(50%+1.5rem)] top-1/2 -translate-y-1/2 text-accent">
+                                            {/* Arrow SVG - Thin Red Line */}
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="opacity-80">
+                                                <path d="M5 12H19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                                <path d="M12 5L19 12L12 19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                             </svg>
                                         </div>
                                     )}

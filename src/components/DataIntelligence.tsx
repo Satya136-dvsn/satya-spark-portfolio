@@ -1,10 +1,10 @@
 import { DatabaseZap, Filter, Calculator, BarChart3, Lightbulb } from 'lucide-react';
 
 const pipelineSteps = [
-    { name: "Raw Data", icon: <DatabaseZap className="w-6 h-6" /> },
-    { name: "Cleaning", icon: <Filter className="w-6 h-6" /> },
-    { name: "Transformation", icon: <Calculator className="w-6 h-6" /> },
-    { name: "Analysis", icon: <BarChart3 className="w-6 h-6" /> },
+    { name: "Raw Data", icon: <DatabaseZap className="w-6 h-6 text-primary" /> },
+    { name: "Cleaning", icon: <Filter className="w-6 h-6 text-primary" /> },
+    { name: "Transformation", icon: <Calculator className="w-6 h-6 text-primary" /> },
+    { name: "Analysis", icon: <BarChart3 className="w-6 h-6 text-primary" /> },
     { name: "Insight", icon: <Lightbulb className="w-6 h-6 text-primary" /> },
 ];
 
@@ -24,33 +24,32 @@ const DataIntelligence = () => {
                 </div>
 
                 <div className="relative max-w-5xl mx-auto">
-                    {/* Main connecting path */}
-                    <div className="hidden md:block absolute top-[4.5rem] left-[10%] right-[10%] h-[2px] bg-border z-0">
-                        <div className="w-full h-full bg-primary/40 animate-pulse"></div>
+                    {/* Main connecting path - Thin Red Highlight */}
+                    <div className="hidden md:block absolute top-[4.5rem] left-[10%] right-[10%] h-[1px] bg-border z-0">
+                        <div className="w-full h-full bg-accent/50"></div>
                     </div>
 
                     <div className="flex flex-col md:flex-row justify-between relative z-10 gap-8 md:gap-4">
                         {pipelineSteps.map((step, index) => (
                             <div key={index} className="flex flex-col items-center group relative w-full md:w-1/5">
 
-                                {/* Mobile connecting line */}
+                                {/* Mobile connecting line - Thin Red Highlight */}
                                 {index !== pipelineSteps.length - 1 && (
-                                    <div className="md:hidden absolute top-[4.5rem] left-[50%] w-[2px] h-[calc(100%-2rem)] bg-primary/20 -translate-x-1/2 z-0 whitespace-nowrap overflow-hidden">
-                                        <div className="w-full h-1/2 bg-primary/50 animate-bounce"></div>
+                                    <div className="md:hidden absolute top-[4.5rem] left-[50%] w-[1px] h-[calc(100%-2rem)] bg-accent/40 -translate-x-1/2 z-0 whitespace-nowrap overflow-hidden">
                                     </div>
                                 )}
 
                                 {/* Visual Node */}
-                                <div className={`w-20 h-20 rounded-xl flex items-center justify-center border-2 bg-card relative z-10 transition-all duration-300 shadow-lg
+                                <div className={`w-20 h-20 rounded-sm flex items-center justify-center border-2 bg-card relative z-10 transition-all duration-300 shadow-sm
                   ${index === pipelineSteps.length - 1
-                                        ? 'border-primary shadow-[0_0_20px_rgba(0,240,255,0.15)]'
+                                        ? 'border-primary shadow-[0_0_15px_rgba(0,229,255,0.2)]'
                                         : 'border-border group-hover:border-primary/50'}`}
                                 >
                                     <div className="text-foreground/80">{step.icon}</div>
 
                                     {/* Glowing core for the final step */}
                                     {index === pipelineSteps.length - 1 && (
-                                        <div className="absolute inset-0 bg-primary/10 rounded-xl animate-pulse"></div>
+                                        <div className="absolute inset-0 bg-primary/5 rounded-sm"></div>
                                     )}
                                 </div>
 

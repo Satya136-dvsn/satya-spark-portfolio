@@ -104,8 +104,11 @@ const Projects = () => {
           {projects.map((project, index) => (
             <Dialog key={index}>
               <DialogTrigger asChild>
-                <div className="group relative bg-card border border-border/50 rounded-xl overflow-hidden hover:border-primary/50 transition-all duration-300 shadow-sm hover:shadow-[0_0_15px_rgba(0,240,255,0.05)] cursor-pointer">
-                  <div className="p-6 md:p-8 flex flex-col lg:flex-row gap-8">
+                <div className="group relative bg-card border border-border rounded-xl overflow-hidden hover:border-primary/50 hover:shadow-[0_0_10px_rgba(0,229,255,0.15)] transition-all duration-300 cursor-pointer">
+                  {/* Strict red hover accent line */}
+                  <div className="absolute top-0 left-0 w-full h-[2px] bg-accent scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 z-20"></div>
+
+                  <div className="p-6 md:p-8 flex flex-col lg:flex-row gap-8 relative z-10">
 
                     {/* Left Side: Core Info */}
                     <div className="flex-1 space-y-4">
@@ -152,7 +155,7 @@ const Projects = () => {
                         <h4 className="text-xs font-mono uppercase tracking-wider text-muted-foreground mb-2">Tech Stack</h4>
                         <div className="flex flex-wrap gap-2">
                           {project.tech.map((tech, i) => (
-                            <span key={i} className="px-2.5 py-1 bg-secondary border border-border rounded text-xs text-foreground/80 font-medium">
+                            <span key={i} className="px-2 py-1 bg-primary/5 border border-primary/20 rounded-sm text-xs text-primary/90 font-mono font-medium">
                               {tech}
                             </span>
                           ))}
@@ -195,9 +198,9 @@ const Projects = () => {
                     <p className="text-muted-foreground leading-relaxed">
                       {project.fullDescription}
                     </p>
-                    <div className="mt-4 p-4 bg-primary/5 border border-primary/20 rounded-lg">
-                      <p className="text-sm font-semibold text-primary/90 leading-snug">
-                        {project.impact}
+                    <div className="mt-4 p-4 bg-accent/5 border border-accent/20 rounded-sm">
+                      <p className="text-sm font-semibold text-foreground/90 leading-snug">
+                        <strong className="text-accent pr-1">Impact:</strong> {project.impact}
                       </p>
                     </div>
                   </div>
@@ -229,7 +232,7 @@ const Projects = () => {
                         </h4>
                         <div className="flex flex-wrap gap-2">
                           {project.tech.map((tech, i) => (
-                            <span key={i} className="px-3 py-1.5 bg-secondary border border-border rounded text-xs text-foreground/90 font-mono font-medium shadow-sm">
+                            <span key={i} className="px-2.5 py-1.5 bg-primary/5 border border-primary/20 rounded-sm text-xs text-primary/90 font-mono font-medium shadow-sm">
                               {tech}
                             </span>
                           ))}

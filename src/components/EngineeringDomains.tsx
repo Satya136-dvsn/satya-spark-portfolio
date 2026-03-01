@@ -30,16 +30,19 @@ const EngineeringDomains = () => {
                     <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4 tracking-tight glow-text">
                         Core Engineering Domains
                     </h2>
-                    <div className="w-24 h-1 bg-primary mx-auto rounded-full shadow-[0_0_15px_rgba(0,240,255,0.3)]"></div>
+                    <div className="w-24 h-1 bg-primary mx-auto rounded-full shadow-[0_0_10px_rgba(0,229,255,0.2)]"></div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {domains.map((domain, index) => (
                         <div
                             key={index}
-                            className="group relative p-8 rounded-xl bg-card border border-border/50 hover:border-primary/50 transition-all duration-500 overflow-hidden"
+                            className="group relative p-8 rounded-xl bg-card border border-border hover:border-primary/50 hover:shadow-[0_0_15px_rgba(0,229,255,0.1)] transition-all duration-300 overflow-hidden"
                         >
-                            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            {/* Sharp Red Hover Accent */}
+                            <div className="absolute top-0 left-0 w-full h-[2px] bg-accent scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 z-20"></div>
+
+                            <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
                             <div className="relative z-10">
                                 {domain.icon}
@@ -50,8 +53,8 @@ const EngineeringDomains = () => {
 
                                 <div className="space-y-2">
                                     {domain.skills.map((skill, sIdx) => (
-                                        <div key={sIdx} className="flex items-center gap-2 text-sm text-foreground/80 font-medium leading-snug">
-                                            <div className="w-1.5 h-1.5 rounded-full bg-primary/80 shadow-[0_0_5px_rgba(0,240,255,0.3)]"></div>
+                                        <div key={sIdx} className="flex items-center gap-2 text-sm text-foreground/80 font-mono leading-snug">
+                                            <div className="w-1.5 h-1.5 rounded-full bg-primary/80"></div>
                                             {skill}
                                         </div>
                                     ))}

@@ -20,20 +20,23 @@ const Hero = ({ delayAnimation = false }: HeroProps) => {
       <div className="container mx-auto max-w-5xl flex flex-col items-center text-center">
 
         {/* Top Status Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 bg-secondary/50 border border-primary/20 rounded-full text-foreground/80 text-xs md:text-sm font-medium mb-8 animate-fade-in shadow-[0_0_15px_rgba(0,240,255,0.05)]">
+        <div className="inline-flex items-center gap-2 px-4 py-2 bg-secondary/30 border border-primary/20 rounded-sm text-foreground/80 text-xs md:text-sm font-medium mb-8 shadow-[0_0_10px_rgba(0,229,255,0.05)]">
           <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
           </span>
           Open to Backend, Full Stack, and Data Engineering roles | 2025 Graduate | Immediate Availability
         </div>
 
         {/* Main Heading */}
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-[1.1] tracking-tighter mb-4 glow-text animate-slide-up" style={{ animationDelay: '100ms', animationFillMode: 'both' }}>
-          Duba Venkata Satyanarayana
-        </h1>
+        <div className="group relative inline-block cursor-default mb-4 animate-slide-up" style={{ animationDelay: '100ms', animationFillMode: 'both' }}>
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-[1.1] tracking-tighter glow-text">
+            Duba Venkata Satyanarayana
+          </h1>
+          {/* Subtle red animated underline under name */}
+          <div className="absolute -bottom-2 left-0 h-[2px] w-0 bg-accent group-hover:w-full transition-all duration-300 ease-out"></div>
+        </div>
 
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500 mb-6 animate-slide-up tracking-tight" style={{ animationDelay: '150ms', animationFillMode: 'both' }}>
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-primary mb-6 animate-slide-up tracking-tight" style={{ animationDelay: '150ms', animationFillMode: 'both' }}>
           Engineering Scalable Systems Across Backend, Full Stack & Data
         </h2>
 
@@ -46,7 +49,7 @@ const Hero = ({ delayAnimation = false }: HeroProps) => {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-slide-up w-full sm:w-auto" style={{ animationDelay: '250ms', animationFillMode: 'both' }}>
           <a
             href="#projects"
-            className="w-full sm:w-auto px-8 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-[0_0_20px_rgba(0,240,255,0.3)]"
+            className="w-full sm:w-auto px-8 py-3 bg-primary text-primary-foreground rounded-sm font-semibold hover:bg-primary/90 transition-all duration-200 flex items-center justify-center gap-2 hover:shadow-[0_0_15px_rgba(0,229,255,0.2)]"
           >
             View Projects
             <ArrowRight className="w-4 h-4" />
@@ -57,9 +60,9 @@ const Hero = ({ delayAnimation = false }: HeroProps) => {
             target="_blank"
             rel="noopener noreferrer"
             onClick={handleResumeDownload}
-            className="w-full sm:w-auto px-8 py-3 border border-primary/30 bg-secondary/30 rounded-lg text-foreground font-semibold hover:bg-secondary/70 transition-all duration-300 flex items-center justify-center gap-2 hover:border-primary/50"
+            className="w-full sm:w-auto px-8 py-3 border border-border bg-transparent rounded-sm text-foreground font-semibold hover:border-accent hover:bg-secondary/30 transition-all duration-200 flex items-center justify-center gap-2"
           >
-            <Download className="w-4 h-4 text-primary" />
+            <Download className="w-4 h-4 text-accent" />
             Download Resume
           </a>
 
@@ -67,7 +70,7 @@ const Hero = ({ delayAnimation = false }: HeroProps) => {
             href="https://github.com/Satya136-dvsn"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto px-8 py-3 border border-border bg-background/50 rounded-lg text-foreground font-semibold hover:bg-secondary transition-all duration-300 flex items-center justify-center gap-2"
+            className="w-full sm:w-auto px-8 py-3 border border-border bg-transparent rounded-sm text-foreground font-semibold hover:bg-secondary transition-all duration-200 flex items-center justify-center gap-2"
           >
             <Github className="w-4 h-4" />
             GitHub
@@ -75,9 +78,6 @@ const Hero = ({ delayAnimation = false }: HeroProps) => {
         </div>
 
       </div>
-
-      {/* Decorative gradient orbs for futuristic feel */}
-      <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary/10 rounded-full blur-[100px] pointer-events-none"></div>
     </section>
   );
 };

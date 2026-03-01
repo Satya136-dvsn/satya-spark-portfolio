@@ -4,47 +4,49 @@
 
 @layer base {
   :root {
-    /* Deep dark background #0B0F19 */
-    --background: 223 39% 7%;
+    /* Strict Tron Engineering Theme */
+    /* Background: Deep dark navy-black #0A0F1C */
+    --background: 223 47% 7%;
     --foreground: 210 40% 98%;
 
-    --card: 223 39% 10%;
+    /* Slightly lighter card background for depth */
+    --card: 223 40% 10%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 223 39% 9%;
+    --popover: 223 40% 9%;
     --popover-foreground: 210 40% 98%;
 
-    /* Electric blue/cyan primary #00f0ff */
-    --primary: 183 100% 50%;
-    --primary-foreground: 223 39% 7%;
+    /* Primary Accent: Electric blue/cyan #00E5FF */
+    --primary: 186 100% 50%;
+    --primary-foreground: 223 47% 7%;
 
-    /* Subtle secondary/muted */
-    --secondary: 223 39% 15%;
+    /* Secondary/Muted: Subtle borders and inactive text */
+    --secondary: 223 40% 14%;
     --secondary-foreground: 210 40% 98%;
-
-    --muted: 223 39% 15%;
+    --muted: 223 40% 14%;
     --muted-foreground: 215 20% 65%;
 
-    --accent: 183 100% 50%;
-    --accent-foreground: 223 39% 7%;
+    /* Secondary Accent: Precise Red #FF2D55 - LIMITED USE */
+    --accent: 349 100% 59%;
+    --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 349 100% 59%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 223 39% 15%;
-    --input: 223 39% 15%;
-    --ring: 183 100% 50%;
+    --border: 223 40% 14%;
+    --input: 223 40% 14%;
+    --ring: 186 100% 50%;
 
     --radius: 0.5rem;
 
-    --sidebar-background: 223 39% 7%;
+    --sidebar-background: 223 47% 7%;
     --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 183 100% 50%;
-    --sidebar-primary-foreground: 223 39% 7%;
-    --sidebar-accent: 223 39% 15%;
+    --sidebar-primary: 186 100% 50%;
+    --sidebar-primary-foreground: 223 47% 7%;
+    --sidebar-accent: 223 40% 14%;
     --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 223 39% 15%;
-    --sidebar-ring: 183 100% 50%;
+    --sidebar-border: 223 40% 14%;
+    --sidebar-ring: 186 100% 50%;
   }
 }
 
@@ -61,18 +63,20 @@
 /* Base futuristic animations and utilities */
 @layer utilities {
   .glow-border {
-    box-shadow: 0 0 10px 0 rgba(0, 240, 255, 0.15), inset 0 0 10px 0 rgba(0, 240, 255, 0.05);
+    /* Subtle 10-15% opacity blue glow */
+    box-shadow: 0 0 10px 0 rgba(0, 229, 255, 0.10), inset 0 0 10px 0 rgba(0, 229, 255, 0.05);
   }
 
   .glow-text {
-    text-shadow: 0 0 10px rgba(0, 240, 255, 0.35);
+    /* Clean, minimal reading glow */
+    text-shadow: 0 0 8px rgba(0, 229, 255, 0.20);
   }
 }
 
-/* Matrix/Grid Background */
+/* Matrix/Grid Background - Highly structured and faint */
 .bg-grid-pattern {
   background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  background-size: 50px 50px;
+    linear-gradient(to right, rgba(0, 229, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 229, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
 }

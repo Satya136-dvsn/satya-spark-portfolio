@@ -153,15 +153,18 @@ const Credentials = () => {
                     <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4 tracking-tight glow-text">
                         Credentials & Recognition
                     </h2>
-                    <div className="w-24 h-1 bg-primary mx-auto mt-6 rounded-full shadow-[0_0_15px_rgba(0,240,255,0.3)]"></div>
+                    <div className="w-24 h-1 bg-primary mx-auto mt-6 rounded-full shadow-[0_0_10px_rgba(0,229,255,0.2)]"></div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {credentials.map((section, idx) => (
                         <Dialog key={idx}>
                             <DialogTrigger asChild>
-                                <div className="bg-card p-6 rounded-xl border border-border/50 shadow-sm cursor-pointer hover:border-primary/50 hover:shadow-[0_0_15px_rgba(0,240,255,0.05)] transition-all group flex flex-col h-full text-left">
-                                    <div className="flex items-center gap-3 mb-4">
+                                <div className="bg-card p-6 rounded-sm border border-border shadow-sm cursor-pointer hover:border-primary/50 hover:shadow-[0_0_10px_rgba(0,229,255,0.15)] transition-all group flex flex-col h-full text-left relative overflow-hidden">
+                                    {/* Sharp Red Hover Accent */}
+                                    <div className="absolute top-0 left-0 w-full h-[2px] bg-accent scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 z-20"></div>
+
+                                    <div className="flex items-center gap-3 mb-4 relative z-10">
                                         <div className="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">
                                             {section.icon}
                                         </div>

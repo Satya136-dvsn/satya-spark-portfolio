@@ -32,7 +32,7 @@ const Philosophy = () => {
                     <h2 className="text-3xl md:text-5xl font-bold text-foreground tracking-tight glow-text uppercase font-mono">
                         Engineering Philosophy
                     </h2>
-                    <div className="w-24 h-1 bg-primary mx-auto mt-6 rounded-full shadow-[0_0_15px_rgba(0,240,255,0.3)]"></div>
+                    <div className="w-24 h-1 bg-primary mx-auto mt-6 rounded-full shadow-[0_0_10px_rgba(0,229,255,0.2)]"></div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">

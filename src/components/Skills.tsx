@@ -51,11 +51,15 @@ const Skills = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {skillGroups.map((group, groupIdx) => (
             <div key={groupIdx} className="bg-card border border-border p-6 rounded-xl hover:border-primary/50 transition-colors">
-              <div className="flex items-center gap-3 mb-6 border-b border-border/50 pb-4">
-                <div className="p-2 bg-primary/10 rounded-lg">
-                  {group.icon}
+              <div className="flex flex-col items-start gap-4 mb-6 pb-2">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-primary/10 rounded-sm">
+                    {group.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-primary tracking-wide">{group.title}</h3>
                 </div>
-                <h3 className="text-xl font-bold text-foreground">{group.title}</h3>
+                {/* Micro Red Divider */}
+                <div className="w-8 h-[2px] bg-accent"></div>
               </div>
 
               <ul className="space-y-3">
