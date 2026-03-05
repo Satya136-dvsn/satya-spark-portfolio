@@ -3,8 +3,8 @@
     "short_name": "Satya",
     "start_url": "/",
     "display": "standalone",
-    "background_color": "#050511",
-    "theme_color": "#050511",
+    "background_color": "#0A0F1C",
+    "theme_color": "#0A0F1C",
     "icons": [
         {
             "src": "/favicon.svg",
