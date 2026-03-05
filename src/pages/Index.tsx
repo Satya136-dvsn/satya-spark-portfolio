@@ -10,6 +10,7 @@ const EngineeringDomains = lazy(() => import('../components/EngineeringDomains')
 const SystemArchitecture = lazy(() => import('../components/SystemArchitecture'));
 const Projects = lazy(() => import('../components/Projects'));
 const Experience = lazy(() => import('../components/Experience'));
+const Education = lazy(() => import('../components/Education'));
 const DataIntelligence = lazy(() => import('../components/DataIntelligence'));
 const Philosophy = lazy(() => import('../components/Philosophy'));
 const Skills = lazy(() => import('../components/Skills'));
@@ -70,6 +71,7 @@ const Index = () => {
             <SystemArchitecture />
             <Projects />
             <Experience />
+            <Education />
             <DataIntelligence />
             <Philosophy />
             <Skills />
