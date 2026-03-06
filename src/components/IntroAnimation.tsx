@@ -56,9 +56,9 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
           <div className="relative transition-all duration-1000 ease-out transform">
             <div className="absolute -inset-4 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full blur-xl opacity-40 animate-pulse"></div>
             <img
-              src="/lovable-uploads/c51f92f6-acbc-4922-996a-d8b6eebdbddc.png"
-              alt="DVS Logo"
-              className="w-20 h-20 md:w-24 md:h-24 relative z-10 drop-shadow-[0_0_20px_rgba(168,85,247,0.8)]"
+              src="/logo.png"
+              alt="Satya Logo"
+              className="w-full h-full object-cover"
             />
           </div>
         </div>
