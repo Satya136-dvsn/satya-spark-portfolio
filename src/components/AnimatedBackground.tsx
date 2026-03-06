@@ -32,6 +32,14 @@ const AnimatedBackground = () => {
 
       {/* Vignette effect from edges to focus the center */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_100%_100%_at_50%_50%,transparent_0%,#0A0F1C_100%)]" />
+      {/* Vertical Laser Trace Line */}
+      <div className="absolute left-[15%] md:left-[20%] top-0 bottom-0 w-[1px] bg-accent/20 overflow-hidden">
+        <div className="w-full h-[15vh] bg-gradient-to-b from-transparent via-accent to-transparent animate-laser-fall"></div>
+      </div>
+      <div className="absolute right-[15%] md:right-[20%] top-0 bottom-0 w-[1px] bg-accent/10 overflow-hidden hidden md:block">
+        <div className="w-full h-[25vh] bg-gradient-to-b from-transparent via-accent/50 to-transparent animate-laser-fall shadow-[0_0_8px_rgba(255,45,85,0.5)]" style={{ animationDelay: '3s', animationDuration: '8s' }}></div>
+      </div>
+
     </div>
   );
 };
