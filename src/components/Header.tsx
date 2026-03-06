@@ -45,7 +45,7 @@ const Header = () => {
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
           >
-            <img src="/logo.png" alt="Satya" className="w-10 h-10 rounded-lg shrink-0 object-cover" />
+            <img src="/logo.png" alt="Satya" className="w-16 h-16" />
           </a>
 
           {/* Desktop Navigation with Dropdown */}

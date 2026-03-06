@@ -58,7 +58,7 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
             <img
               src="/logo.png"
               alt="Satya Logo"
-              className="w-full h-full object-cover"
+              className="w-20 h-20 md:w-24 md:h-24 relative z-10 drop-shadow-[0_0_20px_rgba(0,229,255,0.8)]"
             />
           </div>
         </div>
