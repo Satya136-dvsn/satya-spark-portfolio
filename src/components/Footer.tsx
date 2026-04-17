@@ -16,16 +16,20 @@ const Footer = () => {
                     <div className="text-center md:text-left space-y-2">
                         <h3 className="text-2xl font-bold text-foreground tracking-tight">Duba Venkata Satyanarayana</h3>
                         <p className="font-mono text-sm text-muted-foreground">Systems Engineer | {currentYear}</p>
+                        <div className="font-mono text-xs text-muted-foreground pt-2 space-y-1">
+                            <p>Contact: <a href="tel:+918639796150" className="hover:text-primary transition-colors">+91 8639796150</a></p>
+                            <p>Mail ID: <a href="mailto:d.v.satyanarayana260@gmail.com" className="hover:text-primary transition-colors">d.v.satyanarayana260@gmail.com</a></p>
+                        </div>
                     </div>
 
                     <div className="flex gap-4">
                         <a href="https://github.com/Satya136-dvsn" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="p-3 bg-card border border-border rounded-xl text-muted-foreground hover:text-primary hover:border-primary/50 transition-all duration-300">
                             <Github className="w-5 h-5" />
                         </a>
-                        <a href="https://linkedin.com/in/satya-d" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="p-3 bg-card border border-border rounded-xl text-muted-foreground hover:text-primary hover:border-primary/50 transition-all duration-300">
+                        <a href="https://www.linkedin.com/in/venkatasatyanarayana-duba-679372255" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="p-3 bg-card border border-border rounded-xl text-muted-foreground hover:text-primary hover:border-primary/50 transition-all duration-300">
                             <Linkedin className="w-5 h-5" />
                         </a>
-                        <a href="mailto:dt.satya136@gmail.com" aria-label="Email" className="p-3 bg-card border border-border rounded-xl text-muted-foreground hover:text-primary hover:border-primary/50 transition-all duration-300">
+                        <a href="mailto:d.v.satyanarayana260@gmail.com" aria-label="Email" className="p-3 bg-card border border-border rounded-xl text-muted-foreground hover:text-primary hover:border-primary/50 transition-all duration-300">
                             <Mail className="w-5 h-5" />
                         </a>
                     </div>
