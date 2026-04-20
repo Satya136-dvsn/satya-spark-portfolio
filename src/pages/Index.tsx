@@ -15,6 +15,7 @@ const DataIntelligence = lazy(() => import('../components/DataIntelligence'));
 const Philosophy = lazy(() => import('../components/Philosophy'));
 const Skills = lazy(() => import('../components/Skills'));
 const Credentials = lazy(() => import('../components/Credentials'));
+const Contact = lazy(() => import('../components/Contact'));
 const Footer = lazy(() => import('../components/Footer'));
 
 const Index = () => {
@@ -76,6 +77,7 @@ const Index = () => {
             <Philosophy />
             <Skills />
             <Credentials />
+            <Contact />
             <Footer />
           </Suspense>
         )}
