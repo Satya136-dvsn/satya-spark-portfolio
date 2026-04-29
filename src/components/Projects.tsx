@@ -9,6 +9,46 @@ import {
 
 const projects = [
   {
+    title: "Aegis — Incident Intelligence",
+    period: "Apr 2026",
+    impact: "Autonomous anomaly detection with zero-touch RCA — eliminates manual incident triage for multi-service infrastructure.",
+    engineeringFocus: "Real-time telemetry pipeline with async Celery workers and LLM-driven root cause analysis",
+    miniArchitecture: "Python Simulators → FastAPI → Celery/Redis → Gemini AI → WebSocket → React Dashboard",
+    tech: ["Python", "FastAPI", "Celery", "Redis", "PostgreSQL", "Google Gemini", "React", "TypeScript", "Docker"],
+    status: "Active",
+    github: "https://github.com/Satya136-dvsn/Aegis---Incident-Intelligence",
+    demo: "",
+    category: "Platform Engineering",
+    fullDescription: "Aegis (Vigilinex) is an AI-powered, real-time incident intelligence platform that autonomously detects infrastructure anomalies, generates LLM-driven Root Cause Analysis using Google Gemini, and pushes live incidents to a reactive dashboard — all without human intervention. The entire stack runs locally via docker-compose with zero cloud dependencies.",
+    features: [
+      "Anomaly Engine: Rolling 2-sigma statistical threshold detection across 50-metric sliding windows for CPU, memory, latency, and error rates",
+      "AI-Powered RCA: Google Gemini generates structured, markdown-formatted root cause analysis for every detected anomaly automatically",
+      "Real-Time Streaming: WebSocket push broadcasts incidents instantly to all connected dashboard clients without polling",
+      "Async Pipeline: Celery workers with Redis message broker decouple ingestion from anomaly processing for scalability",
+      "Incident Management: Full dashboard with severity filtering, threaded comments, and session-persistent localStorage state"
+    ]
+  },
+  {
+    title: "VibeAnalytix",
+    period: "Mar 2026 – Apr 2026",
+    impact: "30 formally-verified correctness properties; full 7-language AST-based analysis pipeline with sub-3-minute turnaround on medium codebases.",
+    engineeringFocus: "Multi-pass AST analysis with hierarchical knowledge building and semantic vector retrieval",
+    miniArchitecture: "GitHub/ZIP → Tree-sitter AST → 3-Pass Analysis → pgvector Embeddings → GPT-4 Explanations",
+    tech: ["Python", "FastAPI", "Next.js", "TypeScript", "PostgreSQL", "pgvector", "OpenAI GPT-4", "Celery", "Redis", "Docker"],
+    status: "Production",
+    github: "https://github.com/Satya136-dvsn/VibeAnalytix",
+    demo: "",
+    category: "AI & Developer Tools",
+    fullDescription: "VibeAnalytix is a sophisticated code understanding platform that combines multi-pass AST analysis with AI-powered explanations to provide deep insights into any codebase. V1 ships with real OpenAI GPT-4o integration, pgvector semantic search, 30 formally-verified correctness properties, and an interactive Next.js frontend with real-time job tracking.",
+    features: [
+      "Multi-Pass Analysis: 3-stage pipeline — Structural mapping → Dependency detection → Context refinement — before any AI generation",
+      "AST-Based Parsing: Tree-sitter support for 7 languages (Python, JavaScript, TypeScript, Java, Go, C, C++)",
+      "Semantic Retrieval: pgvector integration builds hierarchical embeddings (Function → File → Module → Project) for context-aware search",
+      "Security-First Ingestion: Strict GitHub URL validation, ZIP path-traversal protection, and executable binary rejection",
+      "Comprehensive Testing: 30 property-based correctness properties (Hypothesis), plus unit and integration test suites"
+    ]
+  },
+  {
     title: "Aerofisc",
     period: "Sep 2025 – Dec 2025",
     impact: "Built scalable architecture for multi-user real-time financial management.",
