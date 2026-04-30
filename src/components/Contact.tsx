@@ -110,33 +110,30 @@ const Contact = () => {
                             />
                         </div>
 
-                        <Button 
+                        <button 
                             type="submit" 
                             disabled={isSubmitting}
-                            className="w-full h-12 font-mono uppercase tracking-wider transition-all duration-300 relative overflow-hidden group"
+                            className="btn-tron-supernova w-full h-14"
                         >
-                            {/* Animated Background */}
-                            <div className="absolute inset-0 bg-gradient-to-r from-primary to-purple-600 opacity-80 group-hover:opacity-100 transition-opacity"></div>
-                            
-                            <div className="relative flex items-center justify-center gap-2">
+                            <div className="relative flex items-center justify-center gap-3">
                                 {isSubmitting ? (
                                     <>
                                         <Loader2 className="w-5 h-5 animate-spin" />
-                                        Transmitting...
+                                        <span className="animate-pulse">TRANSMITTING...</span>
                                     </>
                                 ) : isSuccess ? (
                                     <>
                                         <CheckCircle2 className="w-5 h-5 text-green-400" />
-                                        Transmission Successful
+                                        <span>TRANSMISSION COMPLETE</span>
                                     </>
                                 ) : (
                                     <>
                                         <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                                        Execute Transmission
+                                        <span>EXECUTE TRANSMISSION</span>
                                     </>
                                 )}
                             </div>
-                        </Button>
+                        </button>
                     </form>
                 </div>
             </div>

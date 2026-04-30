@@ -23,7 +23,7 @@ const domains = [
 
 const EngineeringDomains = () => {
     return (
-        <section id="domains" className="py-32 relative z-10 bg-background/50 border-y border-border/50">
+        <section id="about" className="py-32 relative z-10 bg-background/50 border-y border-border/50">
             <div className="container mx-auto max-w-6xl px-6">
 
                 <div className="text-center mb-16">

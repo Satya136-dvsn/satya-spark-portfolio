@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Github, ExternalLink, Activity, Network, ChevronRight } from 'lucide-react';
 import {
   Dialog,
@@ -5,7 +6,16 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogFooter,
+  DialogClose,
 } from "@/components/ui/dialog";
+import { ArrowLeft } from 'lucide-react';
+
+const STATUS_STYLE: Record<string, { label: string; color: string; bg: string }> = {
+  'Active':     { label: '[ACTIVE]',  color: '#00E5FF', bg: 'rgba(0,229,255,0.06)' },
+  'Production': { label: '[PROD]',    color: '#00FF88', bg: 'rgba(0,255,136,0.06)' },
+  'Completed':  { label: '[DONE]',    color: '#3D6B88', bg: 'rgba(61,107,136,0.08)' },
+};
 
 const projects = [
   {
@@ -77,7 +87,7 @@ const projects = [
     status: "Active",
     github: "https://github.com/Satya136-dvsn/biz-stratosphere",
     demo: "",
-    category: "Full Stack applications",
+    category: "Full Stack Applications",
     fullDescription: "An advanced Business Intelligence platform integrating Google's Gemini AI to provide actionable business insights from raw data. Features a zero-knowledge architecture processing sensitive data in isolated environments.",
     features: [
       "Predictive Analytics: Forecasting modules for Churn, CLV, and Demand",
@@ -128,181 +138,325 @@ const projects = [
 
 const Projects = () => {
   return (
-    <section id="projects" className="py-32 px-6 relative z-10 bg-background/50 border-y border-border/50">
+    <section
+      id="projects"
+      className="py-32 px-6 relative z-10"
+      style={{ borderTop: '1px solid rgba(0,229,255,0.1)', borderBottom: '1px solid rgba(0,229,255,0.1)' }}
+    >
       <div className="container mx-auto max-w-6xl">
+
+        {/* Section Header */}
         <div className="mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4 tracking-tight glow-text">
+          <div className="font-tron text-xs tracking-[0.2em] mb-3" style={{ color: 'rgba(0,229,255,0.5)' }}>
+            // MODULE :: PROJECTS
+          </div>
+          <h2 className="text-3xl md:text-5xl font-tron font-bold mb-4 tracking-tight glow-text"
+            style={{ color: '#E8F4FD' }}>
             Project Showcase
           </h2>
-          <p className="text-muted-foreground max-w-2xl text-lg">
+          <p className="font-grotesk max-w-2xl text-lg" style={{ color: '#3D6B88' }}>
             Production-grade systems demonstrating architectural depth and engineering correctness.
           </p>
-          <div className="w-24 h-1 bg-primary mt-6 rounded-full shadow-[0_0_15px_rgba(0,240,255,0.3)]"></div>
+          <div className="tron-sep w-24 mt-6" />
         </div>
 
-        <div className="space-y-8">
-          {projects.map((project, index) => (
-            <Dialog key={index}>
-              <DialogTrigger asChild>
-                <div className="group relative bg-card border border-border rounded-sm overflow-hidden hover:border-primary/50 hover:shadow-[0_0_10px_rgba(0,229,255,0.1)] transition-all duration-300 cursor-pointer">
-                  {/* Vertical left accent line */}
-                  <div className="absolute left-0 top-0 w-1 h-full bg-accent scale-y-0 group-hover:scale-y-100 transition-transform origin-top duration-300 z-20"></div>
+        {/* Project Cards */}
+        <div className="space-y-6">
+          {projects.map((project, index) => {
+            const statusStyle = STATUS_STYLE[project.status] || STATUS_STYLE['Completed'];
+            return (
+              <Dialog key={index}>
+                <DialogTrigger asChild>
+                  <div className="circuit-card group cursor-pointer relative overflow-hidden">
 
-                  <div className="p-6 md:p-8 flex flex-col lg:flex-row gap-8 relative z-10">
+                    {/* Left accent bar */}
+                    <div
+                      className="absolute left-0 top-0 w-[3px] h-full transition-all duration-300"
+                      style={{
+                        background: 'rgba(0,229,255,0)',
+                        boxShadow: 'none',
+                      }}
+                      onMouseEnter={e => {
+                        const el = e.currentTarget as HTMLElement;
+                        el.style.background = '#00E5FF';
+                        el.style.boxShadow = '0 0 10px rgba(0,229,255,0.6)';
+                      }}
+                    />
+                    {/* We use a style tag trick — let's use group-hover via inline onMouseEnter on parent */}
 
-                    {/* Left Side: Core Info */}
-                    <div className="flex-1 space-y-4">
-                      <div className="flex flex-wrap items-start justify-between gap-4">
-                        <div>
-                          <div className="flex items-center gap-3 mb-2">
-                            <h3 className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors">
-                              {project.title}
-                            </h3>
-                            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20">
-                              {project.status}
+                    <div
+                      className="p-6 md:p-8 flex flex-col lg:flex-row gap-8 relative z-10 transition-all duration-300"
+                      onMouseEnter={e => {
+                        const bar = (e.currentTarget.parentElement as HTMLElement)?.querySelector('.left-accent') as HTMLElement;
+                        if (bar) { bar.style.background = '#00E5FF'; bar.style.boxShadow = '0 0 10px rgba(0,229,255,0.6)'; }
+                      }}
+                    >
+
+                      {/* Left: Core Info */}
+                      <div className="flex-1 space-y-4">
+                        <div className="flex flex-wrap items-start justify-between gap-4">
+                          <div>
+                            <div className="flex items-center gap-3 mb-2">
+                              <h3
+                                className="text-xl md:text-2xl font-tron font-bold transition-colors duration-200"
+                                style={{ color: '#E8F4FD' }}
+                              >
+                                {project.title}
+                              </h3>
+                              <span
+                                className="px-2 py-0.5 font-tron text-xs font-semibold tracking-widest"
+                                style={{
+                                  color: statusStyle.color,
+                                  background: statusStyle.bg,
+                                  border: `1px solid ${statusStyle.color}30`,
+                                }}
+                              >
+                                {statusStyle.label}
+                              </span>
+                            </div>
+                            <p className="font-tron text-xs tracking-widest" style={{ color: '#3D6B88' }}>
+                              {project.period} &nbsp;·&nbsp; {project.category}
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* Impact & Focus */}
+                        <div className="pt-2 space-y-3">
+                          <p className="font-grotesk text-sm leading-relaxed" style={{ color: 'rgba(232,244,253,0.8)' }}>
+                            <span className="font-tron text-xs tracking-wider" style={{ color: '#FF6B00' }}>IMPACT </span>
+                            {project.impact}
+                          </p>
+                          <div
+                            className="flex items-start gap-2 p-3 text-sm"
+                            style={{
+                              background: 'rgba(0,229,255,0.03)',
+                              border: '1px solid rgba(0,229,255,0.1)',
+                            }}
+                          >
+                            <Activity className="w-4 h-4 shrink-0 mt-0.5" style={{ color: '#00E5FF' }} />
+                            <span className="font-grotesk" style={{ color: '#3D6B88' }}>
+                              <span className="font-tron text-xs tracking-wider" style={{ color: 'rgba(0,229,255,0.6)' }}>FOCUS </span>
+                              {project.engineeringFocus}
                             </span>
                           </div>
-                          <p className="text-sm font-mono text-muted-foreground">{project.period} • {project.category}</p>
                         </div>
                       </div>
 
-                      {/* Impact & Focus */}
-                      <div className="pt-2">
-                        <p className="text-base text-foreground/90 leading-snug mb-3">
-                          <strong>Impact:</strong> {project.impact}
+                      {/* Right: Architecture & Tech */}
+                      <div className="flex-1 lg:max-w-md space-y-5">
+                        {/* Mini Architecture */}
+                        <div>
+                          <h4 className="font-tron text-[10px] uppercase tracking-[0.2em] mb-2 flex items-center gap-2"
+                            style={{ color: '#3D6B88' }}>
+                            <Network className="w-3.5 h-3.5" style={{ color: 'rgba(0,229,255,0.5)' }} />
+                            SYSTEM ARCHITECTURE
+                          </h4>
+                          <div
+                            className="p-3 font-tron text-xs"
+                            style={{
+                              background: 'rgba(1,6,15,0.8)',
+                              border: '1px solid rgba(0,229,255,0.12)',
+                              color: 'rgba(0,229,255,0.8)',
+                              letterSpacing: '0.02em',
+                            }}
+                          >
+                            <span style={{ color: 'rgba(0,229,255,0.35)' }}>&gt; </span>
+                            {project.miniArchitecture}
+                          </div>
+                        </div>
+
+                        {/* Tech Stack */}
+                        <div>
+                          <h4 className="font-tron text-[10px] uppercase tracking-[0.2em] mb-2" style={{ color: '#3D6B88' }}>
+                            TECH STACK
+                          </h4>
+                          <div className="flex flex-wrap gap-1.5">
+                            {project.tech.map((tech, i) => (
+                              <span
+                                key={i}
+                                className="px-2 py-0.5 font-tron text-[11px] uppercase tracking-wider"
+                                style={{
+                                  background: 'rgba(0,229,255,0.04)',
+                                  border: '1px solid rgba(0,229,255,0.15)',
+                                  color: 'rgba(0,229,255,0.7)',
+                                }}
+                              >
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Click hint */}
+                        <div className="flex items-center gap-2 pt-2">
+                          <div
+                            className="interactive inline-flex items-center gap-2 px-4 py-2 font-tron text-[10px] tracking-[0.2em] transition-all duration-300 border border-[#00E5FF]/30 text-[#00E5FF] group-hover:bg-[#00E5FF] group-hover:text-black tron-clip-sm hover:scale-105 active:scale-95"
+                          >
+                            EXPAND DETAILS
+                            <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </DialogTrigger>
+
+                <DialogContent
+                  className="max-w-3xl w-[90vw] p-0 flex flex-col"
+                  style={{
+                    background: '#050D1A',
+                    border: '1px solid rgba(0,229,255,0.2)',
+                    borderRadius: '0',
+                    boxShadow: '0 0 40px rgba(0,229,255,0.1)',
+                    maxHeight: '90vh',
+                  }}
+                >
+                  <div className="p-6 md:p-8 border-b border-[rgba(0,229,255,0.1)]">
+                    <DialogHeader>
+                      <div className="font-tron text-[10px] tracking-[0.2em] mb-3" style={{ color: 'rgba(0,229,255,0.4)' }}>
+                        // PROJECT DETAIL
+                      </div>
+                      <div className="flex items-center gap-3 mb-2">
+                        <DialogTitle className="font-tron text-2xl md:text-3xl font-bold pr-12" style={{ color: '#E8F4FD' }}>
+                          {project.title}
+                        </DialogTitle>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <span
+                          className="font-tron text-xs tracking-widest px-2 py-0.5"
+                          style={{
+                            color: statusStyle.color,
+                            background: statusStyle.bg,
+                            border: `1px solid ${statusStyle.color}30`,
+                          }}
+                        >
+                          {statusStyle.label}
+                        </span>
+                        <span className="font-tron text-xs tracking-wider" style={{ color: '#3D6B88' }}>
+                          {project.period}
+                        </span>
+                      </div>
+                    </DialogHeader>
+                  </div>
+
+                  <div className="flex-1 overflow-y-auto p-6 md:p-8">
+                    <div className="space-y-8">
+                      {/* Overview */}
+                      <div>
+                        <h4
+                          className="font-tron text-sm font-bold mb-3 pb-2 flex items-center gap-2"
+                          style={{
+                            color: '#E8F4FD',
+                            borderBottom: '1px solid rgba(0,229,255,0.1)',
+                          }}
+                        >
+                          <Activity className="w-4 h-4" style={{ color: '#00E5FF' }} />
+                          OVERVIEW & IMPACT
+                        </h4>
+                        <p className="font-grotesk text-sm leading-relaxed" style={{ color: '#3D6B88' }}>
+                          {project.fullDescription}
                         </p>
-                        <div className="flex items-start gap-2 text-sm text-muted-foreground bg-secondary/30 p-3 rounded-lg border border-border/50 leading-snug group-hover:bg-secondary/50 transition-colors">
-                          <Activity className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                          <span><strong>Engineering Focus:</strong> {project.engineeringFocus}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Right Side: Architecture & Tech */}
-                    <div className="flex-1 lg:max-w-md space-y-6">
-                      {/* Mini Architecture */}
-                      <div>
-                        <h4 className="text-xs font-mono uppercase tracking-wider text-muted-foreground mb-2 flex items-center gap-2">
-                          <Network className="w-4 h-4" /> System Architecture
-                        </h4>
-                        <div className="bg-background border border-border/50 p-3 rounded-lg font-mono text-sm text-primary/90">
-                          {project.miniArchitecture}
+                        <div
+                          className="mt-4 p-4"
+                          style={{
+                            background: 'rgba(255,107,0,0.04)',
+                            border: '1px solid rgba(255,107,0,0.2)',
+                          }}
+                        >
+                          <p className="font-grotesk text-sm" style={{ color: 'rgba(232,244,253,0.8)' }}>
+                            <span className="font-tron text-xs tracking-wider" style={{ color: '#FF6B00' }}>IMPACT </span>
+                            {project.impact}
+                          </p>
                         </div>
                       </div>
 
-                      {/* Tech Stack */}
-                      <div>
-                        <h4 className="text-xs font-mono uppercase tracking-wider text-muted-foreground mb-2">Tech Stack</h4>
-                        <div className="flex flex-wrap gap-2">
-                          {project.tech.map((tech, i) => (
-                            <span key={i} className="px-2 py-1 bg-primary/5 border border-primary/20 rounded-sm text-xs text-primary/90 font-mono font-medium">
-                              {tech}
-                            </span>
-                          ))}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        {/* Architectural Details */}
+                        <div>
+                          <h4 
+                            className="font-tron text-sm font-bold mb-4 pb-2 flex items-center gap-2"
+                            style={{ color: '#E8F4FD', borderBottom: '1px solid rgba(0,229,255,0.1)' }}
+                          >
+                            <Network className="w-4 h-4" style={{ color: '#00E5FF' }} /> TECH STACK
+                          </h4>
+                          <div className="flex flex-wrap gap-2">
+                            {project.tech.map((tech) => (
+                              <span
+                                key={tech}
+                                className="px-2.5 py-1 font-tron text-[11px] uppercase tracking-wider"
+                                style={{
+                                  background: 'rgba(0,229,255,0.04)',
+                                  border: '1px solid rgba(0,229,255,0.15)',
+                                  color: 'rgba(0,229,255,0.7)',
+                                }}
+                              >
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
                         </div>
-                      </div>
 
-                      {/* Interaction Hint */}
-                      <div className="pt-4 flex items-center justify-end md:justify-start">
-                        <div className="inline-flex items-center gap-2 text-primary font-medium text-sm px-4 py-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-all border border-primary/20 group-hover:border-primary/40 shadow-sm">
-                          <span>Click for Details</span>
-                          <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform stroke-[2.5]" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </DialogTrigger>
-
-              <DialogContent className="max-w-3xl bg-card border-border/50 text-foreground max-h-[85vh] overflow-y-auto w-[90vw]">
-                <DialogHeader className="mb-6">
-                  <div className="flex items-center justify-between gap-4 mb-2">
-                    <DialogTitle className="text-2xl md:text-3xl font-bold glow-text pr-12">
-                      {project.title}
-                    </DialogTitle>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20">
-                      {project.status}
-                    </span>
-                    <span className="text-sm font-mono text-muted-foreground">{project.period}</span>
-                  </div>
-                </DialogHeader>
-
-                <div className="space-y-8">
-                  {/* High Level Overview */}
-                  <div>
-                    <h4 className="text-lg font-bold text-foreground mb-3 border-b border-border/50 pb-2 flex items-center gap-2">
-                      <Activity className="w-5 h-5 text-primary" /> Overview & Impact
-                    </h4>
-                    <p className="text-muted-foreground leading-relaxed">
-                      {project.fullDescription}
-                    </p>
-                    <div className="mt-4 p-4 bg-accent/5 border border-accent/20 rounded-sm">
-                      <p className="text-sm font-semibold text-foreground/90 leading-snug">
-                        <strong className="text-accent pr-1">Impact:</strong> {project.impact}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {/* Key Technical Features */}
-                    <div>
-                      <h4 className="text-lg font-bold text-foreground mb-3 border-b border-border/50 pb-2 flex items-center gap-2">
-                        <Network className="w-5 h-5 text-primary" /> Architectural Details
-                      </h4>
-                      <div className="bg-background border border-border/50 p-3 rounded-lg font-mono text-sm text-primary/90 mb-4 inline-block">
-                        {project.miniArchitecture}
-                      </div>
-                      <ul className="space-y-2">
-                        {project.features.map((feature, fIdx) => (
-                          <li key={fIdx} className="flex items-start gap-2 text-sm text-foreground/80 leading-snug">
-                            <ChevronRight className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                            <span>{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {/* Tech & Links */}
-                    <div className="space-y-6">
-                      <div>
-                        <h4 className="text-lg font-bold text-foreground mb-3 border-b border-border/50 pb-2">
-                          Technology Stack
-                        </h4>
-                        <div className="flex flex-wrap gap-2">
-                          {project.tech.map((tech, i) => (
-                            <span key={i} className="px-2.5 py-1.5 bg-primary/5 border border-primary/20 rounded-sm text-xs text-primary/90 font-mono font-medium shadow-sm">
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="bg-background/50 border border-border/50 rounded-xl p-5 mt-auto">
-                        <h4 className="text-sm font-bold text-foreground mb-4 uppercase tracking-wider">Repository & Access</h4>
-                        <div className="flex flex-col gap-3">
-                          {project.github && (
-                            <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 w-full py-2.5 bg-secondary hover:bg-secondary/80 text-foreground border border-border rounded-lg text-sm font-medium transition-colors">
-                              <Github className="w-4 h-4" /> View Source Code
-                            </a>
-                          )}
-                          {project.demo && (
-                            <a href={project.demo} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 w-full py-2.5 bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 rounded-lg text-sm font-medium transition-colors">
-                              <ExternalLink className="w-4 h-4" /> Launch Live Demo
-                            </a>
-                          )}
-                          {!project.github && !project.demo && (
-                            <p className="text-xs text-muted-foreground text-center">Repository details are confidential or unavailable.</p>
-                          )}
+                        {/* Links */}
+                        <div
+                          className="p-4"
+                          style={{
+                            background: 'rgba(1,6,15,0.6)',
+                            border: '1px solid rgba(0,229,255,0.1)',
+                          }}
+                        >
+                          <h4 className="font-tron text-[10px] uppercase tracking-[0.2em] mb-4" style={{ color: '#3D6B88' }}>
+                            REPOSITORY & ACCESS
+                          </h4>
+                          <div className="flex flex-col gap-2.5">
+                            {project.github && (
+                              <a
+                                href={project.github}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="btn-tron-ghost flex items-center justify-center gap-2 w-full py-3 text-xs hover:scale-105 active:scale-95 transition-all"
+                              >
+                                <Github className="w-4 h-4" /> VIEW SOURCE CODE
+                              </a>
+                            )}
+                            {project.demo && (
+                              <a
+                                href={project.demo}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="btn-tron-supernova flex items-center justify-center gap-2 w-full py-3 text-xs"
+                              >
+                                <ExternalLink className="w-4 h-4" /> LAUNCH LIVE DEMO
+                              </a>
+                            )}
+                            {!project.github && !project.demo && (
+                              <p className="font-tron text-xs text-center" style={{ color: '#3D6B88' }}>
+                                // REPOSITORY CONFIDENTIAL
+                              </p>
+                            )}
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </DialogContent>
-            </Dialog>
-          ))}
+                  
+                  <DialogFooter className="p-6 pt-0">
+                    <DialogClose asChild>
+                      <button 
+                        className="btn-tron-ghost w-full py-4 font-tron text-[10px] tracking-[0.3em] flex items-center justify-center gap-3 group transition-all duration-300"
+                        style={{
+                          background: 'rgba(0,229,255,0.02)',
+                          border: '1px solid rgba(0,229,255,0.1)',
+                        }}
+                      >
+                        <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+                        CLOSE PROJECT
+                      </button>
+                    </DialogClose>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
+            );
+          })}
         </div>
       </div>
     </section>

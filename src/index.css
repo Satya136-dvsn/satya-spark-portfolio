@@ -1,82 +1,598 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================
+   TRON GRID RUNNER — Tri-Faction Color System
+   Blue = Programs (Flynn/Tron) | Orange = CLU/Grid Energy | White = ISOs
+   ============================================================ */
 @layer base {
   :root {
-    /* Strict Tron Engineering Theme */
-    /* Background: Deep dark navy-black #0A0F1C */
-    --background: 223 47% 7%;
-    --foreground: 210 40% 98%;
+    /* Core Void Palette */
+    --tron-void:    #01060F;
+    --tron-surface: #050D1A;
+    --tron-grid:    #0A1628;
+    --tron-panel:   #081220;
 
-    /* Slightly lighter card background for depth */
-    --card: 223 40% 10%;
-    --card-foreground: 210 40% 98%;
+    /* FACTION 1 — Cyan/Blue — System Programs */
+    --tron-cyan:        #00E5FF;
+    --tron-cyan-dim:    rgba(0, 229, 255, 0.12);
+    --tron-cyan-glow:   rgba(0, 229, 255, 0.4);
 
-    --popover: 223 40% 9%;
-    --popover-foreground: 210 40% 98%;
+    /* FACTION 2 — Amber/Orange — CLU Grid Energy (CTAs, highlights) */
+    --tron-amber:       #FF8C00;
+    --tron-amber-dim:   rgba(255, 140, 0, 0.12);
+    --tron-amber-glow:  rgba(255, 140, 0, 0.4);
 
-    /* Primary Accent: Electric blue/cyan #00E5FF */
-    --primary: 186 100% 50%;
-    --primary-foreground: 223 47% 7%;
+    /* FACTION 3 — White/Silver — ISOs & Pure Data (primary headings) */
+    --tron-white:       #E8F4FD;
+    --tron-silver:      #C4D8E8;
 
-    /* Secondary/Muted: Subtle borders and inactive text */
-    --secondary: 223 40% 14%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 223 40% 14%;
-    --muted-foreground: 215 20% 65%;
+    /* Muted tones */
+    --tron-muted:   #3D6B88;
+    --tron-ghost:   #1A3A52;
 
-    /* Secondary Accent: Precise Red #FF2D55 - LIMITED USE */
-    --accent: 349 100% 59%;
-    --accent-foreground: 210 40% 98%;
+    /* Tailwind CSS var bridging */
+    --background: 218 96% 4%;        /* #01060F */
+    --foreground: 206 70% 95%;       /* #E8F4FD */
+    --card: 218 72% 6%;              /* #050D1A */
+    --card-foreground: 206 70% 95%;
+    --popover: 218 72% 6%;
+    --popover-foreground: 206 70% 95%;
+    --primary: 191 100% 50%;         /* #00E5FF — cyan */
+    --primary-foreground: 218 96% 4%;
+    --secondary: 218 55% 10%;        /* #0A1628 */
+    --secondary-foreground: 206 70% 95%;
+    --muted: 218 55% 10%;
+    --muted-foreground: 205 40% 38%; /* #3D6B88 */
+    --accent: 33 100% 50%;           /* #FF8C00 — amber */
+    --accent-foreground: 218 96% 4%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 206 70% 95%;
+    --border: 191 100% 50% / 0.12;
+    --input: 218 55% 10%;
+    --ring: 191 100% 50%;
+    --radius: 0rem;                  /* Zero radius — pure sharp geometry */
 
-    --destructive: 349 100% 59%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 223 40% 14%;
-    --input: 223 40% 14%;
-    --ring: 186 100% 50%;
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 223 47% 7%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 186 100% 50%;
-    --sidebar-primary-foreground: 223 47% 7%;
-    --sidebar-accent: 223 40% 14%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 223 40% 14%;
-    --sidebar-ring: 186 100% 50%;
+    --sidebar-background: 218 96% 4%;
+    --sidebar-foreground: 206 70% 95%;
+    --sidebar-primary: 191 100% 50%;
+    --sidebar-primary-foreground: 218 96% 4%;
+    --sidebar-accent: 218 55% 10%;
+    --sidebar-accent-foreground: 206 70% 95%;
+    --sidebar-border: 191 100% 50% / 0.12;
+    --sidebar-ring: 191 100% 50%;
   }
 }
 
+/* ============================================================
+   BASE RESET
+   ============================================================ */
 @layer base {
   * {
     @apply border-border;
+    box-sizing: border-box;
+  }
+
+  html {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    scroll-behavior: smooth;
+    cursor: none; /* hide native cursor on desktop — custom takes over */
+  }
+
+  @media (pointer: coarse) {
+    html { cursor: auto; } /* restore on touch */
   }
 
   body {
     @apply bg-background text-foreground;
+    background-color: var(--tron-void);
+    color: var(--tron-white);
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  code, pre, .font-mono {
+    font-family: 'JetBrains Mono', monospace;
   }
 }
 
-/* Base futuristic animations and utilities */
+/* ============================================================
+   TRON KEYFRAME ANIMATIONS
+   ============================================================ */
+@keyframes typewriter {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+@keyframes blink-cursor {
+  0%, 100% { border-right-color: var(--tron-cyan); }
+  50%       { border-right-color: transparent; }
+}
+
+@keyframes scan-line {
+  0%   { transform: translateY(-100%); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { transform: translateY(200%); opacity: 0; }
+}
+
+@keyframes scan-beam {
+  0%   { top: -2px; }
+  100% { top: 100%; }
+}
+
+@keyframes circuit-pulse {
+  0%, 100% { opacity: 0.15; box-shadow: 0 0 4px rgba(0,229,255,0.1); }
+  50%       { opacity: 0.6;  box-shadow: 0 0 12px rgba(0,229,255,0.4); }
+}
+
+@keyframes amber-pulse {
+  0%, 100% { opacity: 0.15; box-shadow: 0 0 4px rgba(255,140,0,0.1); }
+  50%       { opacity: 0.6;  box-shadow: 0 0 12px rgba(255,140,0,0.4); }
+}
+
+/* ── Custom Cursor Animations ────────────────────────── */
+
+@keyframes cursor-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes cursor-scan {
+  0% { transform: translateY(-100%); opacity: 0; }
+  50% { opacity: 0.8; }
+  100% { transform: translateY(100%); opacity: 0; }
+}
+
+@keyframes data-burst {
+  0% { transform: scale(0.5); opacity: 1; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+.cursor-reticle-spin {
+  animation: cursor-spin 6s linear infinite;
+}
+
+.cursor-scanner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #00E5FF;
+  box-shadow: 0 0 8px #00E5FF;
+  animation: cursor-scan 2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.data-burst-active {
+  animation: data-burst 0.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+}
+@keyframes data-flow {
+  0%   { transform: translateX(-100%); opacity: 0; }
+  5%   { opacity: 1; }
+  95%  { opacity: 1; }
+  100% { transform: translateX(100vw); opacity: 0; }
+}
+
+@keyframes tron-entrance {
+  0%   { opacity: 0; transform: translateY(16px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes laser-fall {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes amber-flicker {
+  0%, 95%, 100% { opacity: 1; }
+  96%            { opacity: 0.4; }
+  97%            { opacity: 1; }
+  98%            { opacity: 0.6; }
+}
+
+@keyframes cursor-ripple {
+  0%   { transform: translate(-50%, -50%) scale(0); opacity: 0.8; }
+  100% { transform: translate(-50%, -50%) scale(3);  opacity: 0; }
+}
+
+@keyframes accordion-down {
+  from { height: 0; }
+  to   { height: var(--radix-accordion-content-height); }
+}
+
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to   { height: 0; }
+}
+
+@keyframes scanBeam {
+  0%   { top: 0%; }
+  100% { top: 100%; }
+}
+
+@keyframes sweep {
+  0% { left: -100%; }
+  50%, 100% { left: 200%; }
+}
+
+@keyframes supernova-glow {
+  0%, 100% { box-shadow: 0 0 15px rgba(0, 229, 255, 0.3), 0 0 30px rgba(0, 229, 255, 0.1); }
+  50% { box-shadow: 0 0 30px rgba(0, 229, 255, 0.7), 0 0 60px rgba(0, 229, 255, 0.3); }
+}
+
+@keyframes glitch-text {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+/* ============================================================
+   TRON UTILITY CLASSES
+   ============================================================ */
 @layer utilities {
-  .glow-border {
-    /* Subtle 10-15% opacity blue glow */
-    box-shadow: 0 0 10px 0 rgba(0, 229, 255, 0.10), inset 0 0 10px 0 rgba(0, 229, 255, 0.05);
+
+  /* Typography */
+  .font-tron    { font-family: 'JetBrains Mono', monospace; }
+  .font-grotesk { font-family: 'Space Grotesk', sans-serif; }
+
+  /* ── Cyan Glow (Programs) ── */
+  .glow-cyan {
+    text-shadow:
+      0 0 8px  rgba(0, 229, 255, 0.8),
+      0 0 20px rgba(0, 229, 255, 0.4),
+      0 0 40px rgba(0, 229, 255, 0.15);
   }
 
-  .glow-text {
-    /* Clean, minimal reading glow */
-    text-shadow: 0 0 8px rgba(0, 229, 255, 0.20);
+  /* ── Amber Glow (CLU / CTAs) ── */
+  .glow-amber {
+    text-shadow:
+      0 0 8px  rgba(255, 140, 0, 0.8),
+      0 0 20px rgba(255, 140, 0, 0.4),
+      0 0 40px rgba(255, 140, 0, 0.15);
+  }
+
+  /* ── White Glow (ISOs / headings) ── */
+  .glow-white {
+    text-shadow:
+      0 0 8px  rgba(232, 244, 253, 0.6),
+      0 0 20px rgba(232, 244, 253, 0.25);
+  }
+
+  /* Legacy alias */
+  .glow-text  { @apply glow-cyan; }
+  .glow-orange { @apply glow-amber; }
+
+  /* Border Glow variants */
+  .glow-border {
+    box-shadow:
+      0 0 0 1px rgba(0, 229, 255, 0.3),
+      0 0 12px rgba(0, 229, 255, 0.1),
+      inset 0 0 8px rgba(0, 229, 255, 0.04);
+  }
+
+  .glow-border-amber {
+    box-shadow:
+      0 0 0 1px rgba(255, 140, 0, 0.4),
+      0 0 16px rgba(255, 140, 0, 0.15),
+      inset 0 0 8px rgba(255, 140, 0, 0.04);
+  }
+
+  .glow-border-strong {
+    box-shadow:
+      0 0 0 1px rgba(0, 229, 255, 0.6),
+      0 0 20px rgba(0, 229, 255, 0.25),
+      inset 0 0 12px rgba(0, 229, 255, 0.06);
+  }
+
+  /* Sharp 45° Tron clip-path corner cut */
+  .tron-clip {
+    clip-path: polygon(
+      12px 0%, 100% 0%,
+      100% calc(100% - 12px),
+      calc(100% - 12px) 100%,
+      0% 100%, 0% 12px
+    );
+  }
+
+  .tron-clip-sm {
+    clip-path: polygon(
+      8px 0%, 100% 0%,
+      100% calc(100% - 8px),
+      calc(100% - 8px) 100%,
+      0% 100%, 0% 8px
+    );
+  }
+
+  /* Tron separator lines — tri-color variants */
+  .tron-sep {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 229, 255, 0.5) 30%,
+      rgba(255, 140, 0, 0.5) 70%,
+      transparent 100%
+    );
+    box-shadow: 0 0 8px rgba(0, 229, 255, 0.2);
+  }
+
+  .tron-sep-cyan {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,229,255,0.7), transparent);
+  }
+
+  .tron-sep-amber {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,140,0,0.7), transparent);
+  }
+
+  /* Animations */
+  .animate-tron-entrance {
+    animation: tron-entrance 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .animate-scan-line   { animation: scan-line 3s ease-in-out infinite; }
+  .animate-circuit-pulse { animation: circuit-pulse 2s ease-in-out infinite; }
+  .animate-amber-pulse { animation: amber-pulse 2s ease-in-out infinite; }
+  .animate-data-flow   { animation: data-flow 8s linear infinite; }
+  .animate-laser-fall  { animation: laser-fall 6s linear infinite; }
+  .animate-amber-flicker { animation: amber-flicker 8s ease infinite; }
+
+  /* ── Circuit card — cyan top-left / amber bottom-right brackets ── */
+  .circuit-card {
+    position: relative;
+    background: var(--tron-surface);
+    border: 1px solid rgba(0, 229, 255, 0.1);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .circuit-card::before,
+  .circuit-card::after {
+    content: '';
+    position: absolute;
+    z-index: 10;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Top-left cyan bracket */
+  .circuit-card::before {
+    top: -1px; left: -1px;
+    width: 0; height: 0;
+    border-top:  2px solid var(--tron-cyan);
+    border-left: 2px solid var(--tron-cyan);
+  }
+
+  /* Bottom-right amber bracket */
+  .circuit-card::after {
+    bottom: -1px; right: -1px;
+    width: 0; height: 0;
+    border-bottom: 2px solid var(--tron-amber);
+    border-right:  2px solid var(--tron-amber);
+  }
+
+  .circuit-card:hover {
+    border-color: rgba(0, 229, 255, 0.35);
+    box-shadow:
+      0 0 20px rgba(0, 229, 255, 0.08),
+      0 0 40px rgba(255, 140, 0, 0.04),
+      inset 0 0 20px rgba(0, 229, 255, 0.02);
+  }
+
+  .circuit-card:hover::before,
+  .circuit-card:hover::after {
+    width: 20px; height: 20px;
   }
 }
 
-/* Matrix/Grid Background - Highly structured and faint */
-.bg-grid-pattern {
+/* ============================================================
+   TRON GRID BACKGROUND
+   ============================================================ */
+.bg-grid-pattern,
+.tron-grid-bg {
   background-image:
-    linear-gradient(to right, rgba(0, 229, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 229, 255, 0.03) 1px, transparent 1px);
-  background-size: 40px 40px;
+    linear-gradient(to right, rgba(0, 229, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 229, 255, 0.035) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ============================================================
+   TRON BUTTON VARIANTS
+   ============================================================ */
+
+/* Primary CTA — Amber (CLU energy — urgent, action) */
+.btn-tron-amber {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem 2.5rem;
+  background: rgba(255, 140, 0, 0.05);
+  border: 2px solid var(--tron-amber);
+  color: var(--tron-amber);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  clip-path: polygon(12px 0%, 100% 0%, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0% 100%, 0% 12px);
+  box-shadow: 0 0 10px rgba(255, 140, 0, 0.2);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-tron-amber::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--tron-amber);
+  transform: translateX(-101%);
+  transition: transform 0.3s ease;
+  z-index: -1;
+}
+
+.btn-tron-amber:hover {
+  color: var(--tron-void);
+  box-shadow: 0 0 25px rgba(255, 140, 0, 0.6);
+}
+
+.btn-tron-amber:hover::before { transform: translateX(0); }
+
+/* Secondary CTA — Cyan (system / programs) */
+.btn-tron-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem 2.5rem;
+  background: rgba(0, 229, 255, 0.05);
+  border: 2px solid var(--tron-cyan);
+  color: var(--tron-cyan);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  clip-path: polygon(12px 0%, 100% 0%, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0% 100%, 0% 12px);
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-tron-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--tron-cyan);
+  transform: translateX(-101%);
+  transition: transform 0.3s ease;
+  z-index: -1;
+}
+
+.btn-tron-primary:hover {
+  color: var(--tron-void);
+  box-shadow: 0 0 25px rgba(0, 229, 255, 0.6);
+}
+
+.btn-tron-primary:hover::before { transform: translateX(0); }
+
+/* Ghost (tertiary) */
+.btn-tron-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem 2.5rem;
+  background: rgba(0, 229, 255, 0.02);
+  border: 1px solid rgba(0, 229, 255, 0.4);
+  color: var(--tron-white);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  clip-path: polygon(12px 0%, 100% 0%, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0% 100%, 0% 12px);
+  transition: all 0.3s ease;
+}
+
+.btn-tron-ghost:hover {
+  border-color: rgba(0, 229, 255, 0.8);
+  color: var(--tron-cyan);
+  background: rgba(0, 229, 255, 0.08);
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.3);
+}
+
+/* Supernova — Maximum Energy Live Button */
+.btn-tron-supernova {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem 2.5rem;
+  background: rgba(0, 229, 255, 0.1);
+  border: 2px solid var(--tron-cyan);
+  color: var(--tron-white);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  clip-path: polygon(12px 0%, 100% 0%, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0% 100%, 0% 12px);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
+  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  position: relative;
+  overflow: hidden;
+  animation: supernova-glow 4s ease-in-out infinite;
+}
+
+.btn-tron-supernova::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 60%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transform: skewX(-25deg);
+  animation: sweep 4s infinite;
+}
+
+.btn-tron-supernova:hover {
+  background: var(--tron-cyan);
+  color: var(--tron-void);
+  box-shadow: 0 0 40px rgba(0, 229, 255, 0.8), 0 0 80px rgba(0, 229, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.animate-glitch-text {
+  animation: glitch-text 0.2s ease-in-out infinite;
+}
+
+/* ============================================================
+   SCROLLBAR — Tron Grid Style
+   ============================================================ */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--tron-void); }
+::-webkit-scrollbar-thumb { background: rgba(0, 229, 255, 0.25); }
+::-webkit-scrollbar-thumb:hover { background: rgba(255, 140, 0, 0.5); } /* amber on hover */
+
+/* ============================================================
+   SELECTION
+   ============================================================ */
+::selection {
+  background: rgba(255, 140, 0, 0.2);   /* amber selection */
+  color: var(--tron-white);
+}
+
+/* ============================================================
+   CURSOR ANIMATIONS — Ripple & Idle Pulse
+   ============================================================ */
+
+/* Inner ripple ring — expands from cursor click point */
+@keyframes cursor-ripple {
+  0%   { width: 6px;  height: 6px;  opacity: 1;   border-width: 2px; }
+  100% { width: 56px; height: 56px; opacity: 0;   border-width: 1px; }
+}
+
+/* Outer ripple ring — larger, slightly delayed (applied via inline delay) */
+@keyframes cursor-ripple-outer {
+  0%   { width: 6px;  height: 6px;  opacity: 0.6; border-width: 1.5px; }
+  100% { width: 80px; height: 80px; opacity: 0;   border-width: 0.5px; }
+}
+
+/* Idle center dot — slow breathe when not hovering a link */
+@keyframes cursor-idle-pulse {
+  0%, 100% { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
+  50%       { opacity: 0.3; transform: translate(-50%, -50%) scale(0.5); }
 }
