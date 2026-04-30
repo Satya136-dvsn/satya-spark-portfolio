@@ -144,9 +144,9 @@ const Projects = () => {
           {projects.map((project, index) => (
             <Dialog key={index}>
               <DialogTrigger asChild>
-                <div className="group relative bg-card border border-border rounded-xl overflow-hidden hover:border-primary/50 hover:shadow-[0_0_10px_rgba(0,229,255,0.15)] transition-all duration-300 cursor-pointer">
-                  {/* Strict red hover accent line */}
-                  <div className="absolute top-0 left-0 w-full h-[2px] bg-accent scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 z-20"></div>
+                <div className="group relative bg-card border border-border rounded-sm overflow-hidden hover:border-primary/50 hover:shadow-[0_0_10px_rgba(0,229,255,0.1)] transition-all duration-300 cursor-pointer">
+                  {/* Vertical left accent line */}
+                  <div className="absolute left-0 top-0 w-1 h-full bg-accent scale-y-0 group-hover:scale-y-100 transition-transform origin-top duration-300 z-20"></div>
 
                   <div className="p-6 md:p-8 flex flex-col lg:flex-row gap-8 relative z-10">
 
